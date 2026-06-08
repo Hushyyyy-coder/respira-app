@@ -264,6 +264,33 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 .tech-steps{text-align:left;font-size:15px;font-weight:500;line-height:1.6;opacity:.92;margin-top:10px;list-style:none;}
 .tech-steps li{margin-bottom:9px;}
 .tech-steps b{font-weight:800;color:#7fe6b0;}
+/* ejercicios guiados */
+.ex-title{font-size:24px;font-weight:800;letter-spacing:-.03em;text-align:center;margin-bottom:4px;}
+.ex-sub{font-size:14px;opacity:.75;font-weight:400;text-align:center;margin-bottom:20px;line-height:1.4;}
+.breath-circle{width:210px;height:210px;border-radius:50%;margin:6px auto 16px;display:flex;align-items:center;justify-content:center;position:relative;
+  background:radial-gradient(circle,rgba(127,230,176,.28),rgba(127,230,176,.08));}
+.breath-orb{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#a8f0c8,#34c79c);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .3s linear;box-shadow:0 0 40px rgba(52,199,156,.5);}
+.breath-orb .bo-phase{font-size:18px;font-weight:800;color:#0c3f2f;}
+.breath-orb .bo-count{font-size:30px;font-weight:800;color:#0c3f2f;line-height:1;margin-top:2px;}
+.breath-ring-prog{position:absolute;inset:0;}
+.ex-cyclelbl{text-align:center;font-size:13px;font-weight:700;opacity:.7;margin-bottom:18px;}
+.ex-start{width:100%;background:#fff;color:#0c3f2f;border:none;border-radius:16px;padding:16px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;}
+.ex-start:active{transform:scale(.97);}
+/* grounding */
+.gr-sense{text-align:center;margin:10px 0 20px;}
+.gr-num{font-size:64px;font-weight:800;line-height:1;color:#7fe6b0;letter-spacing:-.04em;}
+.gr-icon{font-size:40px;margin:8px 0;}
+.gr-instr{font-size:19px;font-weight:700;line-height:1.35;max-width:300px;margin:0 auto;}
+.gr-dots{display:flex;justify-content:center;gap:8px;margin:18px 0 22px;}
+.gr-dots span{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.25);transition:.2s;}
+.gr-dots span.on{background:#7fe6b0;transform:scale(1.3);}
+/* músculos */
+.mus-zone{text-align:center;margin:10px 0 18px;}
+.mus-emoji{font-size:54px;margin-bottom:10px;}
+.mus-name{font-size:22px;font-weight:800;letter-spacing:-.02em;}
+.mus-action{font-size:17px;font-weight:700;margin-top:10px;min-height:24px;}
+.mus-action.tense{color:#ffd479;}
+.mus-action.relax{color:#7fe6b0;}
 
 .hidden{display:none !important;}
 /* ===== REFLEJO ===== */
@@ -748,19 +775,19 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
   <div id="sosOverlay">
     <div id="sosMenu">
       <h2 style="text-align:center">Aguanta la ola</h2>
-      <p class="sm-sub">Las ganas duran 3-5 min y se van. Elige una técnica:</p>
-      <button class="tech" onclick="openTech('respira')"><span class="te-ic">🫁</span><span><span class="te-t">Respiración guiada</span><span class="te-d">Calma el cuerpo en 1 minuto</span></span></button>
+      <p class="sm-sub">Las ganas duran 3-5 min y se van. Elige un ejercicio guiado:</p>
+      <button class="tech" onclick="openTech('respira478')"><span class="te-ic">🌬️</span><span><span class="te-t">Respiración 4-7-8</span><span class="te-d">Baja el cortisol en 90 segundos</span></span></button>
+      <button class="tech" onclick="openTech('box')"><span class="te-ic">⬜</span><span><span class="te-t">Respiración cuadrada</span><span class="te-d">La que usan hasta los marines</span></span></button>
+      <button class="tech" onclick="openTech('grounding')"><span class="te-ic">🖐️</span><span><span class="te-t">Anclaje 5-4-3-2-1</span><span class="te-d">Corta los pensamientos en bucle</span></span></button>
+      <button class="tech" onclick="openTech('musculos')"><span class="te-ic">💪</span><span><span class="te-t">Soltar la tensión</span><span class="te-d">Tensa y relaja el cuerpo</span></span></button>
       <button class="tech" onclick="openTech('surf')"><span class="te-ic">🌊</span><span><span class="te-t">Surfea el impulso</span><span class="te-d">Obsérvalo sin obedecerlo</span></span></button>
-      <button class="tech" onclick="openTech('cuatrod')"><span class="te-ic">✋</span><span><span class="te-t">Las 4D</span><span class="te-d">Demora, respira, agua, distrae</span></span></button>
-      <button class="tech" onclick="openTech('mover')"><span class="te-ic">🏃</span><span><span class="te-t">Mueve el cuerpo</span><span class="te-d">Rompe el automatismo</span></span></button>
-      <button class="tech" onclick="openTech('espera')"><span class="te-ic">⏳</span><span><span class="te-t">Espera 10 minutos</span><span class="te-d">Cuenta atrás, casi siempre pasa</span></span></button>
-      <button class="tech" onclick="openTech('boca')"><span class="te-ic">🥕</span><span><span class="te-t">Distrae la boca</span><span class="te-d">Agua, chicle, algo crujiente</span></span></button>
+      <button class="tech" onclick="openTech('mover')"><span class="te-ic">🏃</span><span><span class="te-t">Mueve el cuerpo</span><span class="te-d">Rompe el automatismo físico</span></span></button>
       <button class="sos-close" style="margin-top:18px" onclick="closeSos()">Ya estoy mejor ✓</button>
     </div>
     <div id="sosTech">
       <button class="sos-back" onclick="backToMenu()">‹ Técnicas</button>
       <div id="techBody"></div>
-      <button class="sos-close" onclick="closeSos()">Ya estoy mejor ✓</button>
+      <button class="sos-close" id="sosTechClose" onclick="closeSos()">Ya estoy mejor ✓</button>
     </div>
   </div>
 
@@ -1152,83 +1179,209 @@ function backToMenu(){
   document.getElementById('sosMenu').style.display='block';
 }
 
+/* limpia cualquier timer de ejercicio en curso */
+function clearExTimers(){ if(window._bt)clearInterval(window._bt); if(window._bt2)clearInterval(window._bt2); }
+
+/* ---- definiciones de cada ejercicio ---- */
 var techContent={
-  respira:{
-    title:'Respiración guiada',
-    html:'<div class="breathe"><div class="inner" id="breatheText">Inhala…</div></div>'+
-         '<p class="sostext">Sigue el círculo. Inhala 4s, mantén 4s, exhala 4s. Repite hasta que el cuerpo se calme.</p>',
-    init:function(){
-      var phases=['Inhala…','Mantén…','Exhala…','Mantén…'];var i=0;
-      var t=document.getElementById('breatheText');if(!t)return;t.textContent=phases[0];
-      clearInterval(window._bt);
-      window._bt=setInterval(function(){i=(i+1)%4;var e=document.getElementById('breatheText');if(e)e.textContent=phases[i];},2000);
+  /* respiración 4-7-8 */
+  respira478:{
+    title:'Respiración 4-7-8',
+    sub:'Inhala 4, retén 7, exhala 8. Repite el ciclo. En unos minutos tu cuerpo baja revoluciones solo.',
+    build:function(box){
+      box.innerHTML=
+        '<div class="ex-title">Respiración 4-7-8</div>'+
+        '<div class="ex-sub">Sigue la bola: crece al inhalar, se queda al retener, encoge al exhalar.</div>'+
+        '<div class="breath-circle"><div class="breath-orb" id="bOrb" style="transform:scale(.6)"><div class="bo-phase" id="bPhase">Prepárate</div><div class="bo-count" id="bCount">·</div></div></div>'+
+        '<div class="ex-cyclelbl" id="bCycle">Ciclo 0 de 4</div>';
+      startBreath([['Inhala',4,1],['Retén',7,1],['Exhala',8,.6]],4);
     }
   },
+  /* box breathing 4-4-4-4 */
+  box:{
+    title:'Respiración cuadrada',
+    sub:'Inhala 4, retén 4, exhala 4, retén 4. Sencilla y potente.',
+    build:function(box){
+      box.innerHTML=
+        '<div class="ex-title">Respiración cuadrada</div>'+
+        '<div class="ex-sub">Cuatro tiempos iguales. La usan pilotos y militares para mantener la calma.</div>'+
+        '<div class="breath-circle"><div class="breath-orb" id="bOrb" style="transform:scale(.6)"><div class="bo-phase" id="bPhase">Prepárate</div><div class="bo-count" id="bCount">·</div></div></div>'+
+        '<div class="ex-cyclelbl" id="bCycle">Ciclo 0 de 4</div>';
+      startBreath([['Inhala',4,1],['Retén',4,1],['Exhala',4,.6],['Retén',4,.6]],4);
+    }
+  },
+  /* grounding 5-4-3-2-1 */
+  grounding:{
+    title:'Anclaje 5-4-3-2-1',
+    build:function(box){ startGrounding(box); }
+  },
+  /* relajación muscular */
+  musculos:{
+    title:'Soltar la tensión',
+    build:function(box){ startMuscles(box); }
+  },
+  /* surf del impulso */
   surf:{
     title:'Surfea el impulso',
-    html:'<div class="breathe"><div class="inner">🌊</div></div>'+
-         '<p class="sostext">El ansia es como una ola: sube, llega a un pico y baja sola. No luches contra ella, obsérvala.</p>'+
-         '<ul class="tech-steps">'+
-         '<li>1. Nota dónde sientes el impulso en tu cuerpo.</li>'+
-         '<li>2. Dite: "estoy teniendo el pensamiento de fumar", no "necesito fumar".</li>'+
-         '<li>3. Respira y observa cómo la ola crece…</li>'+
-         '<li>4. …llega a su punto máximo y empieza a bajar.</li>'+
-         '<li>5. Aguanta sobre la tabla. La ola siempre pasa.</li></ul>'
-  },
-  cuatrod:{
-    title:'Las 4D',
-    html:'<p class="sostext">Cuatro pasos para dejar pasar el momento más fuerte:</p>'+
-         '<ul class="tech-steps">'+
-         '<li>⏱️ <b>Demora</b>: no enciendas. Espera unos minutos, las ganas bajan.</li>'+
-         '<li>🫁 <b>Deep breathing</b>: respira hondo y despacio varias veces.</li>'+
-         '<li>💧 <b>Drink</b>: bebe un vaso de agua a sorbos.</li>'+
-         '<li>🎯 <b>Distrae</b>: cambia de actividad o de habitación.</li></ul>'
-  },
-  mover:{
-    title:'Mueve el cuerpo',
-    html:'<div class="breathe"><div class="inner">🏃</div></div>'+
-         '<p class="sostext">Cambiar el estado físico rompe el automatismo de fumar.</p>'+
-         '<ul class="tech-steps">'+
-         '<li>Sube y baja unas escaleras.</li>'+
-         '<li>Haz 20 sentadillas o unos estiramientos.</li>'+
-         '<li>Sal a caminar 5 minutos.</li>'+
-         '<li>Sacude manos y brazos, suelta la tensión.</li></ul>'
-  },
-  espera:{
-    title:'Espera 10 minutos',
-    html:'<div class="breathe"><div class="inner" id="waitTimer">10:00</div></div>'+
-         '<p class="sostext">Casi ninguna ansia sobrevive 10 minutos. Deja correr la cuenta atrás antes de decidir.</p>',
-    init:function(){
-      var end=Date.now()+10*60000;
-      clearInterval(window._bt);
-      window._bt=setInterval(function(){
-        var left=Math.max(0,end-Date.now());
-        var mm=Math.floor(left/60000),ss=Math.floor((left%60000)/1000);
-        var e=document.getElementById('waitTimer');if(!e){clearInterval(window._bt);return;}
-        e.textContent=mm+':'+String(ss).padStart(2,'0');
-        if(left<=0){clearInterval(window._bt);e.textContent='¡Lo lograste!';}
-      },250);
+    build:function(box){
+      box.innerHTML=
+        '<div class="ex-title">Surfea el impulso</div>'+
+        '<div class="breath-circle"><div class="breath-orb" style="transform:scale(.85);animation:breathe 8s ease-in-out infinite">🌊</div></div>'+
+        '<p class="sostext">El ansia es una ola: sube, llega a un pico y baja sola. No luches, obsérvala desde fuera.</p>'+
+        '<ul class="tech-steps">'+
+        '<li>1. ¿Dónde notas el impulso en tu cuerpo?</li>'+
+        '<li>2. Dite: «estoy teniendo la idea de fumar», no «necesito fumar».</li>'+
+        '<li>3. Mira cómo la ola crece…</li>'+
+        '<li>4. …llega al pico y empieza a bajar.</li>'+
+        '<li>5. Aguanta encima. La ola <b>siempre</b> pasa.</li></ul>';
     }
   },
-  boca:{
-    title:'Distrae la boca',
-    html:'<div class="breathe"><div class="inner">🥕</div></div>'+
-         '<p class="sostext">Gran parte del hábito es tener algo en la boca y las manos. Sustitúyelo:</p>'+
-         '<ul class="tech-steps">'+
-         '<li>Mastica un chicle sin azúcar.</li>'+
-         '<li>Come algo crujiente: zanahoria, apio, una manzana.</li>'+
-         '<li>Bebe agua o una infusión a sorbos.</li>'+
-         '<li>Mantén las manos ocupadas con algo.</li></ul>'
+  /* mover el cuerpo */
+  mover:{
+    title:'Mueve el cuerpo',
+    build:function(box){
+      box.innerHTML=
+        '<div class="ex-title">Mueve el cuerpo</div>'+
+        '<div class="breath-circle"><div class="breath-orb" style="transform:scale(.85);animation:breathe 6s ease-in-out infinite">🏃</div></div>'+
+        '<p class="sostext">Cambiar el estado físico rompe el piloto automático de encender un cigarro.</p>'+
+        '<ul class="tech-steps">'+
+        '<li>🪜 Sube y baja unas escaleras.</li>'+
+        '<li>🏋️ Haz 20 sentadillas o estiramientos.</li>'+
+        '<li>🚶 Sal a caminar 5 minutos.</li>'+
+        '<li>🙆 Sacude brazos y manos, suelta la tensión.</li></ul>';
+    }
   }
 };
+
+/* ---- motor de respiración ---- */
+function startBreath(phases, totalCycles){
+  clearExTimers();
+  var orb=document.getElementById('bOrb');
+  var phaseEl=document.getElementById('bPhase');
+  var countEl=document.getElementById('bCount');
+  var cycleEl=document.getElementById('bCycle');
+  var cycle=0, pi=0, remaining=phases[0][1];
+  /* arranque tras 1s de "prepárate" */
+  setTimeout(function(){
+    cycle=1; pi=0; remaining=phases[0][1]; applyPhase();
+    window._bt=setInterval(tick,1000);
+  },1000);
+  function applyPhase(){
+    var p=phases[pi];
+    phaseEl.textContent=p[0];
+    countEl.textContent=remaining;
+    orb.style.transition='transform '+1+'s linear';
+    orb.style.transform='scale('+p[2]+')';
+    cycleEl.textContent='Ciclo '+cycle+' de '+totalCycles;
+  }
+  function tick(){
+    remaining--;
+    if(remaining<=0){
+      pi++;
+      if(pi>=phases.length){ pi=0; cycle++; if(cycle>totalCycles){ finishBreath(); return; } }
+      remaining=phases[pi][1];
+      applyPhase();
+    }else{
+      countEl.textContent=remaining;
+    }
+  }
+  function finishBreath(){
+    clearExTimers();
+    phaseEl.textContent='Hecho';
+    countEl.textContent='✓';
+    orb.style.transform='scale(.85)';
+    cycleEl.textContent='¿Cómo te sientes ahora?';
+  }
+}
+
+/* ---- grounding 5-4-3-2-1 ---- */
+function startGrounding(box){
+  var steps=[
+    {n:5,ic:'👁️',txt:'Nombra <b>5 cosas que puedas VER</b> a tu alrededor. Míralas con detalle.'},
+    {n:4,ic:'✋',txt:'Nombra <b>4 cosas que puedas TOCAR</b>. Siente su textura.'},
+    {n:3,ic:'👂',txt:'Nombra <b>3 cosas que puedas OÍR</b> ahora mismo.'},
+    {n:2,ic:'👃',txt:'Nombra <b>2 cosas que puedas OLER</b> (o tus olores favoritos).'},
+    {n:1,ic:'👅',txt:'Nombra <b>1 cosa que puedas SABOREAR</b>.'}
+  ];
+  var i=0;
+  function render(){
+    var s=steps[i];
+    var dots=steps.map(function(_,k){return '<span class="'+(k<=i?'on':'')+'"></span>';}).join('');
+    box.innerHTML=
+      '<div class="ex-title">Anclaje 5-4-3-2-1</div>'+
+      '<div class="ex-sub">Trae tu mente al presente y corta el bucle de pensamientos.</div>'+
+      '<div class="gr-sense"><div class="gr-num">'+s.n+'</div><div class="gr-icon">'+s.ic+'</div><div class="gr-instr">'+s.txt+'</div></div>'+
+      '<div class="gr-dots">'+dots+'</div>'+
+      '<button class="ex-start" id="grNext">'+(i<steps.length-1?'Siguiente':'Terminar')+'</button>';
+    document.getElementById('grNext').onclick=function(){
+      if(i<steps.length-1){ i++; render(); }
+      else{ box.innerHTML='<div class="ex-title">Bien hecho 🌿</div><p class="sostext" style="margin-top:14px">Has traído tu mente al aquí y ahora. El bucle de "necesito fumar" pierde fuerza cuando te anclas al presente.</p>'; }
+    };
+  }
+  render();
+}
+
+/* ---- relajación muscular progresiva ---- */
+function startMuscles(box){
+  var groups=[
+    {emoji:'✊',name:'Manos y antebrazos',tip:'Cierra los puños con fuerza'},
+    {emoji:'💪',name:'Brazos y hombros',tip:'Sube los hombros a las orejas'},
+    {emoji:'😬',name:'Cara',tip:'Aprieta los ojos y la mandíbula'},
+    {emoji:'🫁',name:'Pecho y abdomen',tip:'Tensa la barriga como un escudo'},
+    {emoji:'🦵',name:'Piernas y pies',tip:'Estira las piernas y curva los dedos'}
+  ];
+  var i=0;
+  box.innerHTML=
+    '<div class="ex-title">Soltar la tensión</div>'+
+    '<div class="ex-sub">Tensa 5 segundos, suelta de golpe. Nota la diferencia. Vamos por grupos.</div>'+
+    '<div class="mus-zone"><div class="mus-emoji" id="musEmoji">✊</div><div class="mus-name" id="musName">—</div><div class="mus-action" id="musAction">Pulsa empezar</div></div>'+
+    '<div class="ex-cyclelbl" id="musProg">Grupo 0 de 5</div>'+
+    '<button class="ex-start" id="musBtn">Empezar</button>';
+  var btn=document.getElementById('musBtn');
+  btn.onclick=function(){ btn.style.display='none'; runGroup(); };
+  function runGroup(){
+    if(i>=groups.length){
+      document.getElementById('musName').textContent='Cuerpo suelto 🌿';
+      document.getElementById('musAction').textContent='¿Notas cómo pesa menos?';
+      document.getElementById('musAction').className='mus-action relax';
+      document.getElementById('musEmoji').textContent='😌';
+      document.getElementById('musProg').textContent='Completado';
+      return;
+    }
+    var g=groups[i];
+    document.getElementById('musEmoji').textContent=g.emoji;
+    document.getElementById('musName').textContent=g.name;
+    document.getElementById('musProg').textContent='Grupo '+(i+1)+' de '+groups.length;
+    var act=document.getElementById('musAction');
+    /* fase tensar */
+    var t=5; act.className='mus-action tense'; act.textContent=g.tip+'… '+t;
+    clearExTimers();
+    window._bt=setInterval(function(){
+      t--;
+      if(t>0){ act.textContent=g.tip+'… '+t; }
+      else{
+        clearExTimers();
+        /* fase soltar */
+        act.className='mus-action relax'; act.textContent='¡SUELTA! Relaja 5s…';
+        var r=5;
+        window._bt2=setInterval(function(){
+          r--;
+          if(r>0){ act.textContent='Relaja y respira… '+r; }
+          else{ clearInterval(window._bt2); i++; runGroup(); }
+        },1000);
+      }
+    },1000);
+  }
+}
+
 function openTech(key){
   var t=techContent[key];if(!t)return;
-  clearInterval(window._bt);
+  clearExTimers();
   document.getElementById('sosMenu').style.display='none';
   var box=document.getElementById('sosTech');
   box.style.display='flex';
-  document.getElementById('techBody').innerHTML='<h2 style="font-size:26px;margin-bottom:14px;text-align:center">'+t.title+'</h2>'+t.html;
-  if(t.init) t.init();
+  var body=document.getElementById('techBody');
+  t.build(body);
 }
 
 /* ====================================================
