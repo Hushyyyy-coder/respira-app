@@ -139,6 +139,38 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
   box-shadow:0 10px 24px rgba(226,96,59,.3);transition:.2s;}
 .sos:active{transform:scale(.97);}
 .sos .pulse{width:11px;height:11px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite;}
+.cig-card{margin:16px 22px 0;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:18px;}
+.cig-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+.cig-top .ct{font-weight:500;font-size:15px;}
+.cig-top .cd{font-size:12px;color:#6b7d76;margin-top:2px;}
+.cig-since{text-align:right;}
+.cig-since .cs-lbl{font-size:11px;color:#6b7d76;text-transform:uppercase;letter-spacing:.08em;}
+.cig-since .cs-val{font-family:'Fraunces';font-size:20px;font-weight:500;color:var(--moss);}
+.cig-row{display:flex;align-items:center;gap:14px;}
+.cig-count{font-family:'Fraunces';font-size:40px;font-weight:600;line-height:1;}
+.cig-count small{font-family:'Outfit';font-size:14px;font-weight:300;color:#6b7d76;}
+.cig-add{margin-left:auto;background:var(--coral);color:#fff;border:none;width:58px;height:58px;border-radius:50%;
+  font-size:30px;font-weight:300;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s;
+  box-shadow:0 6px 16px rgba(226,96,59,.28);}
+.cig-add:active{transform:scale(.9);}
+.cig-quota{margin-top:12px;font-size:13px;font-weight:300;padding:8px 12px;border-radius:12px;background:var(--mist);color:var(--ink-2);}
+.cig-quota.over{background:var(--coral-soft);color:var(--coral);}
+/* analisis */
+.an-insight{margin:0 22px 12px;background:linear-gradient(160deg,#165240,#0d3b2e);color:var(--cream);border-radius:20px;padding:18px 20px;}
+.an-insight .ai-lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-bottom:6px;}
+.an-insight .ai-txt{font-size:15px;font-weight:300;line-height:1.5;}
+.an-insight .ai-txt b{font-weight:500;color:var(--sage);}
+.an-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 22px;}
+.an-chart{margin:16px 22px 0;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:18px;}
+.an-chart h4{font-family:'Outfit';font-weight:500;font-size:14px;margin-bottom:14px;}
+.bars{display:flex;align-items:flex-end;gap:5px;height:110px;}
+.bars .bcol{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;height:100%;justify-content:flex-end;}
+.bars .bcol .bfill{width:100%;background:linear-gradient(180deg,var(--sage),var(--moss));border-radius:5px 5px 0 0;min-height:3px;transition:height .4s;}
+.bars .bcol .blab{font-size:9px;color:#9aa8a2;}
+.bars .bcol.peak .bfill{background:linear-gradient(180deg,#f0997b,var(--coral));}
+.an-empty{margin:0 22px;background:var(--paper);border:1px dashed var(--line);border-radius:20px;padding:34px 20px;text-align:center;color:#6b7d76;}
+.an-empty .ae-ic{font-size:36px;}
+.an-empty p{font-size:14px;font-weight:300;margin-top:10px;line-height:1.5;}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
 
 /* ===== TCC PROGRAM ===== */
@@ -334,6 +366,23 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
       <div class="bar"><i style="width:62%"></i></div>
       <p class="hnote">A las 2-12 semanas la circulación mejora y respirar cuesta menos.</p>
     </div>
+    <div class="cig-card">
+      <div class="cig-top">
+        <div>
+          <div class="ct">Cigarros de hoy</div>
+          <div class="cd">Registra cada uno que fumes</div>
+        </div>
+        <div class="cig-since">
+          <div class="cs-lbl">Desde el último</div>
+          <div class="cs-val" id="cigSince">—</div>
+        </div>
+      </div>
+      <div class="cig-row">
+        <div class="cig-count"><span id="cigToday">0</span> <small>hoy</small></div>
+        <button class="cig-add" onclick="addCig()" aria-label="Registrar un cigarro">+</button>
+      </div>
+      <div class="cig-quota" id="cigQuota">Tu objetivo de hoy: 0 cigarros</div>
+    </div>
     <button class="sos" onclick="openSos()"><span class="pulse"></span> Tengo ansiedad ahora</button>
   </section>
 
@@ -404,6 +453,34 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
     </div>
   </section>
 
+  <!-- ============ ANÁLISIS ============ -->
+  <section class="screen" id="analisis">
+    <div class="pad" style="padding-bottom:10px">
+      <p class="eyebrow">Análisis de hábitos</p>
+      <h2 style="font-size:30px;margin-top:6px">Cómo<br>fumas</h2>
+    </div>
+    <div id="anEmpty" class="an-empty">
+      <div class="ae-ic">📊</div>
+      <p>Aún no has registrado cigarros. Usa el botón "+" del inicio cada vez que fumes y aquí verás tu análisis.</p>
+    </div>
+    <div id="anContent" style="display:none">
+      <div class="an-insight">
+        <div class="ai-lbl">Lo que vemos en tus datos</div>
+        <div class="ai-txt" id="anInsight">—</div>
+      </div>
+      <div class="an-stats">
+        <div class="stat"><div class="si">🕐</div><div class="sv" id="anPeak">—</div><div class="sl">Tu hora pico</div></div>
+        <div class="stat"><div class="si">🏆</div><div class="sv" id="anMaxGap">—</div><div class="sl">Récord sin fumar</div></div>
+        <div class="stat"><div class="si">📅</div><div class="sv" id="anTotal">0</div><div class="sl">Registrados en total</div></div>
+        <div class="stat"><div class="si">⏱️</div><div class="sv" id="anAvgGap">—</div><div class="sl">Media entre cigarros</div></div>
+      </div>
+      <div class="an-chart">
+        <h4>Cigarros por franja del día</h4>
+        <div class="bars" id="anBars"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ COMUNIDAD ============ -->
   <section class="screen" id="comunidad">
     <div class="pad" style="padding-bottom:8px">
@@ -445,6 +522,7 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
     <button data-go="home" class="on" onclick="nav('home',this)"><span class="ni">🏠</span>Inicio</button>
     <button data-go="programa" onclick="nav('programa',this)"><span class="ni">📚</span>Programa</button>
     <button data-go="logros" onclick="nav('logros',this)"><span class="ni">🏆</span>Logros</button>
+    <button data-go="analisis" onclick="nav('analisis',this)"><span class="ni">📊</span>Análisis</button>
     <button data-go="comunidad" onclick="nav('comunidad',this)"><span class="ni">👥</span>Comunidad</button>
   </nav>
 
@@ -575,6 +653,7 @@ function nav(id,btn){
   show(id);
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
+  if(id==='analisis') renderAnalisis();
 }
 
 /* ---------- app con datos reales ---------- */
@@ -586,7 +665,131 @@ function startApp(data){
   render(data);
   tickInterval=setInterval(()=>render(data),1000);
 }
+/* ---------- contador de cigarros ---------- */
+var LOGKEY='respira_cigs_v1';
+function getLog(){
+  try{ return JSON.parse(localStorage.getItem(LOGKEY))||[]; }catch(e){ return []; }
+}
+function saveLog(arr){ localStorage.setItem(LOGKEY,JSON.stringify(arr)); }
+function addCig(){
+  var log=getLog();
+  log.push(Date.now());
+  saveLog(log);
+  var btn=document.querySelector('.cig-add');
+  if(btn){btn.style.transform='scale(.9)';setTimeout(()=>btn.style.transform='',120);}
+  renderCigs();
+  renderAnalisis();
+}
+function todayStart(){
+  var d=new Date();d.setHours(0,0,0,0);return d.getTime();
+}
+/* objetivo diario según método; en gradual baja por semanas */
+function dailyQuota(){
+  if(!window._userData) return 0;
+  var d=window._userData;
+  if(d.method==='gradual'){
+    var weeks=Math.floor((Date.now()-d.start)/(7*86400000));
+    var q=Math.round(d.cigsPerDay*Math.pow(0.7,weeks)); /* -30% por semana */
+    return Math.max(0,q);
+  }
+  return 0; /* de golpe / sustitutos: objetivo 0 */
+}
+function renderCigs(){
+  var log=getLog();
+  var ts=todayStart();
+  var today=log.filter(t=>t>=ts).length;
+  var el=document.getElementById('cigToday'); if(el)el.textContent=today;
+  /* tiempo desde el último */
+  var since=document.getElementById('cigSince');
+  if(since){
+    if(log.length===0){ since.textContent='—'; }
+    else{
+      var diff=Date.now()-log[log.length-1];
+      var min=Math.floor(diff/60000);
+      if(min<60) since.textContent=min+' min';
+      else if(min<1440) since.textContent=Math.floor(min/60)+'h '+(min%60)+'m';
+      else since.textContent=Math.floor(min/1440)+'d';
+    }
+  }
+  /* cuota */
+  var q=dailyQuota();
+  var qel=document.getElementById('cigQuota');
+  if(qel){
+    if(window._userData && window._userData.method==='gradual'){
+      var left=q-today;
+      if(left>=0){ qel.textContent='Te quedan '+left+' de '+q+' permitidos hoy'; qel.classList.remove('over'); }
+      else{ qel.textContent='Has pasado tu objetivo de hoy ('+q+'). Mañana es otro día 💚'; qel.classList.add('over'); }
+    }else{
+      if(today===0){ qel.textContent='Objetivo de hoy: 0 cigarros · ¡vas perfecto! ✨'; qel.classList.remove('over'); }
+      else{ qel.textContent='Hoy llevas '+today+'. Sin culpa: registra y sigue adelante 💚'; qel.classList.add('over'); }
+    }
+  }
+}
+
+/* ---------- análisis de hábitos ---------- */
+function fmtDur(ms){
+  var min=Math.floor(ms/60000);
+  if(min<60) return min+' min';
+  if(min<1440) return Math.floor(min/60)+'h '+(min%60)+'m';
+  return Math.floor(min/1440)+'d '+Math.floor((min%1440)/60)+'h';
+}
+function renderAnalisis(){
+  var log=getLog().slice().sort(function(a,b){return a-b;});
+  var empty=document.getElementById('anEmpty');
+  var content=document.getElementById('anContent');
+  if(!empty||!content) return;
+  if(log.length===0){ empty.style.display='block'; content.style.display='none'; return; }
+  empty.style.display='none'; content.style.display='block';
+
+  document.getElementById('anTotal').textContent=log.length;
+
+  /* franjas del día: 6 bloques de 4h */
+  var franjas=[0,0,0,0,0,0];
+  var nombres=['0-4','4-8','8-12','12-16','16-20','20-24'];
+  var peakLabels=['de madrugada','a primera hora','por la mañana','al mediodía','por la tarde','por la noche'];
+  log.forEach(function(t){ franjas[Math.floor(new Date(t).getHours()/4)]++; });
+  var maxF=Math.max.apply(null,franjas);
+  var peakIdx=franjas.indexOf(maxF);
+  document.getElementById('anPeak').textContent=nombres[peakIdx]+'h';
+
+  var bars=document.getElementById('anBars');bars.innerHTML='';
+  franjas.forEach(function(v,i){
+    var col=document.createElement('div');col.className='bcol'+(i===peakIdx&&maxF>0?' peak':'');
+    var pct=maxF>0?Math.round(v/maxF*100):0;
+    col.innerHTML='<div class="bfill" style="height:'+pct+'%"></div><div class="blab">'+nombres[i]+'</div>';
+    bars.appendChild(col);
+  });
+
+  /* huecos entre cigarros */
+  var maxGap=0;
+  if(log.length>=2){
+    var sumGap=0;
+    for(var i=1;i<log.length;i++){ var g=log[i]-log[i-1]; if(g>maxGap)maxGap=g; sumGap+=g; }
+    var avgGap=sumGap/(log.length-1);
+    document.getElementById('anMaxGap').textContent=fmtDur(maxGap);
+    document.getElementById('anAvgGap').textContent=fmtDur(avgGap);
+  }else{
+    document.getElementById('anMaxGap').textContent='—';
+    document.getElementById('anAvgGap').textContent='—';
+  }
+
+  /* insight en texto */
+  var ins='';
+  if(log.length<5){
+    ins='Llevas <b>'+log.length+'</b> registro(s). Sigue anotando unos días y podré darte un análisis más fiable de tus patrones.';
+  }else{
+    ins='Fumas sobre todo <b>'+peakLabels[peakIdx]+'</b> (franja '+nombres[peakIdx]+'h). ';
+    if(log.length>=2){
+      ins+='Tu mayor tiempo sin fumar ha sido <b>'+fmtDur(maxGap)+'</b>. ';
+      ins+='Prueba a usar el botón de ansiedad en tu hora pico para ir alargando ese hueco.';
+    }
+  }
+  document.getElementById('anInsight').innerHTML=ins;
+}
+
 function render(data){
+  window._userData=data;
+  renderCigs();
   /* saludo personalizado */
   if(data.name){
     var hn=document.getElementById('hiName'); if(hn)hn.textContent=data.name;
@@ -624,6 +827,7 @@ function render(data){
 function resetAll(){
   if(confirm('¿Seguro que quieres reiniciar todos tus datos?')){
     localStorage.removeItem(KEY);
+    localStorage.removeItem(LOGKEY);
     location.reload();
   }
 }
