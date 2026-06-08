@@ -332,46 +332,60 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 .mind-head .mh-pts{background:#fff;border-radius:18px;padding:10px 16px;box-shadow:var(--shadow);text-align:center;}
 .mind-head .mh-pts .v{font-size:22px;font-weight:800;color:var(--orange);letter-spacing:-.03em;line-height:1;}
 .mind-head .mh-pts .l{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:3px;}
-/* arena de batalla */
-.arena{margin:8px 18px 0;border-radius:26px;overflow:hidden;position:relative;display:flow-root;min-height:340px;background:linear-gradient(180deg,#1a2a4a 0%,#2d1b4e 60%,#3d1f3a 100%);box-shadow:var(--shadow);}
-.arena-sky{display:none;}
-.monster-zone{position:relative;padding:18px 18px 22px;display:flex;flex-direction:column;align-items:center;z-index:2;}
-.monster-hp{width:80%;height:14px;background:rgba(255,255,255,.15);border-radius:20px;overflow:hidden;margin-top:4px;border:2px solid rgba(255,255,255,.2);}
-.monster-hp-bar{height:100%;width:100%;background:linear-gradient(90deg,#ff453a,#ff7a4d);border-radius:20px;transition:width .6s cubic-bezier(.22,1,.36,1);}
-.monster-hp-lbl{font-size:11px;font-weight:800;color:#ffb3ad;text-transform:uppercase;letter-spacing:.04em;margin-top:8px;}
-.speech{background:#fff;color:#2d1b4e;font-size:13px;font-weight:700;padding:10px 15px;border-radius:16px;margin:14px 0 4px;position:relative;max-width:260px;text-align:center;line-height:1.35;box-shadow:0 4px 12px rgba(0,0,0,.2);}
-.speech::after{content:"";position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#fff;border-bottom:0;}
-.monster{width:160px;height:160px;margin:14px 0 6px;position:relative;transition:transform .5s cubic-bezier(.34,1.56,.64,1),filter .5s;transform-origin:bottom center;animation:monIdle 3s ease-in-out infinite;}
-@keyframes monIdle{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-8px) rotate(2deg);}}
-.monster.hit{animation:monHit .4s;}
-@keyframes monHit{0%,100%{transform:translateX(0);}20%{transform:translateX(-12px) rotate(-8deg);}40%{transform:translateX(12px) rotate(8deg);}60%{transform:translateX(-8px);}80%{transform:translateX(8px);}}
-.mon-body{position:absolute;inset:0;background:radial-gradient(circle at 38% 32%,#8be05a,#4caa28 60%,#3a8a1e);border-radius:48% 48% 44% 44%/55% 55% 45% 45%;box-shadow:inset -10px -12px 0 rgba(0,0,0,.12);}
-.mon-face{position:absolute;inset:0;}
-.mon-eyes{position:absolute;top:38%;left:0;right:0;display:flex;justify-content:center;gap:26px;}
-.mon-eyes span{width:26px;height:30px;background:#fff;border-radius:50%;position:relative;box-shadow:inset 0 0 0 2px rgba(0,0,0,.1);}
-.mon-eyes span::after{content:"";position:absolute;width:11px;height:11px;background:#1a1a1a;border-radius:50%;top:11px;left:8px;}
-.mon-mouth{position:absolute;top:62%;left:50%;transform:translateX(-50%);width:52px;height:24px;background:#2a1208;border-radius:0 0 26px 26px;border-top:3px solid #1a0a04;}
-.mon-horns{position:absolute;top:-10px;left:0;right:0;display:flex;justify-content:center;gap:54px;}
-.mon-horns span{width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-bottom:22px solid #3a8a1e;}
-.monster-name{font-size:12px;font-weight:800;color:#fff;letter-spacing:.06em;text-align:center;margin-top:6px;opacity:.85;}
-.hit-fx{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:60px;font-weight:900;z-index:5;pointer-events:none;color:#ffd34d;text-shadow:0 2px 0 #ff7a00;}
-.hit-fx.go{animation:hitpop .7s ease-out;}
-@keyframes hitpop{0%{transform:translate(-50%,-50%) scale(0) rotate(-20deg);opacity:0;}30%{transform:translate(-50%,-50%) scale(1.3) rotate(8deg);opacity:1;}100%{transform:translate(-50%,-120%) scale(1) rotate(8deg);opacity:0;}}
-/* lista de asaltos */
-.rounds{padding:6px 18px 20px;}
-.round{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:18px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow);transition:.18s;}
-.round.beaten{opacity:.6;}
-.round.locked{opacity:.5;}
-.round:not(.locked){cursor:pointer;}
-.round:not(.locked):active{transform:scale(.98);}
-.round .rn-num{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;font-weight:800;}
-.round.beaten .rn-num{background:linear-gradient(140deg,var(--green),var(--teal));}
-.round.next .rn-num{background:linear-gradient(140deg,var(--orange),#ff7a00);color:#fff;animation:pulse2 1.6s infinite;}
-.round.locked .rn-num{background:#ececed;}
-@keyframes pulse2{0%,100%{box-shadow:0 0 0 0 rgba(255,159,10,.5);}50%{box-shadow:0 0 0 8px rgba(255,159,10,0);}}
-.round .rn-t{font-size:15px;font-weight:800;letter-spacing:-.02em;}
-.round .rn-d{font-size:12px;color:var(--muted);font-weight:600;margin-top:1px;}
-.round .rn-go{margin-left:auto;font-size:13px;font-weight:800;color:var(--orange);}
+.mh-cta{padding:0 22px;}
+/* pantalla inicio del juego */
+#mindHome{background:linear-gradient(180deg,#f4fbf7 0%,var(--bg) 30%);}
+.sticker-collection{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:6px 18px 20px;}
+.sticker-slot{aspect-ratio:1;border-radius:18px;background:var(--card);box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;font-size:34px;position:relative;}
+.sticker-slot.locked{background:#eceef0;font-size:22px;color:var(--faint);}
+.sticker-slot .ss-name{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:8px;font-weight:700;color:var(--muted);}
+/* CHAT */
+#mentalidad{background:#e7ddd2;display:flex;flex-direction:column;padding-bottom:0;}
+.chat-topbar{display:flex;align-items:center;gap:12px;padding:48px 16px 12px;background:linear-gradient(135deg,#0c3f2f,#155f47);color:#fff;flex-shrink:0;position:relative;z-index:3;}
+.chat-back{background:none;border:none;color:#fff;font-size:30px;font-weight:700;cursor:pointer;line-height:1;padding:0 4px 0 0;flex-shrink:0;}
+.chat-av{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#8be05a,#3a8a1e);flex-shrink:0;position:relative;transition:transform .4s cubic-bezier(.34,1.56,.64,1),filter .4s;}
+.chat-av.hit{animation:avHit .4s;}
+@keyframes avHit{0%,100%{transform:rotate(0);}25%{transform:rotate(-14deg) scale(.9);}75%{transform:rotate(14deg) scale(.9);}}
+.cav-face{position:absolute;inset:0;}
+.cav-face span{position:absolute;top:32%;width:8px;height:9px;background:#fff;border-radius:50%;}
+.cav-face span:first-child{left:28%;}
+.cav-face span:last-child{right:28%;}
+.cav-face::after{content:"";position:absolute;bottom:26%;left:50%;transform:translateX(-50%);width:18px;height:8px;background:#1a0a04;border-radius:0 0 10px 10px;}
+.chat-meta{flex:1;min-width:0;}
+.chat-name{font-size:16px;font-weight:800;letter-spacing:-.02em;}
+.chat-status{font-size:12px;opacity:.75;font-weight:500;}
+.chat-hp{width:60px;height:8px;background:rgba(255,255,255,.2);border-radius:20px;overflow:hidden;flex-shrink:0;}
+.chat-hp-bar{height:100%;width:100%;background:linear-gradient(90deg,#ff453a,#ff7a4d);border-radius:20px;transition:width .6s cubic-bezier(.22,1,.36,1);}
+.chat-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:18px 14px 14px;display:flex;flex-direction:column;gap:10px;}
+.chat-body::-webkit-scrollbar{display:none;}
+.bubble{max-width:80%;padding:11px 14px;border-radius:18px;font-size:14px;font-weight:500;line-height:1.4;animation:bubIn .3s cubic-bezier(.22,1,.36,1);}
+@keyframes bubIn{0%{opacity:0;transform:translateY(8px) scale(.96);}100%{opacity:1;transform:none;}}
+.bubble.mon{align-self:flex-start;background:#fff;color:#1c1c1e;border-bottom-left-radius:5px;box-shadow:0 1px 2px rgba(0,0,0,.08);}
+.bubble.me{align-self:flex-end;background:#d8fdd0;color:#0c3f2f;border-bottom-right-radius:5px;box-shadow:0 1px 2px rgba(0,0,0,.08);}
+.bubble.sticker{background:none !important;box-shadow:none;font-size:64px;padding:2px 6px;line-height:1;max-width:none;}
+.bubble.sticker.me{align-self:flex-end;}
+.bubble.sticker.mon{align-self:flex-start;}
+.bubble .react{font-size:13px;font-weight:700;margin-top:4px;opacity:.7;}
+.typing{align-self:flex-start;background:#fff;border-radius:18px;border-bottom-left-radius:5px;padding:13px 16px;display:flex;gap:5px;box-shadow:0 1px 2px rgba(0,0,0,.08);}
+.typing span{width:8px;height:8px;border-radius:50%;background:#bbb;animation:typ 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:.2s;}
+.typing span:nth-child(3){animation-delay:.4s;}
+@keyframes typ{0%,60%,100%{transform:translateY(0);opacity:.4;}30%{transform:translateY(-5px);opacity:1;}}
+.chat-dock{flex-shrink:0;background:#f0ebe3;border-top:1px solid #d8cfc2;padding:12px 12px calc(14px + env(safe-area-inset-bottom));position:relative;z-index:3;}
+.combo-tag{text-align:center;font-size:13px;font-weight:800;color:var(--orange);min-height:18px;margin-bottom:6px;}
+.sticker-tray{display:flex;flex-direction:column;gap:8px;}
+.sticker-reply{display:flex;align-items:center;gap:12px;background:#fff;border:2px solid transparent;border-radius:16px;padding:11px 13px;cursor:pointer;transition:.15s;text-align:left;font-family:inherit;width:100%;}
+.sticker-reply:active{transform:scale(.98);}
+.sticker-reply .sr-ic{font-size:30px;flex-shrink:0;}
+.sticker-reply .sr-txt{font-size:13.5px;font-weight:600;color:#1c1c1e;line-height:1.3;}
+.sticker-reply.correct{border-color:var(--green);background:#eafaf0;}
+.sticker-reply.wrong{border-color:var(--red);background:#fdeceb;}
+.chat-next{width:100%;background:linear-gradient(140deg,var(--green),var(--teal));color:#fff;border:none;border-radius:16px;padding:15px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;}
+.chat-next:active{transform:scale(.98);}
+.chat-win{text-align:center;padding:20px;}
+.chat-win .cw-emoji{font-size:60px;}
+.chat-win h3{font-size:22px;font-weight:800;margin:8px 0 6px;letter-spacing:-.03em;}
+.chat-win p{font-size:14px;color:var(--ink-2);font-weight:500;line-height:1.5;}
 
 /* lección modal */
 #lessonOverlay{position:absolute;inset:0;background:linear-gradient(168deg,#0c3f2f,#1f7a5c);z-index:55;
@@ -643,37 +657,42 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
     </div>
   </section>
 
-  <!-- ============ MENTALIDAD (JUEGO: BATALLA) ============ -->
+  <!-- ============ MENTALIDAD (CHAT DE STICKERS) ============ -->
   <section class="screen" id="mentalidad">
+    <div class="chat-topbar">
+      <button class="chat-back" onclick="exitChat()" aria-label="Salir">‹</button>
+      <div class="chat-av" id="chatAv">
+        <div class="cav-face"><span></span><span></span></div>
+      </div>
+      <div class="chat-meta">
+        <div class="chat-name" id="chatName">Monstruo de la Nicotina</div>
+        <div class="chat-status" id="chatStatus">en línea · chuleándose</div>
+      </div>
+      <div class="chat-hp"><div class="chat-hp-bar" id="monHpBar"></div></div>
+    </div>
+
+    <div class="chat-body" id="chatBody"></div>
+
+    <div class="chat-dock" id="chatDock">
+      <div class="combo-tag" id="comboTag"></div>
+      <div class="sticker-tray" id="stickerTray"></div>
+    </div>
+  </section>
+
+  <!-- pantalla de inicio/colección del juego (se muestra antes de empezar) -->
+  <section class="screen" id="mindHome">
     <div class="mind-head">
       <div>
-        <p class="eyebrow">Modo batalla</p>
-        <h2 class="big-title" style="margin-top:8px">Revienta al<br>monstruo</h2>
+        <p class="eyebrow">Batalla de stickers</p>
+        <h2 class="big-title" style="margin-top:8px">Calla al<br>monstruo</h2>
       </div>
-      <div class="mh-pts"><div class="v" id="mindPts">0</div><div class="l">golpes</div></div>
+      <div class="mh-pts"><div class="v" id="mindPts">0</div><div class="l">KO</div></div>
     </div>
+    <p class="muted" style="font-size:14px;padding:6px 22px 12px;font-weight:600;line-height:1.5">El monstruo te escribe excusas para que sigas fumando. Respóndele con el sticker que le cierra la boca. Cuidado: te la intenta colar con respuestas que suenan bien pero son trampa.</p>
+    <div class="mh-cta"><button class="ex-start" style="background:linear-gradient(140deg,var(--green),var(--teal));color:#fff" onclick="startChat()" id="mindStartBtn">💬 Abrir chat con el monstruo</button></div>
 
-    <div class="arena">
-      <div class="arena-sky"></div>
-      <div class="monster-zone">
-        <div class="monster-hp"><div class="monster-hp-bar" id="monHpBar"></div></div>
-        <div class="monster-hp-lbl" id="monHpLbl">Monstruo al 100% de chulería</div>
-        <div class="speech" id="monSpeech">¡Jajaja! Nunca me vas a dejar, me necesitas 😈</div>
-        <div class="monster" id="monster">
-          <div class="mon-horns"><span></span><span></span></div>
-          <div class="mon-body"></div>
-          <div class="mon-face" id="monFace">
-            <div class="mon-eyes"><span></span><span></span></div>
-            <div class="mon-mouth"></div>
-          </div>
-          <div class="hit-fx" id="hitFx">💥</div>
-        </div>
-        <div class="monster-name" id="monName">EL MONSTRUO DE LA NICOTINA</div>
-      </div>
-    </div>
-
-    <p class="muted" style="font-size:14px;padding:14px 22px 4px;font-weight:600;line-height:1.5;text-align:center" id="battleHint">Cada mentira que desmontes le quita fuerza. ¡Tienes 9 asaltos para dejarlo diminuto!</p>
-    <div class="rounds" id="roundList"></div>
+    <div class="section-h"><h3>Tu colección de stickers</h3></div>
+    <div class="sticker-collection" id="stickerCollection"></div>
   </section>
 
   <!-- ============ REFLEJO ============ -->
@@ -752,25 +771,6 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
     </div>
   </div>
 
-  <!-- ============ ASALTO OVERLAY ============ -->
-  <div id="lessonOverlay">
-    <div class="les-top">
-      <button class="les-x" onclick="closeLesson()">✕</button>
-      <div class="les-prog"><i id="lesProg" style="width:0%"></i></div>
-    </div>
-    <div class="les-body" id="lesBody"></div>
-    <div class="les-foot"><button class="les-btn" id="lesBtn" onclick="lessonNext()">Continuar</button></div>
-  </div>
-
-  <!-- ============ KO / CELEBRACIÓN ============ -->
-  <div id="winOverlay">
-    <div class="win-emoji" id="winEmoji">💥</div>
-    <h2 id="winTitle">¡ZASCA!</h2>
-    <div class="win-pts" id="winPts">+1 golpe</div>
-    <p id="winMsg">El monstruo encoge un poco más.</p>
-    <button class="sos-close" style="margin-top:26px" onclick="closeWin()">A por el siguiente 👊</button>
-  </div>
-
   <!-- ============ SOS OVERLAY ============ -->
   <div id="sosOverlay">
     <div id="sosMenu">
@@ -794,7 +794,7 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
   <!-- ============ NAV ============ -->
   <nav class="nav hidden" id="nav">
     <button data-go="home" class="on" onclick="nav('home',this)"><span class="ni">🏠</span><span>Inicio</span></button>
-    <button data-go="mentalidad" onclick="nav('mentalidad',this)"><span class="ni">🧠</span><span>Mentalidad</span></button>
+    <button data-go="mindHome" onclick="nav('mindHome',this)"><span class="ni">🧠</span><span>Mentalidad</span></button>
     <button data-go="logros" onclick="nav('logros',this)"><span class="ni">🏆</span><span>Logros</span></button>
     <button data-go="analisis" onclick="nav('analisis',this)"><span class="ni">📊</span><span>Análisis</span></button>
     <button data-go="reflejo" onclick="nav('reflejo',this)"><span class="ni">🪞</span><span>Reflejo</span></button>
@@ -930,7 +930,7 @@ function nav(id,btn){
   document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
   if(id==='analisis') renderAnalisis();
-  if(id==='mentalidad') renderMind();
+  if(id==='mindHome') renderMindHome();
   if(id==='reflejo') initRefl();
 }
 
@@ -1385,207 +1385,277 @@ function openTech(key){
 }
 
 /* ====================================================
-   JUEGO: BATALLA CONTRA EL MONSTRUO DE LA NICOTINA
-   (mentalidad estilo Allen Carr, en plan gamberro)
+   JUEGO: CHAT DE STICKERS CONTRA EL MONSTRUO
+   El monstruo te escribe excusas; respondes con el sticker
+   que lo calla. Las opciones falsas llevan ironía evidente.
    ==================================================== */
-var MINDKEY='respira_mind_v1';
-/* el monstruo suelta una excusa (mentira) y tú la revientas */
-var lessons=[
-  {ic:'🎭',t:'"Me das placer"',taunt:'Sin mí no disfrutas de NADA, colega 😏',
-   myth:'"El tabaco me da placer"',
-   text:'Mentira gorda. El tabaco no da placer: solo <b>te quita el mono que él mismo te montó</b>. Es como llevar una piedra en el zapato todo el día para sentir "alivio" al quitarla. Menudo chollo.',
-   q:'Entonces, ¿qué sientes de verdad al fumar?',
-   opts:[['Un placer brutal e irrepetible',false],['El alivio de un mono que creó el propio tabaco',true],['Nada que no pudiera sentir sin fumar',true]],
-   good:'¡EXACTO! No es placer, es quitarte un dolor autoinfligido. 💥',
-   bad:'Nah. Tu primera calada fue asquerosa, ¿recuerdas? El "placer" te lo vendieron.'},
-  {ic:'😮‍💨',t:'"Yo te relajo"',taunt:'¿Estresado? Ven con papá monstruo 🚬',
-   myth:'"Fumar me relaja"',
-   text:'La nicotina es un <b>estimulante</b>: te acelera el corazón. No relaja nada. Encima los fumadores tienen MÁS ansiedad de media. El monstruo te genera el nervio y luego se hace el salvador.',
-   q:'Si acelera, ¿por qué parece que calma?',
-   opts:[['Porque relaja los músculos',false],['Porque quita el mono un ratito',true],['Porque baja la tensión',false]],
-   good:'¡TOMA! La calma era puro teatro del monstruo. 💥',
-   bad:'Qué va, es estimulante. La "calma" es solo el fin del mono.'},
-  {ic:'🥂',t:'"Soy tu colega"',taunt:'¿Un cafecito sin mí? Imposible, tío 😎',
-   myth:'"Me acompaña en los buenos momentos"',
-   text:'El café ya molaba. Los amigos ya molaban. El momento ya era perfecto. El monstruo <b>no añade nada</b>: solo se cuela de gorrón para seguir enganchándote.',
-   q:'En un café con amigos, ¿quién pone el disfrute?',
-   opts:[['El cigarro, obvio',false],['La compañía, la charla y el café',true],['La mezcla mágica',false]],
-   good:'¡ZAS! El monstruo era el cuñado que se autoinvita. 💥',
-   bad:'Prueba el café sin él: sigue estando igual de rico.'},
-  {ic:'🧠',t:'"No tienes huevos"',taunt:'Necesitas fuerza de superhéroe, y tú... 😬',
-   myth:'"Necesito muchísima fuerza de voluntad"',
-   text:'No es fuerza, es <b>cabeza</b>. Si lo ves como "pierdo algo", sufres. Si lo ves como "me quito de encima a este parásito", es fácil. Has hecho cosas mil veces más difíciles.',
-   q:'¿Qué mentalidad lo hace fácil?',
-   opts:[['"Voy a resistir aunque sufra"',false],['"Me libero de un parásito"',true],['"Necesito ser un héroe"',false]],
-   good:'¡PUM! Verlo como liberación te hace imparable. 💥',
-   bad:'Quien lo vive como sacrificio cae. Cámbiale el chip.'},
-  {ic:'⛓️',t:'"Eres libre conmigo"',taunt:'Fumas porque QUIERES, ¿no? Jeje 🔗',
-   myth:'"Fumar es mi libertad"',
-   text:'¿Libre? No aguantas una hora sin mí. Sales al frío y a la lluvia por mí. Planeas viajes pensando en dónde fumar. Eso no es elegir, es <b>obedecerme</b>. La libertad es no necesitar nada.',
-   q:'¿Qué es la libertad de verdad?',
-   opts:[['Poder fumar cuando quieras',false],['No necesitar encender nada',true],['Tener siempre tabaco',false]],
-   good:'¡CRACK! Le rompiste la cadenita. 💥',
-   bad:'Necesitarlo no es elegir, es la correa disfrazada.'},
-  {ic:'😤',t:'"Yo con el estrés"',taunt:'Mal día, ¿eh? Échate uno y verás 🔥',
-   myth:'"El tabaco me ayuda con el estrés"',
-   text:'El problema sigue ahí después de fumar. El atasco, la discusión... todo igual. Solo tapaste el mono un minuto. Y vivir pendiente de la próxima calada <b>te mete MÁS ansiedad</b>.',
-   q:'Tras un cabreo sales a fumar. ¿Qué cambia?',
-   opts:[['Se soluciona el problema',false],['Nada de fondo, solo calma el mono',true],['Desaparece el estrés',false]],
-   good:'¡BOOM! Respirar hondo regula mejor y gratis. 💥',
-   bad:'El marrón sigue ahí. Solo tapaste el mono un segundo.'},
-  {ic:'👥',t:'"Sin mí no ligas"',taunt:'Soy tu rollito social, admítelo 🍻',
-   myth:'"Fumar me ayuda a socializar"',
-   text:'La gente conecta contigo por cómo eres, no por el humo. De hecho el monstruo te hace <b>salir corriendo</b> a mitad de conversación. Vaya ayuda social, el tío.',
-   q:'¿Qué une de verdad a un grupo?',
-   opts:[['Fumar todos juntos',false],['El rato y la experiencia compartida',true],['El cigarro de excusa',false]],
-   good:'¡ZASCA! Acompañas sin fumar y todo sigue igual. 💥',
-   bad:'Conectas por ti. El humo no es el carné del grupo.'},
-  {ic:'✨',t:'"Te doy estilazo"',taunt:'Mírate, qué interesante con un piti 🚬',
-   myth:'"Fumar me da personalidad"',
-   text:'Eso fue una <b>campaña de marketing</b> del siglo pasado, majo. ¿Qué estilo hay en toser por la mañana, el mal aliento y la piel apagada? Tu rollo está en ti, no en el humo.',
-   q:'¿De dónde sale lo de que da estilo?',
-   opts:[['Es cosa real del tabaco',false],['De publicidad antigua tramposa',true],['De que mejora tu imagen',false]],
-   good:'¡PLAF! Puro humo (nunca mejor dicho). 💥',
-   bad:'Era marketing. Nadie te admira por fumar.'},
-  {ic:'🌅',t:'"Ya es tarde"',taunt:'Para qué dejarlo ya, el daño está hecho 💀',
-   myth:'"Ya es demasiado tarde para mí"',
-   text:'Última mentira y la más cobarde. El cuerpo se regenera EN CUANTO dejas de meterle veneno. A los 20 min baja la tensión; en semanas vuelve el gusto. Dejarlo <b>baja a la mitad el riesgo de palmarla pronto</b>, hasta en fumadores mayores.',
-   q:'Llevas 30 años fumando. ¿Vale la pena hoy?',
-   opts:[['No, ya da igual',false],['Sí, el cuerpo mejora desde el primer día',true],['Solo si eres joven',false]],
-   good:'¡KO TOTAL! Nunca es tarde. Lo has tumbado. 🏆',
-   bad:'Falso. El cuerpo empieza a recuperarse desde hoy mismo.'}
+var MINDKEY='respira_mind_v2';
+
+/* stickers que se desbloquean (emoji + nombre) */
+var stickerDex=[
+  {e:'🧠',n:'Cerebro ON'},{e:'💪',n:'Fuerte'},{e:'🚫',n:'Ni de coña'},
+  {e:'😎',n:'Tranqui'},{e:'🫁',n:'Pulmón feliz'},{e:'💸',n:'Pasta'},
+  {e:'🦾',n:'Imparable'},{e:'🌬️',n:'Aire puro'},{e:'👑',n:'Libre'},
+  {e:'🥱',n:'Aburres'},{e:'🪦',n:'RIP excusa'},{e:'🏆',n:'Campeón'}
 ];
-var monIdleFaces=[':)',];
+
+/* las 12 rondas. correct = índice de la respuesta sana.
+   las falsas suenan absurdas a propósito (ironía). */
+var rounds=[
+  {monMsg:'Ufff qué estrés llevas hoy... ¿un cigarrito para relajarte? 😌',monSt:'😏',
+   opts:[
+     {e:'🌬️',t:'Eres un estimulante, me pones MÁS nervioso. Paso.'},
+     {e:'🥰',t:'Tienes razón, nada relaja como inhalar alquitrán calentito.'},
+     {e:'🧘',t:'Claro, voy a calmarme acelerándome el corazón. Lógica impecable.'}
+   ],correct:0,
+   reactGood:'Pf... bueno, era por probar 😒',reactBad:'¡JE! Otro que pica 😈'},
+
+  {monMsg:'Sin mí el café de la mañana no sabe a nada, ¿eh? ☕',monSt:'☕',
+   opts:[
+     {e:'😋',t:'Cierto, el café sabe mejor con sabor a cenicero.'},
+     {e:'☕',t:'El café ya está rico solo. Tú solo apestas, gracias.'},
+     {e:'🤝',t:'Sois inseparables, como el resfriado y los mocos.'}
+   ],correct:1,
+   reactGood:'Tch, me has dejado sin café 😤',reactBad:'¡Mío! Vuelves a casa 😈'},
+
+  {monMsg:'Eres débil, no tienes fuerza de voluntad para dejarme 😏',monSt:'💪',
+   opts:[
+     {e:'😢',t:'Es verdad, soy un pobre desgraciado sin remedio.'},
+     {e:'🧠',t:'No es fuerza, es cabeza. Y la tuya la tengo clara.'},
+     {e:'🦸',t:'Necesito poderes de superhéroe para dejar un papelito ardiendo.'}
+   ],correct:1,
+   reactGood:'Vaya... no contaba con eso 😳',reactBad:'¡Justo! Quédate conmigo 😈'},
+
+  {monMsg:'Soy tu colega de toda la vida, no me abandones 🥺',monSt:'🥺',
+   opts:[
+     {e:'🫂',t:'Tienes razón, mi mejor amigo me roba dinero y salud.'},
+     {e:'🚫',t:'¿Colega? Me robas pasta, aire y años. Menudo amigo.'},
+     {e:'😭',t:'Sin ti me sentiré solo... yo y mis dos pulmones limpios.'}
+   ],correct:1,
+   reactGood:'Qué cruel... 💔',reactBad:'¡Siempre juntos! 😈'},
+
+  {monMsg:'Fumas porque QUIERES. Eso es libertad, campeón 🔗',monSt:'🔗',
+   opts:[
+     {e:'👑',t:'Libertad es salir al frío a por ti cada hora. Qué libre soy.'},
+     {e:'🆓',t:'Exacto, soy libre: tú decides cuándo y cuánto. Un placer.'},
+     {e:'🚪',t:'No te necesito para nada. ESO es libertad.'}
+   ],correct:2,
+   reactGood:'Me has roto la cadenita 😩',reactBad:'Jejé, mi esclavo favorito 😈'},
+
+  {monMsg:'Engordarás un montón si me dejas, gordi 🍩',monSt:'🍩',
+   opts:[
+     {e:'🥗',t:'Prefiero veneno en los pulmones antes que comer una zanahoria.'},
+     {e:'🏃',t:'Gestiono la ansiedad de otra forma. Buen intento, listo.'},
+     {e:'🍰',t:'Mejor cáncer que un par de kilos, ¿no? Qué gran consejo.'}
+   ],correct:1,
+   reactGood:'Bah, excusa gastada 🙄',reactBad:'¡A picar dulces conmigo! 😈'},
+
+  {monMsg:'Sin mí no sabes socializar, te quedarás solo en las fiestas 🍻',monSt:'🍻',
+   opts:[
+     {e:'😬',t:'Cierto, mis amigos solo me quieren por el humo que echo.'},
+     {e:'🗣️',t:'Conecto por quién soy, no por toser en corro contigo.'},
+     {e:'🚬',t:'Sin ti no tengo nada que decir, solo sé dar caladas.'}
+   ],correct:1,
+   reactGood:'Tch, social y todo 😒',reactBad:'¡Nos vemos en el balcón! 😈'},
+
+  {monMsg:'Te doy un rollo interesante, misterioso, con estilazo 😎',monSt:'😎',
+   opts:[
+     {e:'🤩',t:'Sí, nada dice "estiloso" como el aliento a cenicero.'},
+     {e:'✨',t:'Mi estilo es mío. Tú eres marketing rancio de los 50.'},
+     {e:'🚬',t:'Sin ti soy aburridísimo, necesito un pitillo para molar.'}
+   ],correct:1,
+   reactGood:'Era una buena campaña... 😔',reactBad:'¡Qué interesante eres! 😈'},
+
+  {monMsg:'Llevas demasiados años. Ya da igual, el daño está hecho 💀',monSt:'💀',
+   opts:[
+     {e:'🤷',t:'Tienes razón, mejor seguir destrozándome, total ya qué más da.'},
+     {e:'🫁',t:'Mi cuerpo se cura desde HOY. Te quedas sin víctima.'},
+     {e:'⏰',t:'Es tardísimo para mejorar, dijo nadie con sentido común.'}
+   ],correct:1,
+   reactGood:'Noooo, mi última carta 😱',reactBad:'Eso, ríndete 😈'},
+
+  {monMsg:'Solo UNO. Por los viejos tiempos, ¿qué más da uno? 🥹',monSt:'👉',
+   opts:[
+     {e:'🎯',t:'"Solo uno" es como estar "un poco" embarazado. No existe.'},
+     {e:'1️⃣',t:'Vale, uno. Y mañana otro "uno". Y así 20 años. Genial plan.'},
+     {e:'🚫',t:'Ni uno. Sé perfectamente cómo acaba esa película.'}
+   ],correct:2,
+   reactGood:'Casi te pillo... 😖',reactBad:'¡Y volvemos a empezar! 😈'},
+
+  {monMsg:'Me necesitas para concentrarte en el trabajo, lo sabes 🧩',monSt:'🧩',
+   opts:[
+     {e:'🧠',t:'Me concentro mejor sin estar pensando en la próxima calada.'},
+     {e:'😵',t:'Sí, nada concentra como un mono de nicotina cada 20 minutos.'},
+     {e:'📉',t:'Sin ti mi cerebro no funciona, soy básicamente una planta.'}
+   ],correct:0,
+   reactGood:'Argh, productivo y todo 😤',reactBad:'¡Pausa para fumar! 😈'},
+
+  {monMsg:'Volverás. Siempre vuelven. Te espero aquí, bonito 😈',monSt:'😈',
+   opts:[
+     {e:'👋',t:'Puede que tiemble algún día. Pero hoy te cierro la puerta.'},
+     {e:'🔄',t:'Sí, volveré llorando, soy débil y predecible, como tú dices.'},
+     {e:'🤝',t:'Te espero yo a ti... para no abrirte nunca. Adiós.'}
+   ],correct:0,
+   reactGood:'¡NO! Esto no acaba así... 😭',reactBad:'Te lo dije, jejé 😈'}
+];
 
 function getMind(){
-  try{ return JSON.parse(localStorage.getItem(MINDKEY))||{done:[],pts:0}; }catch(e){ return {done:[],pts:0}; }
+  try{ var m=JSON.parse(localStorage.getItem(MINDKEY)); return m||{beaten:0,ko:0,stickers:0,best:0}; }
+  catch(e){ return {beaten:0,ko:0,stickers:0,best:0}; }
 }
 function saveMind(m){ localStorage.setItem(MINDKEY,JSON.stringify(m)); }
 
-var monTaunts=['¡No me vas a dejar nunca! 😈','Me necesitas, lo sabes 😏','Bah, durarás dos días 🚬','Volverás llorando a por mí 😤','Soy más fuerte que tú 💪'];
-function renderMind(){
+/* ---- pantalla inicio / colección ---- */
+function renderMindHome(){
   var m=getMind();
-  var beaten=m.done.length;
-  var total=lessons.length;
-  document.getElementById('mindPts').textContent=m.pts;
-  /* salud y tamaño del monstruo */
-  var hp=Math.max(4,Math.round((1-beaten/total)*100));
-  document.getElementById('monHpBar').style.width=hp+'%';
-  var mon=document.getElementById('monster');
-  var scale=Math.max(0.32,1-beaten*0.075);
-  mon.style.transform='scale('+scale+')';
-  /* estado del monstruo */
-  var lbl=document.getElementById('monHpLbl');
-  var speech=document.getElementById('monSpeech');
-  var name=document.getElementById('monName');
-  if(beaten>=total){
-    lbl.textContent='¡DERROTADO! 🏆';
-    speech.textContent='Vale… tú ganas. Me piro 😭';
-    name.textContent='monstruo diminuto y patético';
-    mon.style.filter='grayscale(.6) brightness(1.1)';
-  }else{
-    lbl.textContent='Monstruo al '+hp+'% de chulería';
-    speech.textContent=beaten===0?'¡Jajaja! Nunca me vas a dejar 😈':monTaunts[Math.min(beaten,monTaunts.length-1)];
-    name.textContent='EL MONSTRUO DE LA NICOTINA';
+  document.getElementById('mindPts').textContent=m.ko;
+  var btn=document.getElementById('mindStartBtn');
+  if(btn) btn.textContent = m.beaten>0 ? '💬 Volver al chat (ronda '+(Math.min(m.beaten+1,rounds.length))+')' : '💬 Abrir chat con el monstruo';
+  var col=document.getElementById('stickerCollection');
+  if(col){
+    col.innerHTML='';
+    stickerDex.forEach(function(s,i){
+      var unlocked=i<m.stickers;
+      var d=document.createElement('div');
+      d.className='sticker-slot'+(unlocked?'':' locked');
+      d.innerHTML=(unlocked?s.e:'🔒')+'<div class="ss-name">'+(unlocked?s.n:'???')+'</div>';
+      col.appendChild(d);
+    });
   }
-  /* lista de asaltos */
-  var list=document.getElementById('roundList');
-  list.innerHTML='';
-  lessons.forEach(function(les,i){
-    var done=m.done.indexOf(i)>=0;
-    var next=!done && (i===0 || m.done.indexOf(i-1)>=0);
-    var locked=!done && !next;
-    var r=document.createElement('div');
-    r.className='round '+(done?'beaten':next?'next':'locked');
-    r.innerHTML=
-      '<div class="rn-num">'+(done?'✓':locked?'🔒':les.ic)+'</div>'+
-      '<div><div class="rn-t">Asalto '+(i+1)+(locked?'':' · '+les.t)+'</div><div class="rn-d">'+(done?'Mentira reventada':next?'¡Dale caña!':'Bloqueado')+'</div></div>'+
-      (next?'<div class="rn-go">PELEAR ›</div>':'');
-    if(!locked){ r.onclick=function(){ openLesson(i); }; }
-    list.appendChild(r);
-  });
-  var hint=document.getElementById('battleHint');
-  if(hint) hint.textContent=beaten>=total?'¡Le has dado una paliza memorable! El monstruo ya no manda en ti. 🎉':'Cada mentira que revientas le quita fuerza. Quedan '+(total-beaten)+' asaltos.';
 }
 
-/* ---- jugar un asalto ---- */
-var curLesson=0, lesStep=0, lesAnswered=false;
-function openLesson(i){
-  curLesson=i; lesStep=0; lesAnswered=false;
-  document.getElementById('lessonOverlay').classList.add('show');
-  renderLesStep();
-}
-function closeLesson(){ document.getElementById('lessonOverlay').classList.remove('show'); }
-function renderLesStep(){
-  var les=lessons[curLesson];
-  var body=document.getElementById('lesBody');
-  var btn=document.getElementById('lesBtn');
-  document.getElementById('lesProg').style.width=(lesStep===0?50:100)+'%';
-  if(lesStep===0){
-    body.innerHTML=
-      '<div class="les-emoji">'+les.ic+'</div>'+
-      '<div class="les-myth"><div class="lm-l">El monstruo suelta</div><div class="lm-t">'+les.taunt+'</div></div>'+
-      '<div class="les-truth-l">La verdad que lo destroza</div>'+
-      '<div class="les-text">'+les.text+'</div>';
-    btn.textContent='Vale… ¡a darle! 👊';
-    btn.classList.remove('lock');
-    btn.onclick=lessonNext;
-  }else{
-    lesAnswered=false;
-    var opts=les.opts.map(function(o){
-      return '<button class="ch-opt" data-ok="'+(o[1]?1:0)+'" onclick="answerChallenge(this)">'+o[0]+'</button>';
-    }).join('');
-    body.innerHTML=
-      '<div class="challenge"><div class="ch-l">⚡ Golpe final</div>'+
-      '<div class="ch-q">'+les.q+'</div>'+opts+
-      '<div class="ch-feedback" id="chFb"></div></div>';
-    btn.textContent='Elige tu golpe';
-    btn.classList.add('lock');
-    btn.onclick=function(){ if(lesAnswered) finishLesson(); };
-  }
-}
-function answerChallenge(el){
-  if(lesAnswered)return;
-  lesAnswered=true;
-  var les=lessons[curLesson];
-  var ok=el.dataset.ok==='1';
-  var fb=document.getElementById('chFb');
-  document.querySelectorAll('.ch-opt').forEach(function(b){ b.style.pointerEvents='none'; });
-  if(ok){ el.classList.add('ok'); fb.className='ch-feedback good'; fb.textContent=les.good; }
-  else{ el.classList.add('no'); fb.className='ch-feedback bad'; fb.textContent=les.bad;
-    document.querySelectorAll('.ch-opt').forEach(function(b){ if(b.dataset.ok==='1')b.classList.add('ok'); }); }
-  var btn=document.getElementById('lesBtn');
-  btn.textContent='¡REVENTAR MENTIRA! 💥';
-  btn.classList.remove('lock');
-}
-function lessonNext(){
-  if(lesStep===0){ lesStep=1; renderLesStep(); }
-}
-function finishLesson(){
+/* ---- el chat ---- */
+var chatRound=0, chatCombo=0, chatAnswered=false;
+function startChat(){
   var m=getMind();
-  var first=m.done.indexOf(curLesson)<0;
-  if(first){ m.done.push(curLesson); m.pts+=1; saveMind(m); }
-  closeLesson();
-  /* animar golpe al monstruo */
-  setTimeout(function(){
-    var mon=document.getElementById('monster');
-    var fx=document.getElementById('hitFx');
-    if(mon){ mon.classList.remove('hit'); void mon.offsetWidth; mon.classList.add('hit'); }
-    if(fx){ var hits=['💥','💢','👊','🔥','⭐']; fx.textContent=hits[Math.floor(Math.random()*hits.length)];
-      fx.classList.remove('go'); void fx.offsetWidth; fx.classList.add('go'); }
-    renderMind();
-  },150);
-  /* pantalla de KO */
-  var allDone=m.done.length===lessons.length;
-  document.getElementById('winEmoji').textContent=allDone?'🏆':['💥','👊','🔥','⭐','💢'][Math.floor(Math.random()*5)];
-  document.getElementById('winTitle').textContent=allDone?'¡MONSTRUO KO!':['¡ZASCA!','¡TOMA YA!','¡PUM!','¡EN TODA LA CARA!'][Math.floor(Math.random()*4)];
-  document.getElementById('winPts').textContent=first?'+1 golpe maestro':'Ya reventada';
-  document.getElementById('winMsg').textContent=allDone
-    ?'Has dejado al monstruo diminuto y llorando. Tu mente es tuya otra vez. 🎉'
-    :'El monstruo encoge y se queda sin argumentos. ¡A por el siguiente!';
-  document.getElementById('winOverlay').classList.add('show');
+  chatRound=Math.min(m.beaten,rounds.length-1);
+  if(m.beaten>=rounds.length){ chatRound=0; } /* repetir desde el principio si ya ganó */
+  chatCombo=0;
+  /* ocultar la barra de navegación durante el chat */
+  document.getElementById('nav').classList.add('hidden');
+  /* activar pantalla chat */
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('mentalidad').classList.add('active');
+  document.getElementById('chatBody').innerHTML='';
+  setMonHp();
+  /* intro */
+  addBubble('mon','El monstruo aparece en tu chat...',true);
+  setTimeout(nextRound,700);
 }
-function closeWin(){ document.getElementById('winOverlay').classList.remove('show'); renderMind(); }
+function exitChat(){
+  document.getElementById('nav').classList.remove('hidden');
+  nav('mindHome', document.querySelector(".nav button[data-go='mindHome']"));
+}
+function setMonHp(){
+  var pct=Math.max(4,Math.round((1-chatRound/rounds.length)*100));
+  document.getElementById('monHpBar').style.width=pct+'%';
+  var st=document.getElementById('chatStatus');
+  if(st) st.textContent = pct>66?'en línea · chuleándose':pct>33?'en línea · sudando':'en línea · al borde del KO';
+}
+function addBubble(who,html,isText){
+  var body=document.getElementById('chatBody');
+  var b=document.createElement('div');
+  b.className='bubble '+who+(isText?'':' sticker');
+  b.innerHTML=html;
+  body.appendChild(b);
+  body.scrollTop=body.scrollHeight;
+  return b;
+}
+function showTyping(cb,delay){
+  var body=document.getElementById('chatBody');
+  var t=document.createElement('div');
+  t.className='typing';t.innerHTML='<span></span><span></span><span></span>';
+  body.appendChild(t);body.scrollTop=body.scrollHeight;
+  setTimeout(function(){ t.remove(); cb(); }, delay||900);
+}
+function nextRound(){
+  if(chatRound>=rounds.length){ chatWin(); return; }
+  chatAnswered=false;
+  var r=rounds[chatRound];
+  setMonHp();
+  document.getElementById('comboTag').textContent = chatCombo>=2 ? '🔥 Combo x'+chatCombo+'!' : '';
+  document.getElementById('stickerTray').innerHTML='';
+  showTyping(function(){
+    addBubble('mon',r.monMsg,true);
+    setTimeout(function(){
+      addBubble('mon',r.monSt,false);
+      renderReplies(r);
+    },500);
+  });
+}
+function renderReplies(r){
+  var tray=document.getElementById('stickerTray');
+  tray.innerHTML='';
+  /* mezclar el orden para que la correcta no esté siempre igual */
+  var order=r.opts.map(function(_,i){return i;});
+  for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var tmp=order[i];order[i]=order[j];order[j]=tmp;}
+  order.forEach(function(idx){
+    var o=r.opts[idx];
+    var btn=document.createElement('button');
+    btn.className='sticker-reply';
+    btn.innerHTML='<span class="sr-ic">'+o.e+'</span><span class="sr-txt">'+o.t+'</span>';
+    btn.onclick=function(){ answerChat(idx,btn,r); };
+    tray.appendChild(btn);
+  });
+}
+function answerChat(idx,btn,r){
+  if(chatAnswered)return;
+  chatAnswered=true;
+  var ok=idx===r.correct;
+  /* mostrar mi sticker elegido */
+  addBubble('me',r.opts[idx].e,false);
+  /* marcar botones */
+  document.querySelectorAll('.sticker-reply').forEach(function(b){ b.style.pointerEvents='none'; });
+  btn.classList.add(ok?'correct':'wrong');
+  /* avatar recibe golpe */
+  var av=document.getElementById('chatAv');
+  if(ok && av){ av.classList.remove('hit'); void av.offsetWidth; av.classList.add('hit'); }
+  /* reacción del monstruo */
+  showTyping(function(){
+    addBubble('mon', ok? r.reactGood : r.reactBad, true);
+    if(ok){
+      chatCombo++;
+      var m=getMind();
+      /* avanzar ronda, contar progreso y desbloquear sticker */
+      chatRound++;
+      if(chatRound>m.beaten){ m.beaten=chatRound; if(m.stickers<stickerDex.length)m.stickers=Math.min(stickerDex.length,Math.floor(chatRound)); }
+      saveMind(m);
+      setMonHp();
+    }else{
+      chatCombo=0;
+    }
+    /* botón continuar */
+    var tray=document.getElementById('stickerTray');
+    tray.innerHTML='';
+    var nb=document.createElement('button');
+    nb.className='chat-next';
+    if(!ok){ nb.textContent='Uy, esa colaba... reintentar 🔁'; nb.onclick=function(){ chatAnswered=false; nextRound(); }; }
+    else if(chatRound>=rounds.length){ nb.textContent='🏆 Rematar al monstruo'; nb.onclick=chatWin; }
+    else{ nb.textContent='Siguiente excusa ›'; nb.onclick=nextRound; }
+    document.getElementById('comboTag').textContent = (ok&&chatCombo>=2)?'🔥 ¡Combo x'+chatCombo+'! Imparable':'';
+    tray.appendChild(nb);
+  }, 800);
+}
+function chatWin(){
+  var m=getMind();
+  m.ko++; m.stickers=stickerDex.length;
+  if(chatCombo>m.best)m.best=chatCombo;
+  m.beaten=rounds.length;
+  saveMind(m);
+  document.getElementById('comboTag').textContent='';
+  document.getElementById('stickerTray').innerHTML='';
+  var body=document.getElementById('chatBody');
+  body.innerHTML+='<div class="chat-win"><div class="cw-emoji">🏆</div><h3>¡Monstruo bloqueado y en KO!</h3><p>Le has callado las 12 excusas. Sin argumentos, el muy chulo se queda mudo. Tu cabeza es tuya otra vez. 🎉</p></div>';
+  body.scrollTop=body.scrollHeight;
+  document.getElementById('chatStatus').textContent='visto por última vez: derrotado';
+  document.getElementById('monHpBar').style.width='0%';
+  var tray=document.getElementById('stickerTray');
+  var nb=document.createElement('button');
+  nb.className='chat-next';nb.textContent='Volver a mi colección 🎟️';
+  nb.onclick=function(){ document.getElementById('nav').classList.remove('hidden'); nav('mindHome', document.querySelector(".nav button[data-go='mindHome']")); };
+  tray.appendChild(nb);
+}
+
 
 
 /* ====================================================
