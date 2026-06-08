@@ -90,6 +90,25 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
 .field .unit{font-size:14px;opacity:.6;white-space:nowrap;}
 .ob-step{display:none;}
 .ob-step.on{display:block;}
+/* test */
+#test{background:linear-gradient(165deg,#0d3b2e,#165240 60%,#1f6b51);color:var(--cream);}
+.test-wrap{flex:1;display:flex;flex-direction:column;padding:54px 26px 36px;}
+.q-prog{height:5px;background:rgba(255,255,255,.14);border-radius:20px;margin-bottom:30px;overflow:hidden;}
+.q-prog > i{display:block;height:100%;background:var(--sage);border-radius:20px;transition:width .3s;}
+.q-count{font-size:13px;letter-spacing:.14em;text-transform:uppercase;opacity:.55;margin-bottom:12px;}
+.q-text{font-family:'Fraunces';font-size:27px;font-weight:500;line-height:1.18;margin-bottom:28px;}
+.q-opt{display:block;width:100%;text-align:left;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
+  border-radius:16px;padding:16px 18px;margin-bottom:11px;color:var(--cream);font-family:'Outfit';font-size:16px;cursor:pointer;transition:.18s;}
+.q-opt:active{transform:scale(.98);}
+.q-opt:hover{background:rgba(255,255,255,.13);}
+/* resultado */
+.res-badge{display:inline-block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  background:rgba(127,196,163,.22);color:var(--sage);padding:6px 14px;border-radius:20px;margin-bottom:18px;}
+.res-method{background:var(--cream);color:var(--ink);border-radius:22px;padding:22px;margin:18px 0;}
+.res-method .rm-ic{font-size:34px;}
+.res-method .rm-t{font-family:'Fraunces';font-size:23px;font-weight:600;margin:8px 0 4px;}
+.res-method .rm-d{font-size:14px;color:#3d4f48;line-height:1.5;font-weight:300;}
+.res-note{font-size:13px;opacity:.7;font-weight:300;line-height:1.5;margin-top:6px;}
 
 /* ===== HOME ===== */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 22px 6px;}
@@ -188,26 +207,12 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
     <div class="ob-wrap">
       <div class="leaf">🌱</div>
 
-      <!-- paso 1: método -->
+      <!-- paso 1: bienvenida -->
       <div class="ob-step on" id="step1">
         <div class="ob-title">Tu vida<br><em>sin humo</em><br>empieza hoy.</div>
-        <p class="ob-sub">Elige cómo quieres dejarlo. Sobre cualquier método te acompañamos con un programa basado en evidencia.</p>
-        <p class="method-q">¿Qué método prefieres?</p>
-
-        <div class="method" data-m="brusco" onclick="selMethod(this)">
-          <span class="ic">🎯</span>
-          <div><div class="mt">De golpe</div><div class="md">Eliges un "día D" y lo dejas</div></div>
-          <span class="tag-evi">Evidencia alta</span>
-        </div>
-        <div class="method" data-m="gradual" onclick="selMethod(this)">
-          <span class="ic">📉</span>
-          <div><div class="mt">Reducción gradual</div><div class="md">~30% menos cada semana</div></div>
-          <span class="tag-evi">Evidencia alta</span>
-        </div>
-        <div class="method" data-m="sustituto" onclick="selMethod(this)">
-          <span class="ic">🩹</span>
-          <div><div class="mt">Con sustitutos</div><div class="md">Parches, chicles o vapeo</div></div>
-          <span class="tag-evi">Evidencia alta</span>
+        <p class="ob-sub">Antes de empezar, responde 6 preguntas rápidas. Calcularemos tu nivel de dependencia y te recomendaremos el método con más probabilidades de funcionar en tu caso.</p>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:24px;font-size:13px;opacity:.7;font-weight:300">
+          <span>🔬</span><span>Basado en el test de Fagerström, validado científicamente.</span>
         </div>
       </div>
 
@@ -246,7 +251,60 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
         </div>
       </div>
 
-      <button class="btn-primary" id="obBtn" disabled onclick="obNext()">Continuar</button>
+      <button class="btn-primary" id="obBtn" onclick="obNext()">Empezar el test</button>
+    </div>
+  </section>
+
+  <!-- ============ TEST FAGERSTRÖM ============ -->
+  <section class="screen" id="test">
+    <div class="test-wrap">
+      <div class="q-prog"><i id="qProg" style="width:0%"></i></div>
+      <div class="q-count" id="qCount">Pregunta 1 de 6</div>
+      <div class="q-text" id="qText">…</div>
+      <div id="qOpts"></div>
+    </div>
+  </section>
+
+  <!-- ============ RESULTADO ============ -->
+  <section class="screen" id="resultado">
+    <div class="ob-wrap" style="justify-content:flex-start;padding-top:54px">
+      <div class="res-badge" id="resBadge">Dependencia —</div>
+      <div class="ob-title" style="font-size:32px">Tu método<br><em id="resMethodName">recomendado</em></div>
+      <div class="res-method">
+        <div class="rm-ic" id="resIc">🎯</div>
+        <div class="rm-t" id="resTitle">—</div>
+        <div class="rm-d" id="resDesc">—</div>
+      </div>
+      <p class="res-note" id="resNote">—</p>
+      <div style="margin-top:auto;padding-top:24px">
+        <button class="btn-primary" onclick="acceptMethod()">Usar este método</button>
+        <button class="btn-primary" style="background:none;border:1px solid rgba(255,255,255,.25);color:var(--cream);margin-top:10px" onclick="chooseOther()">Prefiero elegir otro</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ELEGIR MÉTODO MANUAL ============ -->
+  <section class="screen" id="elegir">
+    <div class="ob-wrap" style="justify-content:flex-start;padding-top:54px">
+      <div class="ob-title" style="font-size:32px">Elige tu<br><em>método</em></div>
+      <p class="ob-sub">Cualquiera es válido. Sobre todos te acompañamos con el programa.</p>
+      <div style="margin-top:24px">
+        <div class="method" data-m="brusco" onclick="selMethod(this)">
+          <span class="ic">🎯</span>
+          <div><div class="mt">De golpe</div><div class="md">Eliges un "día D" y lo dejas</div></div>
+        </div>
+        <div class="method" data-m="gradual" onclick="selMethod(this)">
+          <span class="ic">📉</span>
+          <div><div class="mt">Reducción gradual</div><div class="md">~30% menos cada semana</div></div>
+        </div>
+        <div class="method" data-m="sustituto" onclick="selMethod(this)">
+          <span class="ic">🩹</span>
+          <div><div class="mt">Con sustitutos</div><div class="md">Parches, chicles o vapeo</div></div>
+        </div>
+      </div>
+      <div style="margin-top:auto;padding-top:20px">
+        <button class="btn-primary" id="elegirBtn" disabled onclick="confirmManual()">Continuar</button>
+      </div>
     </div>
   </section>
 
@@ -396,12 +454,93 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
 var KEY='respira_user_v1';
 var chosen=null, obStep=1;
 
-/* ---------- onboarding ---------- */
+/* ---------- TEST DE FAGERSTRÖM ---------- */
+var questions=[
+  {q:'¿Cuánto tiempo pasa desde que te despiertas hasta tu primer cigarro?',
+   opts:[['Menos de 5 minutos',3],['Entre 6 y 30 minutos',2],['Entre 31 y 60 minutos',1],['Más de 60 minutos',0]]},
+  {q:'¿Te cuesta no fumar en sitios donde está prohibido (cine, transporte…)?',
+   opts:[['Sí, me cuesta mucho',1],['No, lo llevo bien',0]]},
+  {q:'¿Qué cigarro te costaría más dejar de fumar?',
+   opts:[['El primero de la mañana',1],['Cualquier otro',0]]},
+  {q:'¿Cuántos cigarros fumas al día?',
+   opts:[['31 o más',3],['Entre 21 y 30',2],['Entre 11 y 20',1],['10 o menos',0]]},
+  {q:'¿Fumas más durante las primeras horas tras despertarte que el resto del día?',
+   opts:[['Sí',1],['No',0]]},
+  {q:'¿Fumas aunque estés tan enfermo que pasas el día en cama?',
+   opts:[['Sí',1],['No',0]]}
+];
+var qIndex=0, qScore=0;
+
+function startTest(){
+  qIndex=0;qScore=0;
+  show('test');
+  renderQuestion();
+}
+function renderQuestion(){
+  var q=questions[qIndex];
+  document.getElementById('qProg').style.width=(qIndex/questions.length*100)+'%';
+  document.getElementById('qCount').textContent='Pregunta '+(qIndex+1)+' de '+questions.length;
+  document.getElementById('qText').textContent=q.q;
+  var box=document.getElementById('qOpts');box.innerHTML='';
+  q.opts.forEach(function(o){
+    var b=document.createElement('button');
+    b.className='q-opt';b.textContent=o[0];
+    b.onclick=function(){answer(o[1]);};
+    box.appendChild(b);
+  });
+}
+function answer(points){
+  qScore+=points;
+  qIndex++;
+  if(qIndex<questions.length){renderQuestion();}
+  else{showResult();}
+}
+
+/* recomendación según puntuación: <4 baja, 4-7 moderada, >7 alta */
+function recommend(score){
+  if(score<4) return {level:'baja',method:'brusco',ic:'🎯',title:'Dejarlo de golpe',
+    desc:'Tu dependencia es baja, así que tienes buenas opciones de dejarlo eligiendo un "día D" y parando del todo, apoyándote en el programa.',
+    note:'Aun así, vigila los síntomas de abstinencia los primeros días. El botón de ansiedad estará ahí para ayudarte.'};
+  if(score<=7) return {level:'moderada',method:'gradual',ic:'📉',title:'Reducción gradual',
+    desc:'Con dependencia moderada, ir bajando poco a poco (alrededor de un 30% menos por semana) suele ser más llevadero que parar de golpe.',
+    note:'Una terapia sustitutiva de nicotina (parches o chicles) puede aumentar tus probabilidades. Consúltalo con tu farmacéutico o médico.'};
+  return {level:'alta',method:'sustituto',ic:'🩹',title:'Con sustitutos de nicotina',
+    desc:'Tu dependencia es alta. La evidencia recomienda apoyarte en terapia sustitutiva de nicotina, e incluso combinar productos, junto al programa.',
+    note:'Importante: con dependencia alta conviene que un médico o farmacéutico te oriente sobre la pauta y valore tratamiento.'};
+}
+var recMethod=null;
+function showResult(){
+  document.getElementById('qProg').style.width='100%';
+  var r=recommend(qScore);
+  recMethod=r.method;
+  document.getElementById('resBadge').textContent='Dependencia '+r.level+' · '+qScore+'/10';
+  document.getElementById('resMethodName').textContent=r.title.toLowerCase();
+  document.getElementById('resIc').textContent=r.ic;
+  document.getElementById('resTitle').textContent=r.title;
+  document.getElementById('resDesc').textContent=r.desc;
+  document.getElementById('resNote').textContent=r.note;
+  show('resultado');
+}
+function acceptMethod(){ chosen=recMethod; goToData(); }
+function chooseOther(){ show('elegir'); }
+function confirmManual(){ goToData(); }
+
+/* ---------- selección manual de método ---------- */
 function selMethod(el){
-  document.querySelectorAll('.method').forEach(m=>m.classList.remove('sel'));
+  document.querySelectorAll('#elegir .method').forEach(m=>m.classList.remove('sel'));
   el.classList.add('sel');
   chosen=el.dataset.m;
-  document.getElementById('obBtn').disabled=false;
+  document.getElementById('elegirBtn').disabled=false;
+}
+
+/* ---------- pantalla de datos ---------- */
+function goToData(){
+  show('onboarding');
+  document.getElementById('step1').classList.remove('on');
+  document.getElementById('step2').classList.add('on');
+  document.getElementById('obBtn').textContent='Comenzar mi plan';
+  document.getElementById('obBtn').disabled=true;
+  obStep=2;
 }
 function checkStep2(){
   var n=document.getElementById('inpName').value.trim();
@@ -411,18 +550,12 @@ function checkStep2(){
   document.getElementById('obBtn').disabled=!(n.length>0&&c>0&&p>0&&pp>0);
 }
 function obNext(){
-  if(obStep===1){
-    obStep=2;
-    document.getElementById('step1').classList.remove('on');
-    document.getElementById('step2').classList.add('on');
-    document.getElementById('obBtn').textContent='Comenzar mi plan';
-    document.getElementById('obBtn').disabled=true;
-    return;
-  }
+  if(obStep===1){ startTest(); return; }
   /* guardar */
   var data={
     name:document.getElementById('inpName').value.trim(),
     method:chosen,
+    score:qScore,
     cigsPerDay:parseFloat(document.getElementById('inpCigs').value),
     packPrice:parseFloat(document.getElementById('inpPrice').value),
     perPack:parseFloat(document.getElementById('inpPerPack').value),
