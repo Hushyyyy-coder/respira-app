@@ -217,6 +217,12 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
         <p class="ob-sub">Con esto calculamos tu ahorro real y los cigarros que vas evitando.</p>
         <div style="margin-top:30px">
           <div class="field">
+            <label>¿Cómo te llamas?</label>
+            <div class="inwrap">
+              <input type="text" id="inpName" placeholder="Tu nombre" maxlength="20" oninput="checkStep2()">
+            </div>
+          </div>
+          <div class="field">
             <label>¿Cuántos cigarros fumabas al día?</label>
             <div class="inwrap">
               <input type="number" id="inpCigs" inputmode="numeric" placeholder="20" min="1" max="80" oninput="checkStep2()">
@@ -247,8 +253,8 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
   <!-- ============ HOME ============ -->
   <section class="screen" id="home">
     <div class="topbar">
-      <div class="hi">Buenos días,<br><b>Alex</b></div>
-      <div class="av">A</div>
+      <div class="hi">Buenos días,<br><b id="hiName">—</b></div>
+      <div class="av" id="hiAvatar">·</div>
     </div>
     <div class="counter-card">
       <div class="lbl">Tiempo sin fumar</div>
@@ -270,7 +276,7 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
       <div class="bar"><i style="width:62%"></i></div>
       <p class="hnote">A las 2-12 semanas la circulación mejora y respirar cuesta menos.</p>
     </div>
-    <button class="sos" onclick="openSos()"><span class="pulse"></span> Tengo un ansia ahora</button>
+    <button class="sos" onclick="openSos()"><span class="pulse"></span> Tengo ansiedad ahora</button>
   </section>
 
   <!-- ============ PROGRAMA TCC ============ -->
@@ -358,7 +364,7 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
     </div>
     <div class="post">
       <div class="post-h"><div class="pa">L</div><div class="pn">Lucía</div><div class="pday">día 120</div></div>
-      <p>4 meses ya. Lo que más noto: vuelvo a oler el café por la mañana. Mereció la pena cada ansia superada.</p>
+      <p>4 meses ya. Lo que más noto: vuelvo a oler el café por la mañana. Mereció la pena cada antojo superado.</p>
       <div class="post-foot"><span>❤️ 51</span><span>💬 9</span></div>
     </div>
     <div class="pad" style="padding-top:8px">
@@ -370,8 +376,8 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
   <div id="sosOverlay">
     <p class="eyebrow" style="color:var(--sage)">Respira conmigo</p>
     <div class="breathe"><div class="inner" id="breatheText">Inhala…</div></div>
-    <h2>El ansia dura 3-5 min</h2>
-    <p class="sostext">Sigue el círculo. Inhala 4s, mantén 4s, exhala 4s. Vas a superar esto, como las 245 veces anteriores.</p>
+    <h2>Las ganas duran 3-5 min</h2>
+    <p class="sostext">Sigue el círculo. Inhala 4s, mantén 4s, exhala 4s. Esta sensación pasa sola en unos minutos. Vas a poder.</p>
     <button class="sos-close" onclick="closeSos()">Ya estoy mejor ✓</button>
     <p class="sos-tip">Truco: bebe un vaso de agua o sal a caminar 2 min</p>
   </div>
@@ -398,10 +404,11 @@ function selMethod(el){
   document.getElementById('obBtn').disabled=false;
 }
 function checkStep2(){
+  var n=document.getElementById('inpName').value.trim();
   var c=parseFloat(document.getElementById('inpCigs').value);
   var p=parseFloat(document.getElementById('inpPrice').value);
   var pp=parseFloat(document.getElementById('inpPerPack').value);
-  document.getElementById('obBtn').disabled=!(c>0&&p>0&&pp>0);
+  document.getElementById('obBtn').disabled=!(n.length>0&&c>0&&p>0&&pp>0);
 }
 function obNext(){
   if(obStep===1){
@@ -414,6 +421,7 @@ function obNext(){
   }
   /* guardar */
   var data={
+    name:document.getElementById('inpName').value.trim(),
     method:chosen,
     cigsPerDay:parseFloat(document.getElementById('inpCigs').value),
     packPrice:parseFloat(document.getElementById('inpPrice').value),
@@ -446,6 +454,11 @@ function startApp(data){
   tickInterval=setInterval(()=>render(data),1000);
 }
 function render(data){
+  /* saludo personalizado */
+  if(data.name){
+    var hn=document.getElementById('hiName'); if(hn)hn.textContent=data.name;
+    var ha=document.getElementById('hiAvatar'); if(ha)ha.textContent=data.name.charAt(0).toUpperCase();
+  }
   var ms=Date.now()-data.start;
   var totalSec=Math.floor(ms/1000);
   var days=ms/86400000;
