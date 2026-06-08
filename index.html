@@ -285,6 +285,20 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 .refl-ticks{display:flex;justify-content:space-between;margin-top:10px;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.03em;}
 .refl-disc{font-size:11px;color:var(--muted);text-align:center;margin:14px 22px 0;font-weight:500;line-height:1.5;opacity:.8;}
 .refl-change{display:none;}
+/* ===== popup disparador ===== */
+#trigOverlay{position:absolute;inset:0;background:rgba(12,30,22,.55);backdrop-filter:blur(6px);z-index:58;
+  display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:.28s;}
+#trigOverlay.show{opacity:1;visibility:visible;}
+.trig-sheet{background:var(--card);width:100%;max-width:412px;border-radius:28px 28px 0 0;padding:24px 22px calc(28px + env(safe-area-inset-bottom));
+  transform:translateY(30px);transition:.3s cubic-bezier(.22,1,.36,1);}
+#trigOverlay.show .trig-sheet{transform:none;}
+.trig-sheet h3{font-size:21px;font-weight:800;letter-spacing:-.03em;text-align:center;}
+.trig-sheet .ts-sub{font-size:13px;color:var(--muted);text-align:center;margin:5px 0 18px;font-weight:500;}
+.trig-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.trig-opt{background:var(--bg);border:1.5px solid var(--line);border-radius:16px;padding:15px 12px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:.15s;display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink);}
+.trig-opt:active{transform:scale(.96);}
+.trig-opt .to-ic{font-size:24px;}
+.trig-skip{width:100%;background:none;border:none;color:var(--muted);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;margin-top:14px;padding:8px;}
 /* ===== JUEGO MENTALIDAD ===== */
 #mentalidad{background:linear-gradient(180deg,#f4fbf7 0%,var(--bg) 30%);}
 .mind-head{padding:26px 22px 8px;display:flex;align-items:flex-start;justify-content:space-between;}
@@ -572,6 +586,10 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
         <h4>Cigarros por franja del día</h4>
         <div class="bars" id="anBars"></div>
       </div>
+      <div class="an-insight" id="anTrigCard" style="display:none;background:linear-gradient(150deg,#7a3a0c,#b35a14);margin-top:13px">
+        <div class="ai-lbl">Tu disparador principal</div>
+        <div class="ai-txt" id="anTrigText">—</div>
+      </div>
     </div>
   </section>
 
@@ -646,6 +664,23 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
       <button class="btn-primary" style="background:var(--card);border:1px solid var(--line);color:var(--muted);box-shadow:var(--shadow)" onclick="resetAll()">↺ Reiniciar mis datos</button>
     </div>
   </section>
+
+  <!-- ============ DISPARADOR (sheet) ============ -->
+  <div id="trigOverlay">
+    <div class="trig-sheet">
+      <h3>Cigarro registrado</h3>
+      <p class="ts-sub">¿Qué lo disparó? Esto te ayudará a romper el patrón.</p>
+      <div class="trig-grid">
+        <button class="trig-opt" onclick="setTrigger('Estrés')"><span class="to-ic">😣</span>Estrés</button>
+        <button class="trig-opt" onclick="setTrigger('Café')"><span class="to-ic">☕</span>Café</button>
+        <button class="trig-opt" onclick="setTrigger('Después de comer')"><span class="to-ic">🍽️</span>Después de comer</button>
+        <button class="trig-opt" onclick="setTrigger('Aburrimiento')"><span class="to-ic">😐</span>Aburrimiento</button>
+        <button class="trig-opt" onclick="setTrigger('Social')"><span class="to-ic">🍻</span>Social / amigos</button>
+        <button class="trig-opt" onclick="setTrigger('Costumbre')"><span class="to-ic">🔁</span>Pura costumbre</button>
+      </div>
+      <button class="trig-skip" onclick="setTrigger(null)">Omitir</button>
+    </div>
+  </div>
 
   <!-- ============ LECCIÓN OVERLAY ============ -->
   <div id="lessonOverlay">
@@ -844,13 +879,30 @@ function getLog(){
   try{ return JSON.parse(localStorage.getItem(LOGKEY))||[]; }catch(e){ return []; }
 }
 function saveLog(arr){ localStorage.setItem(LOGKEY,JSON.stringify(arr)); }
+/* helpers: cada entrada puede ser un número (viejo) o {t,trigger} (nuevo) */
+function entryTime(e){ return typeof e==='number'?e:e.t; }
+function entryTrigger(e){ return typeof e==='number'?null:e.trigger; }
+function logTimes(){ return getLog().map(entryTime); }
+
 function addCig(){
   var log=getLog();
-  log.push(Date.now());
+  log.push({t:Date.now(),trigger:null});
   saveLog(log);
   var btn=document.querySelector('.cig-add');
   if(btn){btn.style.transform='scale(.9)';setTimeout(()=>btn.style.transform='',120);}
   renderCigs();
+  renderAnalisis();
+  /* preguntar el disparador */
+  document.getElementById('trigOverlay').classList.add('show');
+}
+function setTrigger(name){
+  var log=getLog();
+  if(log.length){ var last=log[log.length-1];
+    if(typeof last==='number'){ log[log.length-1]={t:last,trigger:name}; }
+    else{ last.trigger=name; }
+    saveLog(log);
+  }
+  document.getElementById('trigOverlay').classList.remove('show');
   renderAnalisis();
 }
 function todayStart(){
@@ -868,16 +920,16 @@ function dailyQuota(){
   return 0; /* de golpe / sustitutos: objetivo 0 */
 }
 function renderCigs(){
-  var log=getLog();
+  var times=logTimes();
   var ts=todayStart();
-  var today=log.filter(t=>t>=ts).length;
+  var today=times.filter(t=>t>=ts).length;
   var el=document.getElementById('cigToday'); if(el)el.textContent=today;
   /* tiempo desde el último */
   var since=document.getElementById('cigSince');
   if(since){
-    if(log.length===0){ since.textContent='—'; }
+    if(times.length===0){ since.textContent='—'; }
     else{
-      var diff=Date.now()-log[log.length-1];
+      var diff=Date.now()-times[times.length-1];
       var min=Math.floor(diff/60000);
       if(min<60) since.textContent=min+' min';
       else if(min<1440) since.textContent=Math.floor(min/60)+'h '+(min%60)+'m';
@@ -907,7 +959,8 @@ function fmtDur(ms){
   return Math.floor(min/1440)+'d '+Math.floor((min%1440)/60)+'h';
 }
 function renderAnalisis(){
-  var log=getLog().slice().sort(function(a,b){return a-b;});
+  var raw=getLog();
+  var log=logTimes().slice().sort(function(a,b){return a-b;});
   var empty=document.getElementById('anEmpty');
   var content=document.getElementById('anContent');
   if(!empty||!content) return;
@@ -946,16 +999,35 @@ function renderAnalisis(){
     document.getElementById('anAvgGap').textContent='—';
   }
 
+  /* disparador principal */
+  var counts={};
+  raw.forEach(function(e){ var tr=entryTrigger(e); if(tr){ counts[tr]=(counts[tr]||0)+1; } });
+  var topTrig=null,topN=0,withTrig=0;
+  for(var k in counts){ withTrig+=counts[k]; if(counts[k]>topN){topN=counts[k];topTrig=k;} }
+  var trigCard=document.getElementById('anTrigCard');
+  var strategies={
+    'Estrés':'Antes de encender, respira hondo 10 veces o usa el botón de ansiedad. La nicotina no quita el estrés, lo aumenta.',
+    'Café':'Cambia el ritual: toma el café de pie, en otro sitio, o sustitúyelo unos días. El placer está en el café, no en el humo.',
+    'Después de comer':'Levántate enseguida de la mesa: lávate los dientes o sal a caminar 5 minutos para romper la asociación.',
+    'Aburrimiento':'Ten algo a mano para las manos y la boca: agua, chicle, un juego corto en el móvil. El impulso pasa en minutos.',
+    'Social':'Acompaña sin fumar. Sostén una bebida en la mano. El vínculo con tus amigos no depende del cigarro.',
+    'Costumbre':'Es el más fácil de romper: son gestos automáticos. Cambia tu rutina justo en ese momento del día.'
+  };
+  if(topTrig && withTrig>=3){
+    trigCard.style.display='block';
+    var pct=Math.round(topN/withTrig*100);
+    document.getElementById('anTrigText').innerHTML='Sueles fumar por <b>'+topTrig.toLowerCase()+'</b> ('+pct+'% de los registros con motivo). '+(strategies[topTrig]||'');
+  }else{
+    trigCard.style.display='none';
+  }
+
   /* insight en texto */
   var ins='';
   if(log.length<5){
-    ins='Llevas <b>'+log.length+'</b> registro(s). Sigue anotando unos días y podré darte un análisis más fiable de tus patrones.';
+    ins='Llevas <b>'+log.length+'</b> registro(s). Sigue anotando y marcando qué los dispara para darte un análisis más útil.';
   }else{
     ins='Fumas sobre todo <b>'+peakLabels[peakIdx]+'</b> (franja '+nombres[peakIdx]+'h). ';
-    if(log.length>=2){
-      ins+='Tu mayor tiempo sin fumar ha sido <b>'+fmtDur(maxGap)+'</b>. ';
-      ins+='Prueba a usar el botón de ansiedad en tu hora pico para ir alargando ese hueco.';
-    }
+    if(log.length>=2){ ins+='Tu mayor tiempo sin fumar ha sido <b>'+fmtDur(maxGap)+'</b>. '; }
   }
   document.getElementById('anInsight').innerHTML=ins;
 }
