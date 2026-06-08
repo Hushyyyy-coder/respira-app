@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0d3b2e">
+<title>Respira · Deja de fumar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d3b2e;
+  --ink-2:#165240;
+  --moss:#2f8f6b;
+  --sage:#7fc4a3;
+  --mist:#e8f3ee;
+  --cream:#f6f4ec;
+  --paper:#fdfcf7;
+  --coral:#e2603b;
+  --coral-soft:#f7e6df;
+  --amber:#d99a2b;
+  --line:rgba(13,59,46,.12);
+  --shadow:0 8px 30px rgba(13,59,46,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:'Outfit',sans-serif;
+  background:#d9d4c4;
+  color:var(--ink);
+  display:flex;align-items:center;justify-content:center;
+  min-height:100dvh;
+  overflow:hidden;
+}
+/* phone frame */
+.phone{
+  position:relative;
+  width:100%;max-width:412px;height:100dvh;max-height:880px;
+  background:var(--paper);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  box-shadow:var(--shadow);
+}
+@media(min-width:440px){
+  .phone{border-radius:38px;border:10px solid #11342a;height:840px;}
+}
+/* screens */
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transform:translateY(8px);
+  transition:opacity .35s ease,transform .35s ease,visibility .35s;
+  overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:88px;}
+.screen.active{opacity:1;visibility:visible;transform:none;}
+.screen::-webkit-scrollbar{display:none;}
+.pad{padding:24px 22px;}
+
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--moss);font-weight:500;}
+
+/* ===== ONBOARDING ===== */
+#onboarding{background:linear-gradient(165deg,#0d3b2e,#165240 60%,#1f6b51);color:var(--cream);}
+.ob-wrap{flex:1;display:flex;flex-direction:column;justify-content:space-between;padding:64px 28px 36px;}
+.leaf{width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:26px;}
+.ob-title{font-size:42px;font-weight:500;line-height:1.02;margin-top:auto;letter-spacing:-.01em;}
+.ob-title em{font-style:italic;color:var(--sage);}
+.ob-sub{font-family:'Outfit';font-weight:300;font-size:16px;opacity:.82;margin-top:16px;line-height:1.5;max-width:300px;}
+.method-q{font-size:13px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;margin:34px 0 14px;}
+.method{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:15px 16px;margin-bottom:11px;
+  cursor:pointer;transition:.2s;}
+.method:active{transform:scale(.98);}
+.method.sel{background:var(--cream);color:var(--ink);border-color:var(--cream);}
+.method .ic{font-size:24px;width:30px;text-align:center;}
+.method .mt{font-weight:500;font-size:16px;}
+.method .md{font-size:13px;opacity:.7;font-weight:300;}
+.method.sel .md{opacity:.6;}
+.tag-evi{margin-left:auto;font-size:10px;letter-spacing:.06em;text-transform:uppercase;
+  background:rgba(127,196,163,.25);color:var(--sage);padding:4px 8px;border-radius:20px;white-space:nowrap;}
+.method.sel .tag-evi{background:var(--mist);color:var(--moss);}
+.btn-primary{background:var(--coral);color:#fff;border:none;border-radius:18px;
+  padding:18px;font-family:'Outfit';font-size:16px;font-weight:500;width:100%;cursor:pointer;
+  transition:.2s;letter-spacing:.01em;}
+.btn-primary:active{transform:scale(.98);}
+.btn-primary:disabled{opacity:.4;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:13px;opacity:.7;margin-bottom:7px;font-weight:300;}
+.field .inwrap{display:flex;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:0 16px;}
+.field input{flex:1;background:none;border:none;outline:none;color:var(--cream);font-family:'Outfit';font-size:18px;font-weight:500;padding:15px 0;width:100%;}
+.field input::placeholder{color:rgba(246,244,236,.4);font-weight:300;}
+.field .unit{font-size:14px;opacity:.6;white-space:nowrap;}
+.ob-step{display:none;}
+.ob-step.on{display:block;}
+
+/* ===== HOME ===== */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 22px 6px;}
+.topbar .hi{font-size:14px;color:var(--moss);}
+.topbar .hi b{font-family:'Fraunces';font-weight:500;}
+.av{width:38px;height:38px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;font-weight:500;color:var(--ink-2);font-size:14px;}
+.counter-card{margin:8px 22px 0;background:linear-gradient(160deg,#165240,#0d3b2e);border-radius:26px;padding:28px 24px;color:var(--cream);text-align:center;position:relative;overflow:hidden;}
+.counter-card::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(127,196,163,.12);}
+.counter-card .lbl{font-size:12px;letter-spacing:.16em;text-transform:uppercase;opacity:.6;}
+.counter-card .big{font-family:'Fraunces';font-size:46px;font-weight:500;margin:6px 0 2px;letter-spacing:-.01em;}
+.counter-card .sub{font-size:13px;opacity:.7;font-weight:300;}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px 22px 0;}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:16px;}
+.stat .si{font-size:18px;color:var(--moss);}
+.stat .sv{font-family:'Fraunces';font-size:26px;font-weight:500;margin-top:6px;}
+.stat .sl{font-size:12px;color:#6b7d76;margin-top:1px;}
+.section-h{padding:24px 22px 10px;display:flex;align-items:center;justify-content:between;}
+.section-h h3{font-size:19px;}
+.health{margin:0 22px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:18px;}
+.health-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.health-top .ht{font-weight:500;font-size:15px;display:flex;align-items:center;gap:8px;}
+.health-top .hd{font-size:12px;color:#6b7d76;}
+.bar{height:9px;background:var(--mist);border-radius:20px;overflow:hidden;}
+.bar > i{display:block;height:100%;background:linear-gradient(90deg,var(--moss),var(--sage));border-radius:20px;}
+.health .hnote{font-size:13px;color:#6b7d76;margin-top:10px;font-weight:300;}
+.sos{margin:22px;background:var(--coral);color:#fff;border:none;border-radius:22px;padding:22px;width:calc(100% - 44px);
+  display:flex;align-items:center;justify-content:center;gap:10px;font-family:'Outfit';font-size:17px;font-weight:500;cursor:pointer;
+  box-shadow:0 10px 24px rgba(226,96,59,.3);transition:.2s;}
+.sos:active{transform:scale(.97);}
+.sos .pulse{width:11px;height:11px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.5);}}
+
+/* ===== TCC PROGRAM ===== */
+.phase{margin:0 22px 14px;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--paper);}
+.phase-h{padding:16px 18px;display:flex;align-items:center;gap:12px;}
+.phase-n{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-weight:600;font-size:15px;}
+.p1 .phase-n{background:var(--mist);color:var(--moss);}
+.p2 .phase-n{background:var(--coral-soft);color:var(--coral);}
+.p3 .phase-n{background:#efe6f7;color:#8159b0;}
+.phase-h .pt{font-weight:500;font-size:16px;}
+.phase-h .pp{font-size:12px;color:#6b7d76;}
+.lessons{padding:0 18px 14px;}
+.lesson{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);font-size:14px;}
+.lesson .lc{width:22px;height:22px;border-radius:50%;border:2px solid var(--sage);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--moss);flex-shrink:0;}
+.lesson.done .lc{background:var(--moss);border-color:var(--moss);color:#fff;}
+.lesson.lock{opacity:.45;}
+.lesson.lock .lc{border-color:#c3cdc8;color:#c3cdc8;}
+
+/* ===== ACHIEVEMENTS / COMMUNITY ===== */
+.ach-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;padding:6px 22px;}
+.ach{aspect-ratio:1;border-radius:18px;background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;}
+.ach.on{background:linear-gradient(160deg,#fff,var(--mist));}
+.ach.off{opacity:.4;}
+.ach .ai{font-size:28px;}
+.ach .an{font-size:11px;margin-top:6px;color:#6b7d76;line-height:1.2;}
+.post{margin:0 22px 12px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:15px 16px;}
+.post-h{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.post-h .pa{width:32px;height:32px;border-radius:50%;background:var(--sage);color:var(--ink);display:flex;align-items:center;justify-content:center;font-weight:500;font-size:13px;}
+.post-h .pn{font-weight:500;font-size:14px;}
+.post-h .pday{font-size:11px;color:var(--moss);background:var(--mist);padding:2px 8px;border-radius:12px;margin-left:auto;}
+.post p{font-size:14px;color:#3d4f48;font-weight:300;line-height:1.5;}
+.post-foot{display:flex;gap:18px;margin-top:10px;font-size:13px;color:#6b7d76;}
+
+/* ===== NAV ===== */
+.nav{position:absolute;bottom:0;left:0;right:0;background:rgba(253,252,247,.92);backdrop-filter:blur(12px);
+  border-top:1px solid var(--line);display:flex;padding:10px 6px 26px;z-index:20;}
+.nav button{flex:1;background:none;border:none;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-family:'Outfit';font-size:10px;color:#9aa8a2;cursor:pointer;padding:4px 0;transition:.2s;}
+.nav button .ni{font-size:21px;}
+.nav button.on{color:var(--moss);}
+
+/* ===== SOS OVERLAY ===== */
+#sosOverlay{position:absolute;inset:0;background:linear-gradient(165deg,#0d3b2e,#1f6b51);z-index:50;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--cream);text-align:center;padding:32px;
+  opacity:0;visibility:hidden;transition:.4s;}
+#sosOverlay.show{opacity:1;visibility:visible;}
+.breathe{width:180px;height:180px;border-radius:50%;background:rgba(127,196,163,.18);
+  display:flex;align-items:center;justify-content:center;margin:24px 0;}
+.breathe .inner{width:120px;height:120px;border-radius:50%;background:rgba(127,196,163,.3);
+  display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-size:19px;
+  animation:breathe 8s ease-in-out infinite;}
+@keyframes breathe{0%,100%{transform:scale(.7);}50%{transform:scale(1.15);}}
+#sosOverlay h2{font-size:30px;margin-bottom:8px;}
+#sosOverlay .sostext{font-weight:300;opacity:.85;font-size:15px;line-height:1.5;max-width:280px;}
+.sos-close{margin-top:30px;background:var(--cream);color:var(--ink);border:none;border-radius:16px;padding:15px 34px;font-family:'Outfit';font-weight:500;font-size:15px;cursor:pointer;}
+.sos-tip{margin-top:14px;font-size:13px;opacity:.6;font-weight:300;}
+
+.hidden{display:none !important;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+  <!-- ============ ONBOARDING ============ -->
+  <section class="screen active" id="onboarding">
+    <div class="ob-wrap">
+      <div class="leaf">🌱</div>
+
+      <!-- paso 1: método -->
+      <div class="ob-step on" id="step1">
+        <div class="ob-title">Tu vida<br><em>sin humo</em><br>empieza hoy.</div>
+        <p class="ob-sub">Elige cómo quieres dejarlo. Sobre cualquier método te acompañamos con un programa basado en evidencia.</p>
+        <p class="method-q">¿Qué método prefieres?</p>
+
+        <div class="method" data-m="brusco" onclick="selMethod(this)">
+          <span class="ic">🎯</span>
+          <div><div class="mt">De golpe</div><div class="md">Eliges un "día D" y lo dejas</div></div>
+          <span class="tag-evi">Evidencia alta</span>
+        </div>
+        <div class="method" data-m="gradual" onclick="selMethod(this)">
+          <span class="ic">📉</span>
+          <div><div class="mt">Reducción gradual</div><div class="md">~30% menos cada semana</div></div>
+          <span class="tag-evi">Evidencia alta</span>
+        </div>
+        <div class="method" data-m="sustituto" onclick="selMethod(this)">
+          <span class="ic">🩹</span>
+          <div><div class="mt">Con sustitutos</div><div class="md">Parches, chicles o vapeo</div></div>
+          <span class="tag-evi">Evidencia alta</span>
+        </div>
+      </div>
+
+      <!-- paso 2: datos -->
+      <div class="ob-step" id="step2">
+        <div class="ob-title">Cuéntame<br>tus <em>números</em>.</div>
+        <p class="ob-sub">Con esto calculamos tu ahorro real y los cigarros que vas evitando.</p>
+        <div style="margin-top:30px">
+          <div class="field">
+            <label>¿Cuántos cigarros fumabas al día?</label>
+            <div class="inwrap">
+              <input type="number" id="inpCigs" inputmode="numeric" placeholder="20" min="1" max="80" oninput="checkStep2()">
+              <span class="unit">cig/día</span>
+            </div>
+          </div>
+          <div class="field">
+            <label>¿Cuánto cuesta tu paquete de tabaco?</label>
+            <div class="inwrap">
+              <span class="unit">€</span>
+              <input type="number" id="inpPrice" inputmode="decimal" placeholder="5,50" min="1" max="30" step="0.10" style="text-align:right" oninput="checkStep2()">
+            </div>
+          </div>
+          <div class="field">
+            <label>¿Cuántos cigarros trae el paquete?</label>
+            <div class="inwrap">
+              <input type="number" id="inpPerPack" inputmode="numeric" placeholder="20" min="1" max="40" value="20" oninput="checkStep2()">
+              <span class="unit">cig/paquete</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="obBtn" disabled onclick="obNext()">Continuar</button>
+    </div>
+  </section>
+
+  <!-- ============ HOME ============ -->
+  <section class="screen" id="home">
+    <div class="topbar">
+      <div class="hi">Buenos días,<br><b>Alex</b></div>
+      <div class="av">A</div>
+    </div>
+    <div class="counter-card">
+      <div class="lbl">Tiempo sin fumar</div>
+      <div class="big" id="bigTimer">0d 00:00</div>
+      <div class="sub" id="bigSub">Tu nueva vida empieza ahora 🌱</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="si">💰</div><div class="sv" id="stSaved">0 €</div><div class="sl">Ahorrado</div></div>
+      <div class="stat"><div class="si">🚭</div><div class="sv" id="stAvoid">0</div><div class="sl">Cigarros evitados</div></div>
+      <div class="stat"><div class="si">❤️</div><div class="sv" id="stLife">0 h</div><div class="sl">Vida recuperada</div></div>
+      <div class="stat"><div class="si">🫁</div><div class="sv" id="stLung">0 %</div><div class="sl">Pulmones recuperando</div></div>
+    </div>
+    <div class="section-h"><h3>Tu próximo hito de salud</h3></div>
+    <div class="health">
+      <div class="health-top">
+        <div class="ht">🫀 Mejora la circulación</div>
+        <div class="hd">en 2 semanas</div>
+      </div>
+      <div class="bar"><i style="width:62%"></i></div>
+      <p class="hnote">A las 2-12 semanas la circulación mejora y respirar cuesta menos.</p>
+    </div>
+    <button class="sos" onclick="openSos()"><span class="pulse"></span> Tengo un ansia ahora</button>
+  </section>
+
+  <!-- ============ PROGRAMA TCC ============ -->
+  <section class="screen" id="programa">
+    <div class="pad" style="padding-bottom:8px">
+      <p class="eyebrow">Programa guiado</p>
+      <h2 style="font-size:30px;margin-top:6px">Tu terapia<br>cognitivo-conductual</h2>
+      <p style="font-size:14px;color:#6b7d76;margin-top:10px;font-weight:300;line-height:1.5">El método con más respaldo científico, en 3 fases. Una sesión corta al día.</p>
+    </div>
+
+    <div class="phase p1">
+      <div class="phase-h"><div class="phase-n">1</div><div><div class="pt">Preparación</div><div class="pp">Completada · 4/4</div></div></div>
+      <div class="lessons">
+        <div class="lesson done"><div class="lc">✓</div>Conoce tus desencadenantes</div>
+        <div class="lesson done"><div class="lc">✓</div>Tus motivos para dejarlo</div>
+        <div class="lesson done"><div class="lc">✓</div>Elige tu día D</div>
+        <div class="lesson done"><div class="lc">✓</div>Prepara tu entorno</div>
+      </div>
+    </div>
+
+    <div class="phase p2">
+      <div class="phase-h"><div class="phase-n">2</div><div><div class="pt">Abandono</div><div class="pp">En curso · 3/5</div></div></div>
+      <div class="lessons">
+        <div class="lesson done"><div class="lc">✓</div>Sobrevivir las primeras 72h</div>
+        <div class="lesson done"><div class="lc">✓</div>Reestructurar pensamientos</div>
+        <div class="lesson done"><div class="lc">✓</div>Romper rutinas asociadas</div>
+        <div class="lesson" onclick="this.classList.toggle('done')"><div class="lc"></div>Manejar el estrés sin tabaco</div>
+        <div class="lesson lock"><div class="lc">🔒</div>Resistir las recaídas sociales</div>
+      </div>
+    </div>
+
+    <div class="phase p3">
+      <div class="phase-h"><div class="phase-n">3</div><div><div class="pt">Prevención de recaída</div><div class="pp">Bloqueada · 0/4</div></div></div>
+      <div class="lessons">
+        <div class="lesson lock"><div class="lc">🔒</div>Identificar señales de riesgo</div>
+        <div class="lesson lock"><div class="lc">🔒</div>Plan de emergencia personal</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LOGROS ============ -->
+  <section class="screen" id="logros">
+    <div class="pad" style="padding-bottom:10px">
+      <p class="eyebrow">Tus logros</p>
+      <h2 style="font-size:30px;margin-top:6px">12 insignias<br>desbloqueadas</h2>
+    </div>
+    <div class="stats" style="padding-top:0">
+      <div class="stat"><div class="si">💰</div><div class="sv" id="lgSaved">0 €</div><div class="sl">Ahorrado en total</div></div>
+      <div class="stat"><div class="si">🚭</div><div class="sv" id="lgAvoid">0</div><div class="sl">Cigarros evitados</div></div>
+    </div>
+    <div class="section-h" style="padding-top:18px"><h3>Insignias</h3></div>
+    <div class="ach-grid">
+      <div class="ach on"><div class="ai">🥇</div><div class="an">Primer día</div></div>
+      <div class="ach on"><div class="ai">📅</div><div class="an">Una semana</div></div>
+      <div class="ach on"><div class="ai">🫁</div><div class="an">Pulmones+</div></div>
+      <div class="ach on"><div class="ai">💶</div><div class="an">50 € ahorrados</div></div>
+      <div class="ach on"><div class="ai">🌬️</div><div class="an">100 cigarros menos</div></div>
+      <div class="ach on"><div class="ai">🔥</div><div class="an">Racha de 10</div></div>
+      <div class="ach off"><div class="ai">🏔️</div><div class="an">Un mes</div></div>
+      <div class="ach off"><div class="ai">💎</div><div class="an">3 meses</div></div>
+      <div class="ach off"><div class="ai">👑</div><div class="an">Un año</div></div>
+    </div>
+    <div class="section-h" style="padding-top:20px"><h3>Siguiente objetivo</h3></div>
+    <div class="health" style="margin-bottom:8px">
+      <div class="health-top"><div class="ht">🏔️ Un mes sin fumar</div><div class="hd">18 días</div></div>
+      <div class="bar"><i style="width:40%"></i></div>
+    </div>
+  </section>
+
+  <!-- ============ COMUNIDAD ============ -->
+  <section class="screen" id="comunidad">
+    <div class="pad" style="padding-bottom:8px">
+      <p class="eyebrow">Comunidad</p>
+      <h2 style="font-size:30px;margin-top:6px">No estás solo<br>en esto</h2>
+    </div>
+    <div class="post">
+      <div class="post-h"><div class="pa">M</div><div class="pn">María</div><div class="pday">día 47</div></div>
+      <p>Hoy he pasado por delante del estanco y no he entrado. Hace un mes era impensable. ¡Se puede! 💪</p>
+      <div class="post-foot"><span>❤️ 24</span><span>💬 6</span></div>
+    </div>
+    <div class="post">
+      <div class="post-h"><div class="pa">J</div><div class="pn">Jorge</div><div class="pday">día 3</div></div>
+      <p>Los primeros días son durísimos. ¿Algún truco para la ansiedad de después de comer?</p>
+      <div class="post-foot"><span>❤️ 12</span><span>💬 18</span></div>
+    </div>
+    <div class="post">
+      <div class="post-h"><div class="pa">L</div><div class="pn">Lucía</div><div class="pday">día 120</div></div>
+      <p>4 meses ya. Lo que más noto: vuelvo a oler el café por la mañana. Mereció la pena cada ansia superada.</p>
+      <div class="post-foot"><span>❤️ 51</span><span>💬 9</span></div>
+    </div>
+    <div class="pad" style="padding-top:8px">
+      <button class="btn-primary" style="background:none;border:1px solid var(--line);color:#6b7d76" onclick="resetAll()">↺ Reiniciar mis datos</button>
+    </div>
+  </section>
+
+  <!-- ============ SOS OVERLAY ============ -->
+  <div id="sosOverlay">
+    <p class="eyebrow" style="color:var(--sage)">Respira conmigo</p>
+    <div class="breathe"><div class="inner" id="breatheText">Inhala…</div></div>
+    <h2>El ansia dura 3-5 min</h2>
+    <p class="sostext">Sigue el círculo. Inhala 4s, mantén 4s, exhala 4s. Vas a superar esto, como las 245 veces anteriores.</p>
+    <button class="sos-close" onclick="closeSos()">Ya estoy mejor ✓</button>
+    <p class="sos-tip">Truco: bebe un vaso de agua o sal a caminar 2 min</p>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav hidden" id="nav">
+    <button data-go="home" class="on" onclick="nav('home',this)"><span class="ni">🏠</span>Inicio</button>
+    <button data-go="programa" onclick="nav('programa',this)"><span class="ni">📚</span>Programa</button>
+    <button data-go="logros" onclick="nav('logros',this)"><span class="ni">🏆</span>Logros</button>
+    <button data-go="comunidad" onclick="nav('comunidad',this)"><span class="ni">👥</span>Comunidad</button>
+  </nav>
+
+</div>
+
+<script>
+var KEY='respira_user_v1';
+var chosen=null, obStep=1;
+
+/* ---------- onboarding ---------- */
+function selMethod(el){
+  document.querySelectorAll('.method').forEach(m=>m.classList.remove('sel'));
+  el.classList.add('sel');
+  chosen=el.dataset.m;
+  document.getElementById('obBtn').disabled=false;
+}
+function checkStep2(){
+  var c=parseFloat(document.getElementById('inpCigs').value);
+  var p=parseFloat(document.getElementById('inpPrice').value);
+  var pp=parseFloat(document.getElementById('inpPerPack').value);
+  document.getElementById('obBtn').disabled=!(c>0&&p>0&&pp>0);
+}
+function obNext(){
+  if(obStep===1){
+    obStep=2;
+    document.getElementById('step1').classList.remove('on');
+    document.getElementById('step2').classList.add('on');
+    document.getElementById('obBtn').textContent='Comenzar mi plan';
+    document.getElementById('obBtn').disabled=true;
+    return;
+  }
+  /* guardar */
+  var data={
+    method:chosen,
+    cigsPerDay:parseFloat(document.getElementById('inpCigs').value),
+    packPrice:parseFloat(document.getElementById('inpPrice').value),
+    perPack:parseFloat(document.getElementById('inpPerPack').value),
+    start:Date.now()
+  };
+  localStorage.setItem(KEY,JSON.stringify(data));
+  startApp(data);
+}
+
+/* ---------- navegación ---------- */
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById(id).scrollTop=0;
+}
+function nav(id,btn){
+  show(id);
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+
+/* ---------- app con datos reales ---------- */
+var tickInterval=null;
+function startApp(data){
+  show('home');
+  document.getElementById('nav').classList.remove('hidden');
+  if(tickInterval)clearInterval(tickInterval);
+  render(data);
+  tickInterval=setInterval(()=>render(data),1000);
+}
+function render(data){
+  var ms=Date.now()-data.start;
+  var totalSec=Math.floor(ms/1000);
+  var days=ms/86400000;
+  /* tiempo */
+  var s=totalSec,d=Math.floor(s/86400);s-=d*86400;
+  var h=Math.floor(s/3600);s-=h*3600;var m=Math.floor(s/60);
+  var p=n=>String(n).padStart(2,'0');
+  document.getElementById('bigTimer').textContent=d+'d '+p(h)+':'+p(m);
+  /* cigarros evitados = días * cig/día */
+  var avoided=Math.floor(days*data.cigsPerDay);
+  document.getElementById('stAvoid').textContent=avoided.toLocaleString('es-ES');
+  /* ahorro = cigarros evitados * precio por cigarro */
+  var perCig=data.packPrice/data.perPack;
+  var saved=avoided*perCig;
+  var savedStr=saved.toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' €';
+  document.getElementById('stSaved').textContent=savedStr;
+  /* mismas cifras en la pantalla de Logros */
+  var lgS=document.getElementById('lgSaved'); if(lgS)lgS.textContent=savedStr;
+  var lgA=document.getElementById('lgAvoid'); if(lgA)lgA.textContent=avoided.toLocaleString('es-ES');
+  /* vida recuperada ~11 min por cigarro evitado */
+  var lifeMin=avoided*11;
+  var lifeStr=lifeMin<60?Math.round(lifeMin)+' min':lifeMin<1440?Math.round(lifeMin/60)+' h':Math.round(lifeMin/1440)+' d';
+  document.getElementById('stLife').textContent=lifeStr;
+  /* pulmones: progreso simbólico hacia los ~270 días */
+  var lung=Math.min(100,Math.round(days/270*100));
+  document.getElementById('stLung').textContent=lung+' %';
+}
+
+/* ---------- reset ---------- */
+function resetAll(){
+  if(confirm('¿Seguro que quieres reiniciar todos tus datos?')){
+    localStorage.removeItem(KEY);
+    location.reload();
+  }
+}
+
+/* ---------- SOS ---------- */
+function openSos(){document.getElementById('sosOverlay').classList.add('show');runBreathe();}
+function closeSos(){document.getElementById('sosOverlay').classList.remove('show');clearInterval(window._bt);}
+function runBreathe(){
+  var phases=['Inhala…','Mantén…','Exhala…','Mantén…'];var i=0;
+  var t=document.getElementById('breatheText');t.textContent=phases[0];
+  clearInterval(window._bt);
+  window._bt=setInterval(function(){i=(i+1)%4;t.textContent=phases[i];},2000);
+}
+
+/* ---------- arranque: ¿usuario ya registrado? ---------- */
+(function(){
+  var saved=localStorage.getItem(KEY);
+  if(saved){
+    try{ startApp(JSON.parse(saved)); }catch(e){ /* datos corruptos: mostrar onboarding */ }
+  }
+})();
+</script>
+</body>
+</html>
