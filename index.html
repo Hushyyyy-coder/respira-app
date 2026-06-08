@@ -305,23 +305,46 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 .mind-head .mh-pts{background:#fff;border-radius:18px;padding:10px 16px;box-shadow:var(--shadow);text-align:center;}
 .mind-head .mh-pts .v{font-size:22px;font-weight:800;color:var(--orange);letter-spacing:-.03em;line-height:1;}
 .mind-head .mh-pts .l{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-top:3px;}
-.map{position:relative;padding:14px 0 20px;}
-.node{position:relative;display:flex;align-items:center;gap:16px;padding:0 26px;margin-bottom:6px;min-height:88px;}
-.node.right{flex-direction:row-reverse;}
-.node .nz{width:74px;height:74px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;cursor:pointer;transition:.18s;position:relative;z-index:2;box-shadow:var(--shadow);}
-.node .nz:active{transform:scale(.92);}
-.node.done .nz{background:linear-gradient(140deg,var(--green),var(--teal));}
-.node.current .nz{background:#fff;border:3px solid var(--orange);animation:bob 2s ease-in-out infinite;}
-.node.lock .nz{background:#ececed;cursor:not-allowed;filter:grayscale(.4);opacity:.7;}
-@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
-.node .nlabel{flex:1;}
-.node.right .nlabel{text-align:right;}
-.node .nlabel .nt{font-size:15px;font-weight:800;letter-spacing:-.02em;line-height:1.2;}
-.node .nlabel .nd{font-size:12px;color:var(--muted);font-weight:600;margin-top:3px;}
-.node.lock .nlabel{opacity:.5;}
-.node .badge-check{position:absolute;top:-2px;right:18px;background:var(--green);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;z-index:3;box-shadow:0 2px 6px rgba(0,0,0,.15);}
-.node.right .badge-check{right:auto;left:18px;}
-.path-line{position:absolute;left:50%;top:0;bottom:0;width:3px;background:repeating-linear-gradient(180deg,var(--faint) 0 8px,transparent 8px 16px);transform:translateX(-50%);z-index:0;}
+/* arena de batalla */
+.arena{margin:8px 18px 0;border-radius:26px;overflow:hidden;position:relative;display:flow-root;min-height:340px;background:linear-gradient(180deg,#1a2a4a 0%,#2d1b4e 60%,#3d1f3a 100%);box-shadow:var(--shadow);}
+.arena-sky{display:none;}
+.monster-zone{position:relative;padding:18px 18px 22px;display:flex;flex-direction:column;align-items:center;z-index:2;}
+.monster-hp{width:80%;height:14px;background:rgba(255,255,255,.15);border-radius:20px;overflow:hidden;margin-top:4px;border:2px solid rgba(255,255,255,.2);}
+.monster-hp-bar{height:100%;width:100%;background:linear-gradient(90deg,#ff453a,#ff7a4d);border-radius:20px;transition:width .6s cubic-bezier(.22,1,.36,1);}
+.monster-hp-lbl{font-size:11px;font-weight:800;color:#ffb3ad;text-transform:uppercase;letter-spacing:.04em;margin-top:8px;}
+.speech{background:#fff;color:#2d1b4e;font-size:13px;font-weight:700;padding:10px 15px;border-radius:16px;margin:14px 0 4px;position:relative;max-width:260px;text-align:center;line-height:1.35;box-shadow:0 4px 12px rgba(0,0,0,.2);}
+.speech::after{content:"";position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);border:8px solid transparent;border-top-color:#fff;border-bottom:0;}
+.monster{width:160px;height:160px;margin:14px 0 6px;position:relative;transition:transform .5s cubic-bezier(.34,1.56,.64,1),filter .5s;transform-origin:bottom center;animation:monIdle 3s ease-in-out infinite;}
+@keyframes monIdle{0%,100%{transform:translateY(0) rotate(-2deg);}50%{transform:translateY(-8px) rotate(2deg);}}
+.monster.hit{animation:monHit .4s;}
+@keyframes monHit{0%,100%{transform:translateX(0);}20%{transform:translateX(-12px) rotate(-8deg);}40%{transform:translateX(12px) rotate(8deg);}60%{transform:translateX(-8px);}80%{transform:translateX(8px);}}
+.mon-body{position:absolute;inset:0;background:radial-gradient(circle at 38% 32%,#8be05a,#4caa28 60%,#3a8a1e);border-radius:48% 48% 44% 44%/55% 55% 45% 45%;box-shadow:inset -10px -12px 0 rgba(0,0,0,.12);}
+.mon-face{position:absolute;inset:0;}
+.mon-eyes{position:absolute;top:38%;left:0;right:0;display:flex;justify-content:center;gap:26px;}
+.mon-eyes span{width:26px;height:30px;background:#fff;border-radius:50%;position:relative;box-shadow:inset 0 0 0 2px rgba(0,0,0,.1);}
+.mon-eyes span::after{content:"";position:absolute;width:11px;height:11px;background:#1a1a1a;border-radius:50%;top:11px;left:8px;}
+.mon-mouth{position:absolute;top:62%;left:50%;transform:translateX(-50%);width:52px;height:24px;background:#2a1208;border-radius:0 0 26px 26px;border-top:3px solid #1a0a04;}
+.mon-horns{position:absolute;top:-10px;left:0;right:0;display:flex;justify-content:center;gap:54px;}
+.mon-horns span{width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;border-bottom:22px solid #3a8a1e;}
+.monster-name{font-size:12px;font-weight:800;color:#fff;letter-spacing:.06em;text-align:center;margin-top:6px;opacity:.85;}
+.hit-fx{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:60px;font-weight:900;z-index:5;pointer-events:none;color:#ffd34d;text-shadow:0 2px 0 #ff7a00;}
+.hit-fx.go{animation:hitpop .7s ease-out;}
+@keyframes hitpop{0%{transform:translate(-50%,-50%) scale(0) rotate(-20deg);opacity:0;}30%{transform:translate(-50%,-50%) scale(1.3) rotate(8deg);opacity:1;}100%{transform:translate(-50%,-120%) scale(1) rotate(8deg);opacity:0;}}
+/* lista de asaltos */
+.rounds{padding:6px 18px 20px;}
+.round{display:flex;align-items:center;gap:14px;background:var(--card);border-radius:18px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow);transition:.18s;}
+.round.beaten{opacity:.6;}
+.round.locked{opacity:.5;}
+.round:not(.locked){cursor:pointer;}
+.round:not(.locked):active{transform:scale(.98);}
+.round .rn-num{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;font-weight:800;}
+.round.beaten .rn-num{background:linear-gradient(140deg,var(--green),var(--teal));}
+.round.next .rn-num{background:linear-gradient(140deg,var(--orange),#ff7a00);color:#fff;animation:pulse2 1.6s infinite;}
+.round.locked .rn-num{background:#ececed;}
+@keyframes pulse2{0%,100%{box-shadow:0 0 0 0 rgba(255,159,10,.5);}50%{box-shadow:0 0 0 8px rgba(255,159,10,0);}}
+.round .rn-t{font-size:15px;font-weight:800;letter-spacing:-.02em;}
+.round .rn-d{font-size:12px;color:var(--muted);font-weight:600;margin-top:1px;}
+.round .rn-go{margin-left:auto;font-size:13px;font-weight:800;color:var(--orange);}
 
 /* lección modal */
 #lessonOverlay{position:absolute;inset:0;background:linear-gradient(168deg,#0c3f2f,#1f7a5c);z-index:55;
@@ -593,17 +616,37 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
     </div>
   </section>
 
-  <!-- ============ MENTALIDAD (JUEGO) ============ -->
+  <!-- ============ MENTALIDAD (JUEGO: BATALLA) ============ -->
   <section class="screen" id="mentalidad">
     <div class="mind-head">
       <div>
-        <p class="eyebrow">El juego mental</p>
-        <h2 class="big-title" style="margin-top:8px">Libera tu<br>mente</h2>
+        <p class="eyebrow">Modo batalla</p>
+        <h2 class="big-title" style="margin-top:8px">Revienta al<br>monstruo</h2>
       </div>
-      <div class="mh-pts"><div class="v" id="mindPts">0</div><div class="l">puntos</div></div>
+      <div class="mh-pts"><div class="v" id="mindPts">0</div><div class="l">golpes</div></div>
     </div>
-    <p class="muted" style="font-size:14px;padding:6px 22px 0;font-weight:500;line-height:1.5">Desmonta una mentira del tabaco en cada nivel. Cuanto más avanzas, más libre eres.</p>
-    <div class="map" id="mindMap"><div class="path-line"></div></div>
+
+    <div class="arena">
+      <div class="arena-sky"></div>
+      <div class="monster-zone">
+        <div class="monster-hp"><div class="monster-hp-bar" id="monHpBar"></div></div>
+        <div class="monster-hp-lbl" id="monHpLbl">Monstruo al 100% de chulería</div>
+        <div class="speech" id="monSpeech">¡Jajaja! Nunca me vas a dejar, me necesitas 😈</div>
+        <div class="monster" id="monster">
+          <div class="mon-horns"><span></span><span></span></div>
+          <div class="mon-body"></div>
+          <div class="mon-face" id="monFace">
+            <div class="mon-eyes"><span></span><span></span></div>
+            <div class="mon-mouth"></div>
+          </div>
+          <div class="hit-fx" id="hitFx">💥</div>
+        </div>
+        <div class="monster-name" id="monName">EL MONSTRUO DE LA NICOTINA</div>
+      </div>
+    </div>
+
+    <p class="muted" style="font-size:14px;padding:14px 22px 4px;font-weight:600;line-height:1.5;text-align:center" id="battleHint">Cada mentira que desmontes le quita fuerza. ¡Tienes 9 asaltos para dejarlo diminuto!</p>
+    <div class="rounds" id="roundList"></div>
   </section>
 
   <!-- ============ REFLEJO ============ -->
@@ -682,7 +725,7 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
     </div>
   </div>
 
-  <!-- ============ LECCIÓN OVERLAY ============ -->
+  <!-- ============ ASALTO OVERLAY ============ -->
   <div id="lessonOverlay">
     <div class="les-top">
       <button class="les-x" onclick="closeLesson()">✕</button>
@@ -692,13 +735,13 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
     <div class="les-foot"><button class="les-btn" id="lesBtn" onclick="lessonNext()">Continuar</button></div>
   </div>
 
-  <!-- ============ CELEBRACIÓN ============ -->
+  <!-- ============ KO / CELEBRACIÓN ============ -->
   <div id="winOverlay">
-    <div class="win-emoji" id="winEmoji">🎉</div>
-    <h2 id="winTitle">¡Nivel superado!</h2>
-    <div class="win-pts" id="winPts">+20 puntos</div>
-    <p id="winMsg">Una mentira menos. Cada vez más libre.</p>
-    <button class="sos-close" style="margin-top:26px" onclick="closeWin()">Seguir</button>
+    <div class="win-emoji" id="winEmoji">💥</div>
+    <h2 id="winTitle">¡ZASCA!</h2>
+    <div class="win-pts" id="winPts">+1 golpe</div>
+    <p id="winMsg">El monstruo encoge un poco más.</p>
+    <button class="sos-close" style="margin-top:26px" onclick="closeWin()">A por el siguiente 👊</button>
   </div>
 
   <!-- ============ SOS OVERLAY ============ -->
@@ -1189,98 +1232,130 @@ function openTech(key){
 }
 
 /* ====================================================
-   JUEGO DE MENTALIDAD (método Allen Carr / Santandreu)
+   JUEGO: BATALLA CONTRA EL MONSTRUO DE LA NICOTINA
+   (mentalidad estilo Allen Carr, en plan gamberro)
    ==================================================== */
 var MINDKEY='respira_mind_v1';
+/* el monstruo suelta una excusa (mentira) y tú la revientas */
 var lessons=[
-  {ic:'🎭',t:'El falso placer',myth:'"El tabaco me da placer"',
-   text:'El tabaco no produce ningún placer real. Solo <b>alivia la ansiedad que él mismo crea</b>. Es como llevar piedras en el zapato todo el día solo para sentir alivio al quitártelas por la noche. Ese "placer" es solo el fin de un malestar que provocó el propio cigarro.',
-   q:'¿Qué sientes de verdad al encender un cigarro?',
-   opts:[['Un placer auténtico y único',false],['El alivio de una ansiedad que el tabaco creó',true],['Nada que no pudiera sentir sin fumar',true]],
-   good:'¡Exacto! No es placer, es el fin de un malestar autoinducido.',
-   bad:'Piénsalo: la primera calada de tu vida fue desagradable. El "placer" es aprendido por la adicción.'},
-  {ic:'😮‍💨',t:'La calma falsa',myth:'"Fumar me relaja"',
-   text:'La nicotina es un <b>estimulante</b>: acelera tu corazón y tu sistema nervioso. No te relaja. Lo que sientes es el alivio temporal de la abstinencia. Por eso los fumadores tienen, de media, <b>más ansiedad</b> que los no fumadores.',
-   q:'Si la nicotina es un estimulante, ¿por qué parece que calma?',
-   opts:[['Porque relaja los músculos',false],['Porque quita el malestar de la abstinencia un rato',true],['Porque baja la tensión arterial',false]],
-   good:'¡Eso es! Quita un malestar que él mismo generó. La calma es un espejismo.',
-   bad:'En realidad es estimulante. La sensación de calma es solo el fin de la abstinencia.'},
-  {ic:'🥂',t:'El falso amigo',myth:'"Me acompaña en los buenos momentos"',
-   text:'El café ya era un placer. La compañía ya era un placer. El momento ya era pleno. El cigarro <b>no añade nada</b>: solo lo interrumpe para mantenerte enganchado. Quita el tabaco y el ritual del café o la charla siguen ahí, intactos.',
-   q:'En un café con amigos, ¿qué te da el disfrute?',
-   opts:[['El cigarro',false],['La compañía, la charla y el café en sí',true],['La mezcla de tabaco y café',false]],
-   good:'¡Sí! El placer ya estaba ahí. El tabaco solo se cuela de intruso.',
-   bad:'Prueba el ritual sin fumar: el disfrute sigue igual o más limpio.'},
-  {ic:'🧘',t:'No es fuerza, es claridad',myth:'"Necesito muchísima fuerza de voluntad"',
-   text:'Dejar de fumar <b>no es una batalla de fuerza de voluntad</b>, es un cambio de perspectiva. Si lo ves como "estoy perdiendo algo valioso", sufres. Si lo ves como "me estoy liberando de una estafa", se vuelve ligero. Has superado cosas mucho más difíciles en tu vida.',
-   q:'¿Cuál es el enfoque que hace dejarlo más fácil?',
-   opts:[['"Voy a resistir aunque sufra horrores"',false],['"Me estoy liberando, no perdiendo nada"',true],['"Necesito ser un superhéroe"',false]],
-   good:'¡Perfecto! Verlo como liberación multiplica tus probabilidades de éxito.',
-   bad:'Quienes lo viven como sacrificio fracasan más. La clave es verlo como liberación.'},
-  {ic:'⛓️',t:'La libertad robada',myth:'"Fumar es mi libertad, mi elección"',
-   text:'¿Eres libre si no aguantas una hora sin fumar? ¿Si sales al frío o a la lluvia solo para encender uno? ¿Si organizas viajes pensando dónde podrás fumar? Eso no es elegir, es <b>depender</b>. La libertad real es no necesitar nada para estar bien.',
-   q:'¿Qué es la verdadera libertad?',
-   opts:[['Poder fumar cuando quieras',false],['No necesitar encender nada para estar bien',true],['Tener siempre tabaco a mano',false]],
-   good:'¡Eso es libertad de verdad! No depender de nada.',
-   bad:'Necesitar el cigarro no es elegir: es la cadena disfrazada de elección.'},
-  {ic:'😤',t:'El falso calmante del estrés',myth:'"El tabaco me ayuda con el estrés"',
-   text:'El estrés de fondo sigue intacto después de fumar. El problema (la discusión, el atasco) no se resuelve. El cigarro solo tapa durante unos minutos el malestar de la abstinencia. Encima, <b>vivir pendiente de la próxima dosis añade ansiedad</b>.',
-   q:'Tras una discusión sales a fumar. ¿Qué cambia?',
-   opts:[['El problema se resuelve',false],['Nada de fondo: solo calma la abstinencia un rato',true],['Desaparece todo el estrés',false]],
-   good:'¡Correcto! El estrés sigue ahí. Respirar hondo regula mejor y de verdad.',
-   bad:'El conflicto sigue sin resolverse. Solo tapaste la abstinencia un instante.'},
-  {ic:'👥',t:'El falso pasaporte social',myth:'"Fumar me ayuda a socializar"',
-   text:'La gente conecta contigo por quién eres, por lo que aportas, por tu presencia. <b>El humo no añade nada</b>; muchas veces resta, porque te hace salir corriendo a mitad de una conversación. Lo que une a un grupo es la experiencia compartida, no el cigarro.',
-   q:'¿Qué refuerza de verdad el vínculo en un grupo?',
-   opts:[['Fumar todos juntos',false],['La experiencia y el rato compartido',true],['El cigarro como excusa',false]],
-   good:'¡Sí! Puedes acompañar sin fumar y el vínculo sigue igual de fuerte.',
-   bad:'Conectas por tu forma de ser. El humo no es la condición de ninguna amistad.'},
-  {ic:'✨',t:'No es estilo, es marketing',myth:'"Fumar me da personalidad"',
-   text:'La imagen del fumador atractivo y rebelde fue <b>una campaña de marketing</b> del siglo pasado. ¿Qué estilo hay en toser por la mañana, en el mal aliento, en la piel apagada? Tu carisma está en ti, no en el humo. Al dejarlo, brillas más.',
-   q:'¿De dónde viene la idea de que fumar da estilo?',
-   opts:[['Es una cualidad real del tabaco',false],['De la publicidad antigua sin escrúpulos',true],['De que mejora tu imagen',false]],
-   good:'¡Exacto! Puro marketing. Tu valor no depende de un cigarro.',
-   bad:'Era marketing. Nadie te admira más por fumar; tu esencia está en ti.'},
-  {ic:'🌅',t:'Nunca es tarde',myth:'"Ya es demasiado tarde para mí"',
-   text:'El cuerpo se regenera en cuanto dejas de meterle veneno. A las 20 min baja la tensión; a las semanas vuelve el gusto y el olfato; a los meses cae el riesgo de infarto. Dejarlo <b>reduce a la mitad el riesgo de morir prematuramente, incluso en fumadores mayores</b>.',
-   q:'Llevas 30 años fumando. ¿Vale la pena dejarlo hoy?',
-   opts:[['No, el daño ya está hecho',false],['Sí, el cuerpo empieza a mejorar desde el primer día',true],['Solo si eres joven',false]],
-   good:'¡Siempre vale la pena! Cada día sin humo es un regalo para tu cuerpo.',
-   bad:'Nunca es tarde: el cuerpo empieza a regenerarse desde el primer día sin fumar.'}
+  {ic:'🎭',t:'"Me das placer"',taunt:'Sin mí no disfrutas de NADA, colega 😏',
+   myth:'"El tabaco me da placer"',
+   text:'Mentira gorda. El tabaco no da placer: solo <b>te quita el mono que él mismo te montó</b>. Es como llevar una piedra en el zapato todo el día para sentir "alivio" al quitarla. Menudo chollo.',
+   q:'Entonces, ¿qué sientes de verdad al fumar?',
+   opts:[['Un placer brutal e irrepetible',false],['El alivio de un mono que creó el propio tabaco',true],['Nada que no pudiera sentir sin fumar',true]],
+   good:'¡EXACTO! No es placer, es quitarte un dolor autoinfligido. 💥',
+   bad:'Nah. Tu primera calada fue asquerosa, ¿recuerdas? El "placer" te lo vendieron.'},
+  {ic:'😮‍💨',t:'"Yo te relajo"',taunt:'¿Estresado? Ven con papá monstruo 🚬',
+   myth:'"Fumar me relaja"',
+   text:'La nicotina es un <b>estimulante</b>: te acelera el corazón. No relaja nada. Encima los fumadores tienen MÁS ansiedad de media. El monstruo te genera el nervio y luego se hace el salvador.',
+   q:'Si acelera, ¿por qué parece que calma?',
+   opts:[['Porque relaja los músculos',false],['Porque quita el mono un ratito',true],['Porque baja la tensión',false]],
+   good:'¡TOMA! La calma era puro teatro del monstruo. 💥',
+   bad:'Qué va, es estimulante. La "calma" es solo el fin del mono.'},
+  {ic:'🥂',t:'"Soy tu colega"',taunt:'¿Un cafecito sin mí? Imposible, tío 😎',
+   myth:'"Me acompaña en los buenos momentos"',
+   text:'El café ya molaba. Los amigos ya molaban. El momento ya era perfecto. El monstruo <b>no añade nada</b>: solo se cuela de gorrón para seguir enganchándote.',
+   q:'En un café con amigos, ¿quién pone el disfrute?',
+   opts:[['El cigarro, obvio',false],['La compañía, la charla y el café',true],['La mezcla mágica',false]],
+   good:'¡ZAS! El monstruo era el cuñado que se autoinvita. 💥',
+   bad:'Prueba el café sin él: sigue estando igual de rico.'},
+  {ic:'🧠',t:'"No tienes huevos"',taunt:'Necesitas fuerza de superhéroe, y tú... 😬',
+   myth:'"Necesito muchísima fuerza de voluntad"',
+   text:'No es fuerza, es <b>cabeza</b>. Si lo ves como "pierdo algo", sufres. Si lo ves como "me quito de encima a este parásito", es fácil. Has hecho cosas mil veces más difíciles.',
+   q:'¿Qué mentalidad lo hace fácil?',
+   opts:[['"Voy a resistir aunque sufra"',false],['"Me libero de un parásito"',true],['"Necesito ser un héroe"',false]],
+   good:'¡PUM! Verlo como liberación te hace imparable. 💥',
+   bad:'Quien lo vive como sacrificio cae. Cámbiale el chip.'},
+  {ic:'⛓️',t:'"Eres libre conmigo"',taunt:'Fumas porque QUIERES, ¿no? Jeje 🔗',
+   myth:'"Fumar es mi libertad"',
+   text:'¿Libre? No aguantas una hora sin mí. Sales al frío y a la lluvia por mí. Planeas viajes pensando en dónde fumar. Eso no es elegir, es <b>obedecerme</b>. La libertad es no necesitar nada.',
+   q:'¿Qué es la libertad de verdad?',
+   opts:[['Poder fumar cuando quieras',false],['No necesitar encender nada',true],['Tener siempre tabaco',false]],
+   good:'¡CRACK! Le rompiste la cadenita. 💥',
+   bad:'Necesitarlo no es elegir, es la correa disfrazada.'},
+  {ic:'😤',t:'"Yo con el estrés"',taunt:'Mal día, ¿eh? Échate uno y verás 🔥',
+   myth:'"El tabaco me ayuda con el estrés"',
+   text:'El problema sigue ahí después de fumar. El atasco, la discusión... todo igual. Solo tapaste el mono un minuto. Y vivir pendiente de la próxima calada <b>te mete MÁS ansiedad</b>.',
+   q:'Tras un cabreo sales a fumar. ¿Qué cambia?',
+   opts:[['Se soluciona el problema',false],['Nada de fondo, solo calma el mono',true],['Desaparece el estrés',false]],
+   good:'¡BOOM! Respirar hondo regula mejor y gratis. 💥',
+   bad:'El marrón sigue ahí. Solo tapaste el mono un segundo.'},
+  {ic:'👥',t:'"Sin mí no ligas"',taunt:'Soy tu rollito social, admítelo 🍻',
+   myth:'"Fumar me ayuda a socializar"',
+   text:'La gente conecta contigo por cómo eres, no por el humo. De hecho el monstruo te hace <b>salir corriendo</b> a mitad de conversación. Vaya ayuda social, el tío.',
+   q:'¿Qué une de verdad a un grupo?',
+   opts:[['Fumar todos juntos',false],['El rato y la experiencia compartida',true],['El cigarro de excusa',false]],
+   good:'¡ZASCA! Acompañas sin fumar y todo sigue igual. 💥',
+   bad:'Conectas por ti. El humo no es el carné del grupo.'},
+  {ic:'✨',t:'"Te doy estilazo"',taunt:'Mírate, qué interesante con un piti 🚬',
+   myth:'"Fumar me da personalidad"',
+   text:'Eso fue una <b>campaña de marketing</b> del siglo pasado, majo. ¿Qué estilo hay en toser por la mañana, el mal aliento y la piel apagada? Tu rollo está en ti, no en el humo.',
+   q:'¿De dónde sale lo de que da estilo?',
+   opts:[['Es cosa real del tabaco',false],['De publicidad antigua tramposa',true],['De que mejora tu imagen',false]],
+   good:'¡PLAF! Puro humo (nunca mejor dicho). 💥',
+   bad:'Era marketing. Nadie te admira por fumar.'},
+  {ic:'🌅',t:'"Ya es tarde"',taunt:'Para qué dejarlo ya, el daño está hecho 💀',
+   myth:'"Ya es demasiado tarde para mí"',
+   text:'Última mentira y la más cobarde. El cuerpo se regenera EN CUANTO dejas de meterle veneno. A los 20 min baja la tensión; en semanas vuelve el gusto. Dejarlo <b>baja a la mitad el riesgo de palmarla pronto</b>, hasta en fumadores mayores.',
+   q:'Llevas 30 años fumando. ¿Vale la pena hoy?',
+   opts:[['No, ya da igual',false],['Sí, el cuerpo mejora desde el primer día',true],['Solo si eres joven',false]],
+   good:'¡KO TOTAL! Nunca es tarde. Lo has tumbado. 🏆',
+   bad:'Falso. El cuerpo empieza a recuperarse desde hoy mismo.'}
 ];
+var monIdleFaces=[':)',];
 
 function getMind(){
   try{ return JSON.parse(localStorage.getItem(MINDKEY))||{done:[],pts:0}; }catch(e){ return {done:[],pts:0}; }
 }
 function saveMind(m){ localStorage.setItem(MINDKEY,JSON.stringify(m)); }
 
+var monTaunts=['¡No me vas a dejar nunca! 😈','Me necesitas, lo sabes 😏','Bah, durarás dos días 🚬','Volverás llorando a por mí 😤','Soy más fuerte que tú 💪'];
 function renderMind(){
   var m=getMind();
-  var pe=document.getElementById('mindPts'); if(pe)pe.textContent=m.pts;
-  var map=document.getElementById('mindMap');
-  if(!map)return;
-  map.innerHTML='<div class="path-line"></div>';
+  var beaten=m.done.length;
+  var total=lessons.length;
+  document.getElementById('mindPts').textContent=m.pts;
+  /* salud y tamaño del monstruo */
+  var hp=Math.max(4,Math.round((1-beaten/total)*100));
+  document.getElementById('monHpBar').style.width=hp+'%';
+  var mon=document.getElementById('monster');
+  var scale=Math.max(0.32,1-beaten*0.075);
+  mon.style.transform='scale('+scale+')';
+  /* estado del monstruo */
+  var lbl=document.getElementById('monHpLbl');
+  var speech=document.getElementById('monSpeech');
+  var name=document.getElementById('monName');
+  if(beaten>=total){
+    lbl.textContent='¡DERROTADO! 🏆';
+    speech.textContent='Vale… tú ganas. Me piro 😭';
+    name.textContent='monstruo diminuto y patético';
+    mon.style.filter='grayscale(.6) brightness(1.1)';
+  }else{
+    lbl.textContent='Monstruo al '+hp+'% de chulería';
+    speech.textContent=beaten===0?'¡Jajaja! Nunca me vas a dejar 😈':monTaunts[Math.min(beaten,monTaunts.length-1)];
+    name.textContent='EL MONSTRUO DE LA NICOTINA';
+  }
+  /* lista de asaltos */
+  var list=document.getElementById('roundList');
+  list.innerHTML='';
   lessons.forEach(function(les,i){
     var done=m.done.indexOf(i)>=0;
-    var current=!done && (i===0 || m.done.indexOf(i-1)>=0);
-    var locked=!done && !current;
-    var side=i%2===0?'left':'right';
-    var node=document.createElement('div');
-    node.className='node '+side+' '+(done?'done':current?'current':'lock');
-    var emoji=locked?'🔒':les.ic;
-    node.innerHTML=
-      (done?'<div class="badge-check">✓</div>':'')+
-      '<div class="nz">'+emoji+'</div>'+
-      '<div class="nlabel"><div class="nt">'+(locked?'Nivel '+(i+1):les.t)+'</div><div class="nd">'+(done?'Completado':current?'¡Toca para jugar!':'Bloqueado')+'</div></div>';
-    if(!locked){
-      var nz=node.querySelector('.nz');
-      nz.onclick=function(){ openLesson(i); };
-    }
-    map.appendChild(node);
+    var next=!done && (i===0 || m.done.indexOf(i-1)>=0);
+    var locked=!done && !next;
+    var r=document.createElement('div');
+    r.className='round '+(done?'beaten':next?'next':'locked');
+    r.innerHTML=
+      '<div class="rn-num">'+(done?'✓':locked?'🔒':les.ic)+'</div>'+
+      '<div><div class="rn-t">Asalto '+(i+1)+(locked?'':' · '+les.t)+'</div><div class="rn-d">'+(done?'Mentira reventada':next?'¡Dale caña!':'Bloqueado')+'</div></div>'+
+      (next?'<div class="rn-go">PELEAR ›</div>':'');
+    if(!locked){ r.onclick=function(){ openLesson(i); }; }
+    list.appendChild(r);
   });
+  var hint=document.getElementById('battleHint');
+  if(hint) hint.textContent=beaten>=total?'¡Le has dado una paliza memorable! El monstruo ya no manda en ti. 🎉':'Cada mentira que revientas le quita fuerza. Quedan '+(total-beaten)+' asaltos.';
 }
 
-/* ---- jugar una lección ---- */
+/* ---- jugar un asalto ---- */
 var curLesson=0, lesStep=0, lesAnswered=false;
 function openLesson(i){
   curLesson=i; lesStep=0; lesAnswered=false;
@@ -1296,22 +1371,22 @@ function renderLesStep(){
   if(lesStep===0){
     body.innerHTML=
       '<div class="les-emoji">'+les.ic+'</div>'+
-      '<div class="les-myth"><div class="lm-l">El mito</div><div class="lm-t">'+les.myth+'</div></div>'+
-      '<div class="les-truth-l">La verdad</div>'+
+      '<div class="les-myth"><div class="lm-l">El monstruo suelta</div><div class="lm-t">'+les.taunt+'</div></div>'+
+      '<div class="les-truth-l">La verdad que lo destroza</div>'+
       '<div class="les-text">'+les.text+'</div>';
-    btn.textContent='Entendido, ¡reto!';
+    btn.textContent='Vale… ¡a darle! 👊';
     btn.classList.remove('lock');
     btn.onclick=lessonNext;
   }else{
     lesAnswered=false;
-    var opts=les.opts.map(function(o,idx){
+    var opts=les.opts.map(function(o){
       return '<button class="ch-opt" data-ok="'+(o[1]?1:0)+'" onclick="answerChallenge(this)">'+o[0]+'</button>';
     }).join('');
     body.innerHTML=
-      '<div class="challenge"><div class="ch-l">⚡ Reto rápido</div>'+
+      '<div class="challenge"><div class="ch-l">⚡ Golpe final</div>'+
       '<div class="ch-q">'+les.q+'</div>'+opts+
       '<div class="ch-feedback" id="chFb"></div></div>';
-    btn.textContent='Elige una respuesta';
+    btn.textContent='Elige tu golpe';
     btn.classList.add('lock');
     btn.onclick=function(){ if(lesAnswered) finishLesson(); };
   }
@@ -1327,7 +1402,7 @@ function answerChallenge(el){
   else{ el.classList.add('no'); fb.className='ch-feedback bad'; fb.textContent=les.bad;
     document.querySelectorAll('.ch-opt').forEach(function(b){ if(b.dataset.ok==='1')b.classList.add('ok'); }); }
   var btn=document.getElementById('lesBtn');
-  btn.textContent='Completar nivel';
+  btn.textContent='¡REVENTAR MENTIRA! 💥';
   btn.classList.remove('lock');
 }
 function lessonNext(){
@@ -1336,20 +1411,29 @@ function lessonNext(){
 function finishLesson(){
   var m=getMind();
   var first=m.done.indexOf(curLesson)<0;
-  if(first){ m.done.push(curLesson); m.pts+=20; saveMind(m); }
+  if(first){ m.done.push(curLesson); m.pts+=1; saveMind(m); }
   closeLesson();
-  renderMind();
-  /* celebración */
+  /* animar golpe al monstruo */
+  setTimeout(function(){
+    var mon=document.getElementById('monster');
+    var fx=document.getElementById('hitFx');
+    if(mon){ mon.classList.remove('hit'); void mon.offsetWidth; mon.classList.add('hit'); }
+    if(fx){ var hits=['💥','💢','👊','🔥','⭐']; fx.textContent=hits[Math.floor(Math.random()*hits.length)];
+      fx.classList.remove('go'); void fx.offsetWidth; fx.classList.add('go'); }
+    renderMind();
+  },150);
+  /* pantalla de KO */
   var allDone=m.done.length===lessons.length;
-  document.getElementById('winEmoji').textContent=allDone?'🏆':'🎉';
-  document.getElementById('winTitle').textContent=allDone?'¡Mente libre!':'¡Nivel superado!';
-  document.getElementById('winPts').textContent=first?'+20 puntos':'Ya completado';
+  document.getElementById('winEmoji').textContent=allDone?'🏆':['💥','👊','🔥','⭐','💢'][Math.floor(Math.random()*5)];
+  document.getElementById('winTitle').textContent=allDone?'¡MONSTRUO KO!':['¡ZASCA!','¡TOMA YA!','¡PUM!','¡EN TODA LA CARA!'][Math.floor(Math.random()*4)];
+  document.getElementById('winPts').textContent=first?'+1 golpe maestro':'Ya reventada';
   document.getElementById('winMsg').textContent=allDone
-    ?'Has desmontado las 9 mentiras del tabaco. Tu mente ya no le pertenece.'
-    :'Una mentira menos. El cigarro pierde poder sobre ti.';
+    ?'Has dejado al monstruo diminuto y llorando. Tu mente es tuya otra vez. 🎉'
+    :'El monstruo encoge y se queda sin argumentos. ¡A por el siguiente!';
   document.getElementById('winOverlay').classList.add('show');
 }
-function closeWin(){ document.getElementById('winOverlay').classList.remove('show'); }
+function closeWin(){ document.getElementById('winOverlay').classList.remove('show'); renderMind(); }
+
 
 /* ====================================================
    REFLEJO: simulación de mejora sobre tu foto
