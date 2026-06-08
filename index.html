@@ -214,9 +214,10 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
 
 /* ===== SOS OVERLAY ===== */
 #sosOverlay{position:absolute;inset:0;background:linear-gradient(165deg,#0d3b2e,#1f6b51);z-index:50;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--cream);text-align:center;padding:32px;
-  opacity:0;visibility:hidden;transition:.4s;}
+  display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--cream);text-align:center;padding:48px 28px 32px;
+  opacity:0;visibility:hidden;transition:.4s;overflow-y:auto;}
 #sosOverlay.show{opacity:1;visibility:visible;}
+#sosOverlay::-webkit-scrollbar{display:none;}
 .breathe{width:180px;height:180px;border-radius:50%;background:rgba(127,196,163,.18);
   display:flex;align-items:center;justify-content:center;margin:24px 0;}
 .breathe .inner{width:120px;height:120px;border-radius:50%;background:rgba(127,196,163,.3);
@@ -226,6 +227,20 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
 #sosOverlay h2{font-size:30px;margin-bottom:8px;}
 #sosOverlay .sostext{font-weight:300;opacity:.85;font-size:15px;line-height:1.5;max-width:280px;}
 .sos-close{margin-top:30px;background:var(--cream);color:var(--ink);border:none;border-radius:16px;padding:15px 34px;font-family:'Outfit';font-weight:500;font-size:15px;cursor:pointer;}
+#sosMenu{width:100%;max-width:340px;}
+#sosMenu h2{font-size:27px;margin-bottom:6px;text-align:center;}
+#sosMenu .sm-sub{font-size:14px;opacity:.7;font-weight:300;text-align:center;margin-bottom:24px;}
+.tech{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+  border-radius:16px;padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:.15s;text-align:left;width:100%;color:var(--cream);font-family:'Outfit';}
+.tech:active{transform:scale(.98);}
+.tech:hover{background:rgba(255,255,255,.14);}
+.tech .te-ic{font-size:24px;width:30px;text-align:center;flex-shrink:0;}
+.tech .te-t{font-weight:500;font-size:15px;}
+.tech .te-d{font-size:12px;opacity:.65;font-weight:300;margin-top:1px;}
+#sosTech{width:100%;max-width:340px;display:none;flex-direction:column;align-items:center;}
+.sos-back{position:absolute;top:24px;left:20px;background:none;border:none;color:var(--cream);font-size:15px;font-family:'Outfit';cursor:pointer;opacity:.7;}
+.tech-steps{text-align:left;font-size:15px;font-weight:300;line-height:1.6;opacity:.9;margin-top:8px;}
+.tech-steps li{margin-bottom:8px;}
 .sos-tip{margin-top:14px;font-size:13px;opacity:.6;font-weight:300;}
 
 .hidden{display:none !important;}
@@ -509,12 +524,27 @@ h1,h2,h3{font-family:'Fraunces',serif;font-weight:500;line-height:1.1;}
 
   <!-- ============ SOS OVERLAY ============ -->
   <div id="sosOverlay">
-    <p class="eyebrow" style="color:var(--sage)">Respira conmigo</p>
-    <div class="breathe"><div class="inner" id="breatheText">Inhala…</div></div>
-    <h2>Las ganas duran 3-5 min</h2>
-    <p class="sostext">Sigue el círculo. Inhala 4s, mantén 4s, exhala 4s. Esta sensación pasa sola en unos minutos. Vas a poder.</p>
-    <button class="sos-close" onclick="closeSos()">Ya estoy mejor ✓</button>
-    <p class="sos-tip">Truco: bebe un vaso de agua o sal a caminar 2 min</p>
+
+    <!-- menú de técnicas -->
+    <div id="sosMenu">
+      <h2>Aguanta la ola</h2>
+      <p class="sm-sub">Las ganas duran 3-5 min y se van. Elige una técnica:</p>
+      <button class="tech" onclick="openTech('respira')"><span class="te-ic">🫁</span><span><span class="te-t">Respiración guiada</span><span class="te-d">Calma el cuerpo en 1 minuto</span></span></button>
+      <button class="tech" onclick="openTech('surf')"><span class="te-ic">🌊</span><span><span class="te-t">Surfea el impulso</span><span class="te-d">Obsérvalo sin obedecerlo</span></span></button>
+      <button class="tech" onclick="openTech('cuatrod')"><span class="te-ic">✋</span><span><span class="te-t">Las 4D</span><span class="te-d">Demora, respira, agua, distrae</span></span></button>
+      <button class="tech" onclick="openTech('mover')"><span class="te-ic">🏃</span><span><span class="te-t">Mueve el cuerpo</span><span class="te-d">Rompe el automatismo</span></span></button>
+      <button class="tech" onclick="openTech('espera')"><span class="te-ic">⏳</span><span><span class="te-t">Espera 10 minutos</span><span class="te-d">Cuenta atrás, casi siempre pasa</span></span></button>
+      <button class="tech" onclick="openTech('boca')"><span class="te-ic">🥕</span><span><span class="te-t">Distrae la boca</span><span class="te-d">Agua, chicle, algo crujiente</span></span></button>
+      <button class="sos-close" style="margin-top:20px" onclick="closeSos()">Ya estoy mejor ✓</button>
+    </div>
+
+    <!-- vista de técnica -->
+    <div id="sosTech">
+      <button class="sos-back" onclick="backToMenu()">‹ Técnicas</button>
+      <div id="techBody"></div>
+      <button class="sos-close" onclick="closeSos()">Ya estoy mejor ✓</button>
+    </div>
+
   </div>
 
   <!-- ============ NAV ============ -->
@@ -832,14 +862,98 @@ function resetAll(){
   }
 }
 
-/* ---------- SOS ---------- */
-function openSos(){document.getElementById('sosOverlay').classList.add('show');runBreathe();}
-function closeSos(){document.getElementById('sosOverlay').classList.remove('show');clearInterval(window._bt);}
-function runBreathe(){
-  var phases=['Inhala…','Mantén…','Exhala…','Mantén…'];var i=0;
-  var t=document.getElementById('breatheText');t.textContent=phases[0];
+/* ---------- SOS: técnicas para la ansiedad ---------- */
+function openSos(){
+  document.getElementById('sosOverlay').classList.add('show');
+  backToMenu();
+}
+function closeSos(){
+  document.getElementById('sosOverlay').classList.remove('show');
   clearInterval(window._bt);
-  window._bt=setInterval(function(){i=(i+1)%4;t.textContent=phases[i];},2000);
+}
+function backToMenu(){
+  clearInterval(window._bt);
+  document.getElementById('sosTech').style.display='none';
+  document.getElementById('sosMenu').style.display='block';
+}
+
+var techContent={
+  respira:{
+    title:'Respiración guiada',
+    html:'<div class="breathe"><div class="inner" id="breatheText">Inhala…</div></div>'+
+         '<p class="sostext">Sigue el círculo. Inhala 4s, mantén 4s, exhala 4s. Repite hasta que el cuerpo se calme.</p>',
+    init:function(){
+      var phases=['Inhala…','Mantén…','Exhala…','Mantén…'];var i=0;
+      var t=document.getElementById('breatheText');if(!t)return;t.textContent=phases[0];
+      clearInterval(window._bt);
+      window._bt=setInterval(function(){i=(i+1)%4;var e=document.getElementById('breatheText');if(e)e.textContent=phases[i];},2000);
+    }
+  },
+  surf:{
+    title:'Surfea el impulso',
+    html:'<div class="breathe"><div class="inner">🌊</div></div>'+
+         '<p class="sostext">El ansia es como una ola: sube, llega a un pico y baja sola. No luches contra ella, obsérvala.</p>'+
+         '<ul class="tech-steps">'+
+         '<li>1. Nota dónde sientes el impulso en tu cuerpo.</li>'+
+         '<li>2. Dite: "estoy teniendo el pensamiento de fumar", no "necesito fumar".</li>'+
+         '<li>3. Respira y observa cómo la ola crece…</li>'+
+         '<li>4. …llega a su punto máximo y empieza a bajar.</li>'+
+         '<li>5. Aguanta sobre la tabla. La ola siempre pasa.</li></ul>'
+  },
+  cuatrod:{
+    title:'Las 4D',
+    html:'<p class="sostext">Cuatro pasos para dejar pasar el momento más fuerte:</p>'+
+         '<ul class="tech-steps">'+
+         '<li>⏱️ <b>Demora</b>: no enciendas. Espera unos minutos, las ganas bajan.</li>'+
+         '<li>🫁 <b>Deep breathing</b>: respira hondo y despacio varias veces.</li>'+
+         '<li>💧 <b>Drink</b>: bebe un vaso de agua a sorbos.</li>'+
+         '<li>🎯 <b>Distrae</b>: cambia de actividad o de habitación.</li></ul>'
+  },
+  mover:{
+    title:'Mueve el cuerpo',
+    html:'<div class="breathe"><div class="inner">🏃</div></div>'+
+         '<p class="sostext">Cambiar el estado físico rompe el automatismo de fumar.</p>'+
+         '<ul class="tech-steps">'+
+         '<li>Sube y baja unas escaleras.</li>'+
+         '<li>Haz 20 sentadillas o unos estiramientos.</li>'+
+         '<li>Sal a caminar 5 minutos.</li>'+
+         '<li>Sacude manos y brazos, suelta la tensión.</li></ul>'
+  },
+  espera:{
+    title:'Espera 10 minutos',
+    html:'<div class="breathe"><div class="inner" id="waitTimer">10:00</div></div>'+
+         '<p class="sostext">Casi ninguna ansia sobrevive 10 minutos. Deja correr la cuenta atrás antes de decidir.</p>',
+    init:function(){
+      var end=Date.now()+10*60000;
+      clearInterval(window._bt);
+      window._bt=setInterval(function(){
+        var left=Math.max(0,end-Date.now());
+        var mm=Math.floor(left/60000),ss=Math.floor((left%60000)/1000);
+        var e=document.getElementById('waitTimer');if(!e){clearInterval(window._bt);return;}
+        e.textContent=mm+':'+String(ss).padStart(2,'0');
+        if(left<=0){clearInterval(window._bt);e.textContent='¡Lo lograste!';}
+      },250);
+    }
+  },
+  boca:{
+    title:'Distrae la boca',
+    html:'<div class="breathe"><div class="inner">🥕</div></div>'+
+         '<p class="sostext">Gran parte del hábito es tener algo en la boca y las manos. Sustitúyelo:</p>'+
+         '<ul class="tech-steps">'+
+         '<li>Mastica un chicle sin azúcar.</li>'+
+         '<li>Come algo crujiente: zanahoria, apio, una manzana.</li>'+
+         '<li>Bebe agua o una infusión a sorbos.</li>'+
+         '<li>Mantén las manos ocupadas con algo.</li></ul>'
+  }
+};
+function openTech(key){
+  var t=techContent[key];if(!t)return;
+  clearInterval(window._bt);
+  document.getElementById('sosMenu').style.display='none';
+  var box=document.getElementById('sosTech');
+  box.style.display='flex';
+  document.getElementById('techBody').innerHTML='<h2 style="font-size:26px;margin-bottom:14px;text-align:center">'+t.title+'</h2>'+t.html;
+  if(t.init) t.init();
 }
 
 /* ---------- arranque: ¿usuario ya registrado? ---------- */
