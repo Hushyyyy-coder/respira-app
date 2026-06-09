@@ -476,50 +476,55 @@ body{background:radial-gradient(circle at 20% 0%,#dff8ea 0,#e3e4e8 38%,#d8dbe0 1
 .nav{background:rgba(255,255,255,.86);box-shadow:0 -10px 30px rgba(0,0,0,.04);}
 .nav button.on{color:#0c7c41;}
 
-.smart-plan{position:relative;overflow:hidden;margin:16px 18px 0;padding:0;border-radius:30px;color:#fff;background:
-  radial-gradient(circle at 12% 6%,rgba(127,230,176,.34),transparent 30%),
-  radial-gradient(circle at 90% 0%,rgba(10,132,255,.24),transparent 34%),
-  linear-gradient(155deg,#071f1a 0%,#0b3f30 48%,#136047 100%);
-  box-shadow:0 18px 42px rgba(9,58,40,.26);border:1px solid rgba(255,255,255,.12);}
-.smart-plan::after{content:"";position:absolute;inset:auto -30px -80px -30px;height:140px;background:linear-gradient(90deg,rgba(127,230,176,.18),rgba(255,255,255,.02));filter:blur(18px);}
-.plan-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 20px 6px;}
-.plan-kicker{font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px;}
-.plan-dot{width:8px;height:8px;border-radius:50%;background:#7fe6b0;box-shadow:0 0 0 5px rgba(127,230,176,.12);}
-.risk-pill{font-size:11px;font-weight:900;letter-spacing:.02em;border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);color:#fff;white-space:nowrap;}
-.risk-pill.low{background:rgba(127,230,176,.16);color:#9df2c2;}
-.risk-pill.mid{background:rgba(255,159,10,.18);color:#ffd89a;}
-.risk-pill.high{background:rgba(255,69,58,.20);color:#ffb0aa;animation:riskGlow 1.8s infinite;}
-@keyframes riskGlow{0%,100%{box-shadow:0 0 0 rgba(255,69,58,0)}50%{box-shadow:0 0 0 6px rgba(255,69,58,.08)}}
-.plan-main{position:relative;z-index:1;display:flex;gap:14px;align-items:flex-start;padding:11px 20px 16px;}
-.plan-icon{width:50px;height:50px;border-radius:18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:27px;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.12);}
-.smart-plan .pl-title{font-size:24px;line-height:1.08;font-weight:900;letter-spacing:-.045em;margin:0 0 7px;}
-.smart-plan .pl-txt{font-size:14px;line-height:1.5;font-weight:600;color:rgba(255,255,255,.82);}
-.smart-plan .pl-txt b{color:#7fe6b0;}
-.plan-now{position:relative;z-index:1;margin:0 16px 14px;background:rgba(255,255,255,.92);color:#11231c;border-radius:24px;padding:17px 17px 16px;box-shadow:0 14px 30px rgba(0,0,0,.13);}
-.pn-lbl{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#0c7c41;margin-bottom:5px;}
-.pn-title{font-size:18px;font-weight:900;letter-spacing:-.03em;line-height:1.16;}
-.pn-text{font-size:13px;color:#59615d;font-weight:650;line-height:1.45;margin-top:6px;}
+
+/* Plan inteligente V3: más fino, luminoso y legible */
+.smart-plan{
+  position:relative;overflow:hidden;margin:18px 18px 0;padding:0;border-radius:28px;color:#14231c;
+  background:linear-gradient(180deg,#ffffff 0%,#f7fff9 100%);
+  border:1px solid rgba(20,80,45,.08);
+  box-shadow:0 16px 38px rgba(12,55,34,.10);
+}
+.smart-plan::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:linear-gradient(90deg,#34c759,#30b0a8,#7fe6b0);}
+.smart-plan::after{content:"";position:absolute;right:-58px;top:-62px;width:160px;height:160px;border-radius:50%;background:rgba(52,199,89,.08);filter:blur(3px);}
+.plan-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 20px 10px;}
+.plan-kicker{font-size:12px;font-weight:850;letter-spacing:.075em;text-transform:uppercase;color:#0c7c41;display:flex;align-items:center;gap:8px;}
+.plan-dot{width:8px;height:8px;border-radius:50%;background:#34c759;box-shadow:0 0 0 5px rgba(52,199,89,.12);}
+.risk-pill{font-size:11px;font-weight:850;letter-spacing:.01em;border-radius:999px;padding:7px 10px;background:#f1f4f2;border:1px solid rgba(20,45,30,.07);color:#52605a;white-space:nowrap;}
+.risk-pill.low{background:#eafaf0;color:#16823d;border-color:rgba(52,199,89,.12);}
+.risk-pill.mid{background:#fff5e3;color:#9a5a00;border-color:rgba(255,159,10,.16);}
+.risk-pill.high{background:#fff0ee;color:#c33830;border-color:rgba(255,69,58,.18);animation:riskGlow 1.8s infinite;}
+@keyframes riskGlow{0%,100%{box-shadow:0 0 0 rgba(255,69,58,0)}50%{box-shadow:0 0 0 6px rgba(255,69,58,.06)}}
+.plan-main{position:relative;z-index:1;display:flex;gap:13px;align-items:flex-start;padding:8px 20px 14px;}
+.plan-icon{width:46px;height:46px;border-radius:16px;background:linear-gradient(145deg,#eafff1,#f7fffb);border:1px solid rgba(52,199,89,.13);display:flex;align-items:center;justify-content:center;font-size:25px;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.8);}
+.smart-plan .pl-title{font-size:22px;line-height:1.13;font-weight:850;letter-spacing:-.035em;margin:0 0 8px;color:#101916;}
+.smart-plan .pl-txt{font-size:14.5px;line-height:1.55;font-weight:560;color:#66706b;letter-spacing:-.01em;}
+.smart-plan .pl-txt b{color:#16823d;font-weight:800;}
+.plan-now{position:relative;z-index:1;margin:0 16px 14px;background:#f4fbf7;color:#102019;border-radius:22px;padding:16px 16px 15px;border:1px solid rgba(52,199,89,.10);box-shadow:none;}
+.pn-lbl{font-size:10.5px;font-weight:850;letter-spacing:.08em;text-transform:uppercase;color:#16823d;margin-bottom:6px;}
+.pn-title{font-size:17.5px;font-weight:850;letter-spacing:-.025em;line-height:1.18;color:#101916;}
+.pn-text{font-size:13.5px;color:#66706b;font-weight:560;line-height:1.48;margin-top:6px;}
 .pn-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px;}
-.pn-btn{border:none;border-radius:15px;padding:13px 10px;font-family:inherit;font-size:13px;font-weight:900;cursor:pointer;background:#eef2ef;color:#1d372c;transition:.16s;}
-.pn-btn.primary{background:linear-gradient(140deg,#34c759,#30b0a8);color:#fff;box-shadow:0 8px 18px rgba(48,176,168,.22);}
+.pn-btn{border:none;border-radius:14px;padding:13px 10px;font-family:inherit;font-size:13px;font-weight:850;cursor:pointer;background:#fff;color:#19382b;transition:.16s;border:1px solid rgba(20,45,30,.07);box-shadow:0 4px 12px rgba(20,55,35,.05);}
+.pn-btn.primary{background:linear-gradient(140deg,#23b85c,#25a99f);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(37,169,159,.18);}
 .pn-btn:active{transform:scale(.97);}
 .plan-metrics{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 16px 14px;}
-.plan-metrics div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.13);border-radius:17px;padding:12px 10px;min-width:0;}
-.plan-metrics span{display:block;font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.54);margin-bottom:5px;white-space:nowrap;}
-.plan-metrics b{display:block;font-size:13px;font-weight:900;line-height:1.15;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.plan-metrics div{background:#ffffff;border:1px solid rgba(20,45,30,.06);border-radius:16px;padding:12px 10px;min-width:0;box-shadow:0 4px 12px rgba(20,55,35,.035);}
+.plan-metrics span{display:block;font-size:9.5px;font-weight:850;letter-spacing:.05em;text-transform:uppercase;color:#9aa19d;margin-bottom:5px;white-space:nowrap;}
+.plan-metrics b{display:block;font-size:13px;font-weight:800;line-height:1.15;color:#17241e;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .plan-progress{position:relative;z-index:1;padding:0 16px 15px;}
-.pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;font-weight:800;color:rgba(255,255,255,.74);}
-.pp-top b{color:#7fe6b0;}
-.pp-bar{height:9px;border-radius:20px;background:rgba(255,255,255,.13);overflow:hidden;}
-.pp-bar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#7fe6b0,#30b0a8);transition:width .35s cubic-bezier(.22,1,.36,1);}
+.pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12.5px;font-weight:750;color:#717b75;}
+.pp-top b{color:#16823d;font-weight:850;}
+.pp-bar{height:8px;border-radius:20px;background:#e8eeeb;overflow:hidden;}
+.pp-bar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#34c759,#30b0a8);transition:width .35s cubic-bezier(.22,1,.36,1);}
 .plan-steps{position:relative;z-index:1;display:grid;gap:8px;padding:0 16px 14px;}
-.plan-step{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.11);border-radius:16px;padding:11px 12px;font-size:13px;font-weight:650;line-height:1.36;color:rgba(255,255,255,.86);}
-.plan-step i{font-style:normal;width:22px;height:22px;border-radius:50%;background:rgba(127,230,176,.18);color:#7fe6b0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;}
-.micro-challenge{position:relative;z-index:1;margin:0 16px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(127,230,176,.18);border-radius:18px;padding:13px 14px;font-size:13px;font-weight:800;line-height:1.38;color:#eafff1;}
+.plan-step{display:flex;gap:10px;align-items:flex-start;background:#ffffff;border:1px solid rgba(20,45,30,.06);border-radius:15px;padding:11px 12px;font-size:13.2px;font-weight:560;line-height:1.38;color:#4f5b55;box-shadow:0 4px 12px rgba(20,55,35,.035);}
+.plan-step i{font-style:normal;width:22px;height:22px;border-radius:50%;background:#eafaf0;color:#16823d;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:850;flex-shrink:0;}
+.micro-challenge{position:relative;z-index:1;margin:0 16px 16px;background:linear-gradient(145deg,#103d30,#17624a);border:none;border-radius:18px;padding:13px 14px;font-size:13.2px;font-weight:720;line-height:1.4;color:#effff5;box-shadow:0 10px 22px rgba(16,61,48,.16);}
 .urge-card{background:linear-gradient(180deg,#ffffff,#fbfffc);}
 .urge-card .uc-rate{background:linear-gradient(140deg,#e9fff1,#dff7ff);}
 .sos{border-radius:24px;}
-@media(max-width:360px){.plan-metrics{grid-template-columns:1fr}.pn-actions{grid-template-columns:1fr}.smart-plan .pl-title{font-size:22px}}
+@media(max-width:360px){.plan-metrics{grid-template-columns:1fr}.pn-actions{grid-template-columns:1fr}.smart-plan .pl-title{font-size:20px}.smart-plan .pl-txt{font-size:13.5px}}
+.pn-actions{grid-template-columns:1fr}.smart-plan .pl-title{font-size:22px}}
 
 </style>
 </head>
@@ -675,15 +680,15 @@ body{background:radial-gradient(circle at 20% 0%,#dff8ea 0,#e3e4e8 38%,#d8dbe0 1
       <div class="plan-main">
         <div class="plan-icon" id="planIcon">🎯</div>
         <div>
-          <div class="pl-title" id="planTitle">Misión de hoy: ganar el siguiente impulso</div>
-          <div class="pl-txt" id="planText">La app irá afinando tu plan según tus cigarros, impulsos y disparadores.</div>
+          <div class="pl-title" id="planTitle">Tu plan para hoy</div>
+          <div class="pl-txt" id="planText">Vamos a detectar cuándo aparece la gana y convertirla en una victoria pequeña.</div>
         </div>
       </div>
 
       <div class="plan-now">
         <div class="pn-lbl">Haz esto ahora</div>
-        <div class="pn-title" id="planNowTitle">Registra las ganas antes del cigarro</div>
-        <div class="pn-text" id="planNowText">Cuando aparezca el impulso, pulsa “Tengo ganas”. Si pasan unos minutos y no fumas, pulsa “He aguantado”.</div>
+        <div class="pn-title" id="planNowTitle">Detecta la gana antes de fumar</div>
+        <div class="pn-text" id="planNowText">Cuando aparezca el impulso, márcalo. Si pasan unos minutos y no fumas, conviértelo en victoria.</div>
         <div class="pn-actions">
           <button class="pn-btn primary" onclick="addCraving()">🌊 Tengo ganas</button>
           <button class="pn-btn" onclick="markResisted()">✅ He aguantado</button>
@@ -1439,8 +1444,8 @@ function renderPersonalPlan(){
 
   var p=plans[top] || {
     icon:'🎯',
-    title:'Misión de hoy: detectar antes de caer',
-    text:'Todavía estoy aprendiendo tu patrón. Hoy lo importante es registrar <b>las ganas</b>, no solo los cigarros.',
+    title:'Tu plan para hoy: anticiparte',
+    text:'Todavía estoy aprendiendo tu patrón. Hoy la clave es detectar <b>la gana antes del cigarro</b>.',
     nowTitle: active?'Impulso activo: no negocies ahora':'Registra la próxima gana antes del cigarro',
     nowText:'Pulsa “Tengo ganas” cuando aparezca el impulso. Si pasan unos minutos y no fumas, pulsa “He aguantado”. Ahí empieza el cambio real.',
     steps:['Registra cada impulso, aunque luego fumes.','Marca “He aguantado” cuando superes una ola.','Añade el disparador si fumas para que el plan aprenda.'],
