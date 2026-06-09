@@ -463,6 +463,64 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 #winOverlay h2{font-size:30px;font-weight:800;margin:16px 0 6px;letter-spacing:-.03em;}
 #winOverlay .win-pts{font-size:17px;font-weight:700;color:#ffd479;margin-bottom:8px;}
 #winOverlay p{font-size:15px;opacity:.85;font-weight:400;line-height:1.5;max-width:280px;}
+
+
+/* ====== V2 UI: interfaz más limpia y plan inteligente premium ====== */
+body{background:radial-gradient(circle at 20% 0%,#dff8ea 0,#e3e4e8 38%,#d8dbe0 100%);}
+.phone{background:linear-gradient(180deg,#f4faf6 0%,#fbfbfd 38%);}
+.topbar{padding-top:30px;}
+.topbar .greet{font-size:29px;}
+.ring-card{background:linear-gradient(145deg,#ffffff 0%,#f7fff9 100%);border:1px solid rgba(52,199,89,.10);box-shadow:0 14px 36px rgba(20,70,40,.08);}
+.stat{border:1px solid rgba(28,28,30,.04);box-shadow:0 8px 22px rgba(20,45,30,.055);}
+.health,.cig-card,.urge-card{border:1px solid rgba(28,28,30,.045);box-shadow:0 10px 28px rgba(20,45,30,.06);}
+.nav{background:rgba(255,255,255,.86);box-shadow:0 -10px 30px rgba(0,0,0,.04);}
+.nav button.on{color:#0c7c41;}
+
+.smart-plan{position:relative;overflow:hidden;margin:16px 18px 0;padding:0;border-radius:30px;color:#fff;background:
+  radial-gradient(circle at 12% 6%,rgba(127,230,176,.34),transparent 30%),
+  radial-gradient(circle at 90% 0%,rgba(10,132,255,.24),transparent 34%),
+  linear-gradient(155deg,#071f1a 0%,#0b3f30 48%,#136047 100%);
+  box-shadow:0 18px 42px rgba(9,58,40,.26);border:1px solid rgba(255,255,255,.12);}
+.smart-plan::after{content:"";position:absolute;inset:auto -30px -80px -30px;height:140px;background:linear-gradient(90deg,rgba(127,230,176,.18),rgba(255,255,255,.02));filter:blur(18px);}
+.plan-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 20px 6px;}
+.plan-kicker{font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px;}
+.plan-dot{width:8px;height:8px;border-radius:50%;background:#7fe6b0;box-shadow:0 0 0 5px rgba(127,230,176,.12);}
+.risk-pill{font-size:11px;font-weight:900;letter-spacing:.02em;border-radius:999px;padding:8px 11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16);color:#fff;white-space:nowrap;}
+.risk-pill.low{background:rgba(127,230,176,.16);color:#9df2c2;}
+.risk-pill.mid{background:rgba(255,159,10,.18);color:#ffd89a;}
+.risk-pill.high{background:rgba(255,69,58,.20);color:#ffb0aa;animation:riskGlow 1.8s infinite;}
+@keyframes riskGlow{0%,100%{box-shadow:0 0 0 rgba(255,69,58,0)}50%{box-shadow:0 0 0 6px rgba(255,69,58,.08)}}
+.plan-main{position:relative;z-index:1;display:flex;gap:14px;align-items:flex-start;padding:11px 20px 16px;}
+.plan-icon{width:50px;height:50px;border-radius:18px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:27px;flex-shrink:0;box-shadow:inset 0 1px 0 rgba(255,255,255,.12);}
+.smart-plan .pl-title{font-size:24px;line-height:1.08;font-weight:900;letter-spacing:-.045em;margin:0 0 7px;}
+.smart-plan .pl-txt{font-size:14px;line-height:1.5;font-weight:600;color:rgba(255,255,255,.82);}
+.smart-plan .pl-txt b{color:#7fe6b0;}
+.plan-now{position:relative;z-index:1;margin:0 16px 14px;background:rgba(255,255,255,.92);color:#11231c;border-radius:24px;padding:17px 17px 16px;box-shadow:0 14px 30px rgba(0,0,0,.13);}
+.pn-lbl{font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#0c7c41;margin-bottom:5px;}
+.pn-title{font-size:18px;font-weight:900;letter-spacing:-.03em;line-height:1.16;}
+.pn-text{font-size:13px;color:#59615d;font-weight:650;line-height:1.45;margin-top:6px;}
+.pn-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px;}
+.pn-btn{border:none;border-radius:15px;padding:13px 10px;font-family:inherit;font-size:13px;font-weight:900;cursor:pointer;background:#eef2ef;color:#1d372c;transition:.16s;}
+.pn-btn.primary{background:linear-gradient(140deg,#34c759,#30b0a8);color:#fff;box-shadow:0 8px 18px rgba(48,176,168,.22);}
+.pn-btn:active{transform:scale(.97);}
+.plan-metrics{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 16px 14px;}
+.plan-metrics div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.13);border-radius:17px;padding:12px 10px;min-width:0;}
+.plan-metrics span{display:block;font-size:9px;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.54);margin-bottom:5px;white-space:nowrap;}
+.plan-metrics b{display:block;font-size:13px;font-weight:900;line-height:1.15;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.plan-progress{position:relative;z-index:1;padding:0 16px 15px;}
+.pp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:12px;font-weight:800;color:rgba(255,255,255,.74);}
+.pp-top b{color:#7fe6b0;}
+.pp-bar{height:9px;border-radius:20px;background:rgba(255,255,255,.13);overflow:hidden;}
+.pp-bar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#7fe6b0,#30b0a8);transition:width .35s cubic-bezier(.22,1,.36,1);}
+.plan-steps{position:relative;z-index:1;display:grid;gap:8px;padding:0 16px 14px;}
+.plan-step{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.11);border-radius:16px;padding:11px 12px;font-size:13px;font-weight:650;line-height:1.36;color:rgba(255,255,255,.86);}
+.plan-step i{font-style:normal;width:22px;height:22px;border-radius:50%;background:rgba(127,230,176,.18);color:#7fe6b0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;}
+.micro-challenge{position:relative;z-index:1;margin:0 16px 16px;background:rgba(255,255,255,.12);border:1px solid rgba(127,230,176,.18);border-radius:18px;padding:13px 14px;font-size:13px;font-weight:800;line-height:1.38;color:#eafff1;}
+.urge-card{background:linear-gradient(180deg,#ffffff,#fbfffc);}
+.urge-card .uc-rate{background:linear-gradient(140deg,#e9fff1,#dff7ff);}
+.sos{border-radius:24px;}
+@media(max-width:360px){.plan-metrics{grid-template-columns:1fr}.pn-actions{grid-template-columns:1fr}.smart-plan .pl-title{font-size:22px}}
+
 </style>
 </head>
 <body>
@@ -608,10 +666,43 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
       <p class="hnote">A las 2-12 semanas la circulación mejora y respirar cuesta menos.</p>
     </div>
 
-    <div class="plan-card" id="personalPlan">
-      <div class="pl-lbl">Plan inteligente de hoy</div>
-      <div class="pl-title" id="planTitle">Rompe el piloto automático</div>
-      <div class="pl-txt" id="planText">Registra cigarros e impulsos. Cuando sepamos tu patrón, te avisaremos de tus momentos peligrosos.</div>
+    <div class="plan-card smart-plan" id="personalPlan">
+      <div class="plan-head">
+        <div class="plan-kicker"><span class="plan-dot"></span>Plan inteligente de hoy</div>
+        <div class="risk-pill" id="planRiskBadge">Aprendiendo</div>
+      </div>
+
+      <div class="plan-main">
+        <div class="plan-icon" id="planIcon">🎯</div>
+        <div>
+          <div class="pl-title" id="planTitle">Misión de hoy: ganar el siguiente impulso</div>
+          <div class="pl-txt" id="planText">La app irá afinando tu plan según tus cigarros, impulsos y disparadores.</div>
+        </div>
+      </div>
+
+      <div class="plan-now">
+        <div class="pn-lbl">Haz esto ahora</div>
+        <div class="pn-title" id="planNowTitle">Registra las ganas antes del cigarro</div>
+        <div class="pn-text" id="planNowText">Cuando aparezca el impulso, pulsa “Tengo ganas”. Si pasan unos minutos y no fumas, pulsa “He aguantado”.</div>
+        <div class="pn-actions">
+          <button class="pn-btn primary" onclick="addCraving()">🌊 Tengo ganas</button>
+          <button class="pn-btn" onclick="markResisted()">✅ He aguantado</button>
+        </div>
+      </div>
+
+      <div class="plan-metrics">
+        <div><span>Disparador</span><b id="planTrigger">—</b></div>
+        <div><span>Hora crítica</span><b id="planDanger">—</b></div>
+        <div><span>Objetivo hoy</span><b id="planTodayGoal">—</b></div>
+      </div>
+
+      <div class="plan-progress">
+        <div class="pp-top"><span>Control de impulsos hoy</span><b id="planProgressText">0%</b></div>
+        <div class="pp-bar"><i id="planProgressBar" style="width:0%"></i></div>
+      </div>
+
+      <div class="plan-steps" id="planSteps"></div>
+      <div class="micro-challenge" id="planMicro">Reto: gana el próximo impulso sin negociar con el cigarro.</div>
     </div>
 
     <div class="cig-card">
@@ -1068,6 +1159,7 @@ function renderCravings(){
   var u=document.getElementById('urgeToday'); if(u)u.textContent=total;
   var w=document.getElementById('urgeWon'); if(w)w.textContent=won;
   var r=document.getElementById('urgeRate'); if(r)r.textContent=rate+'%';
+  renderPersonalPlan();
 }
 function markRecentCravingAsSmoked(){
   var arr=getCraves();
@@ -1098,6 +1190,7 @@ function addCig(){
   if(btn){btn.style.transform='scale(.9)';setTimeout(()=>btn.style.transform='',120);}
   renderCigs();
   renderAnalisis();
+  renderPersonalPlan();
   /* preguntar el disparador */
   document.getElementById('trigOverlay').classList.add('show');
 }
@@ -1256,20 +1349,139 @@ function renderPersonalPlan(){
   if(!window._userData) return;
   var title=document.getElementById('planTitle'), txt=document.getElementById('planText');
   if(!title||!txt)return;
+
+  var data=window._userData;
+  var raw=getLog();
+  var times=logTimes().slice().sort(function(a,b){return a-b;});
+  var cr=getCraves();
+  var ts=todayStart();
+  var todaySmoked=times.filter(function(t){return t>=ts;}).length;
+  var todayCraves=cr.filter(function(e){return cravingTime(e)>=ts;});
+  var won=todayCraves.filter(function(e){return e.status==='resisted';}).length;
+  var active=todayCraves.filter(function(e){return e.status==='active' && Date.now()-cravingTime(e)<45*60000;}).length;
+  var total=todayCraves.length;
+  var rate=total?Math.round(won/total*100):0;
+  var quota=dailyQuota();
   var top=getTopTrigger();
-  var map={
-    'Estrés':['Tu punto débil: estrés','Cuando notes tensión, no negocies con el cigarro: abre SOS, respira 90 segundos y camina 3 minutos. <b>Primero baja el cuerpo, luego decides.</b>'],
-    'Café':['Tu punto débil: café','Cambia el ritual durante 7 días: otra taza, otro sitio o café más corto. <b>El placer está en el café, no en el humo.</b>'],
-    'Después de comer':['Tu punto débil: después de comer','Regla de oro: al terminar, levántate. Agua, dientes o paseo de 5 minutos. <b>No te quedes sentado negociando.</b>'],
-    'Aburrimiento':['Tu punto débil: aburrimiento','Ten sustitutos de gesto: agua, chicle, paseo corto o juego mental. <b>El impulso pasa si no lo alimentas.</b>'],
-    'Social':['Tu punto débil: social','Lleva frase preparada: “estoy dejándolo, hoy paso”. Bebida en mano y aléjate del corro fumador 5 minutos.'],
-    'Costumbre':['Tu punto débil: costumbre','Cambia el contexto exacto donde fumas: silla, ruta, mano, hora. <b>La costumbre se rompe cambiando el guion.</b>']
+
+  var hour=new Date().getHours();
+  var franjas=[0,0,0,0,0,0], nombres=['0-4h','4-8h','8-12h','12-16h','16-20h','20-24h'];
+  times.forEach(function(t){ franjas[Math.floor(new Date(t).getHours()/4)]++; });
+  var maxF=Math.max.apply(null,franjas);
+  var peakIdx=maxF>0?franjas.indexOf(maxF):-1;
+  var danger=peakIdx>=0?nombres[peakIdx]:'Después de comer';
+  var nearPeak=peakIdx>=0 && Math.floor(hour/4)===peakIdx;
+
+  var risk='low', riskText='Riesgo bajo';
+  if(active>0 || (nearPeak && top) || (data.method==='gradual' && todaySmoked>=quota && quota>0)){ risk='high'; riskText='Riesgo alto ahora'; }
+  else if(total===0 && todaySmoked===0){ risk='mid'; riskText='Modo arranque'; }
+  else if(rate<50 || top){ risk='mid'; riskText='Riesgo medio'; }
+
+  var methodName={brusco:'0 cigarros',gradual:'reducción gradual',sustituto:'apoyo con nicotina'}[data.method]||'plan personal';
+  var goal=(data.method==='gradual') ? ('máx. '+quota+' cig.') : '0 cig. + victorias';
+
+  var plans={
+    'Estrés':{
+      icon:'😣',
+      title:'Hoy atacamos el estrés, no el cigarro',
+      text:'Tu patrón apunta a <b>estrés</b>. La misión no es “aguantar a lo bruto”: es bajar la activación del cuerpo antes de decidir.',
+      nowTitle: active?'Impulso activo: congela la decisión 10 minutos':'Cuando notes tensión: regla de 90 segundos',
+      nowText:'Abre SOS, haz una respiración guiada y camina 3 minutos. Luego decides. No fumes mientras el cuerpo está acelerado.',
+      steps:['Abre SOS antes de encender nada.','Respira 4-7-8 o cuadrada durante 90 segundos.','Escribe en una frase qué te ha estresado y qué harás después.'],
+      micro:'Reto de hoy: cada vez que haya estrés, espera 10 minutos antes de cualquier cigarro.'
+    },
+    'Café':{
+      icon:'☕',
+      title:'Hoy rompemos el binomio café = cigarro',
+      text:'Tu disparador principal parece ser <b>el café</b>. No tienes que quitar el café: tienes que cambiar el ritual que lo rodea.',
+      nowTitle:'Cambia el escenario del próximo café',
+      nowText:'Otra taza, otro sitio, café más corto o de pie. Nada de quedarte sentado negociando con el cigarro.',
+      steps:['Prepara el café en otro sitio.','Ten agua o chicle preparado antes de beberlo.','Al terminar, muévete 3 minutos: cocina, calle o escaleras.'],
+      micro:'Reto de hoy: un café completo sin cigarro. Solo uno. Pero ganado.'
+    },
+    'Después de comer':{
+      icon:'🍽️',
+      title:'Hoy blindamos el momento de después de comer',
+      text:'Aquí manda la costumbre: comida terminada, piloto automático y cigarro. Vamos a cortar justo ese enlace.',
+      nowTitle:'Regla de oro: levántate de la mesa',
+      nowText:'En cuanto termines, agua, dientes o paseo de 5 minutos. La silla es zona peligrosa.',
+      steps:['Retira el plato o levántate nada más terminar.','Lávate los dientes o bebe agua fría.','Paseo corto de 5 minutos antes de mirar el móvil.'],
+      micro:'Reto de hoy: ganar el primer “después de comer” sin sentarte a discutir con la nicotina.'
+    },
+    'Aburrimiento':{
+      icon:'😐',
+      title:'Hoy sustituimos el gesto automático',
+      text:'Tu patrón apunta a <b>aburrimiento</b>. El cigarro no resuelve nada: solo ocupa manos, boca y cabeza unos minutos.',
+      nowTitle:'Ten un sustituto físico preparado',
+      nowText:'Agua, chicle, paseo corto, flexiones suaves o el juego del monstruo. Dale al cuerpo otra salida.',
+      steps:['Pon agua o chicle a mano.','Abre Mentalidad si aparece la excusa “por hacer algo”.','Muévete 3 minutos antes de fumar.'],
+      micro:'Reto de hoy: cuando venga el aburrimiento, haz una acción de 3 minutos antes de decidir.'
+    },
+    'Social':{
+      icon:'🍻',
+      title:'Hoy entrenamos el modo social sin humo',
+      text:'Tu punto delicado parece ser <b>lo social</b>. La clave es llegar con una frase y una maniobra preparadas.',
+      nowTitle:'Frase preparada + bebida en mano',
+      nowText:'Di: “Estoy dejándolo, hoy paso”. Luego cambia de sitio 5 minutos si el grupo fuma.',
+      steps:['Lleva una bebida en la mano.','Usa una frase corta, sin justificarte demasiado.','Aléjate del corro fumador cuando empiece la ronda.'],
+      micro:'Reto de hoy: una situación social diciendo “hoy paso” sin dar explicaciones largas.'
+    },
+    'Costumbre':{
+      icon:'🔁',
+      title:'Hoy cambiamos el guion de la costumbre',
+      text:'Esto no va de placer: va de repetición. Si cambias el contexto, el automático pierde fuerza.',
+      nowTitle:'Cambia sitio, mano, ruta u hora',
+      nowText:'Rompe una pieza del ritual. Cuanto más raro se lo pongas al hábito, menos manda.',
+      steps:['No fumes en el sitio de siempre.','Cambia la ruta o retrasa 10 minutos.','Registra la gana aunque acabes fumando.'],
+      micro:'Reto de hoy: ningún cigarro exactamente igual que ayer. Cambia el guion.'
+    }
   };
-  if(top && map[top]){ title.innerHTML=map[top][0]; txt.innerHTML=map[top][1]; }
-  else{
-    title.textContent='Misión de hoy: registra también las ganas';
-    txt.innerHTML='Pulsa <b>“Tengo ganas”</b> cuando aparezca el impulso y <b>“He aguantado”</b> si lo superas. La app aprenderá tus momentos peligrosos.';
+
+  var p=plans[top] || {
+    icon:'🎯',
+    title:'Misión de hoy: detectar antes de caer',
+    text:'Todavía estoy aprendiendo tu patrón. Hoy lo importante es registrar <b>las ganas</b>, no solo los cigarros.',
+    nowTitle: active?'Impulso activo: no negocies ahora':'Registra la próxima gana antes del cigarro',
+    nowText:'Pulsa “Tengo ganas” cuando aparezca el impulso. Si pasan unos minutos y no fumas, pulsa “He aguantado”. Ahí empieza el cambio real.',
+    steps:['Registra cada impulso, aunque luego fumes.','Marca “He aguantado” cuando superes una ola.','Añade el disparador si fumas para que el plan aprenda.'],
+    micro:'Reto de hoy: conseguir 1 impulso superado. Uno solo ya cuenta.'
+  };
+
+  if(active>0){
+    p = Object.assign({}, p, {
+      title:'Ahora mismo: gana esta ola',
+      text:'Hay un impulso activo. No necesitas ganar todo el día: solo los próximos <b>10 minutos</b>.',
+      nowTitle:'Protocolo urgente de 10 minutos',
+      nowText:'Abre SOS, respira, cambia de habitación y vuelve aquí para marcar “He aguantado”.',
+      micro:'Reto inmediato: no fumar durante 10 minutos. Después reevaluamos.'
+    });
   }
+
+  var riskEl=document.getElementById('planRiskBadge');
+  var iconEl=document.getElementById('planIcon');
+  var nowTitle=document.getElementById('planNowTitle');
+  var nowText=document.getElementById('planNowText');
+  var triggerEl=document.getElementById('planTrigger');
+  var dangerEl=document.getElementById('planDanger');
+  var goalEl=document.getElementById('planTodayGoal');
+  var progText=document.getElementById('planProgressText');
+  var progBar=document.getElementById('planProgressBar');
+  var stepsEl=document.getElementById('planSteps');
+  var microEl=document.getElementById('planMicro');
+
+  if(riskEl){ riskEl.textContent=riskText; riskEl.className='risk-pill '+risk; }
+  if(iconEl) iconEl.textContent=p.icon;
+  title.innerHTML=p.title;
+  txt.innerHTML=p.text+' <b>Plan: '+methodName+'.</b>';
+  if(nowTitle) nowTitle.textContent=p.nowTitle;
+  if(nowText) nowText.textContent=p.nowText;
+  if(triggerEl) triggerEl.textContent=top || 'Aprendiendo';
+  if(dangerEl) dangerEl.textContent=danger;
+  if(goalEl) goalEl.textContent=goal;
+  if(progText) progText.textContent=rate+'%';
+  if(progBar) progBar.style.width=rate+'%';
+  if(stepsEl){ stepsEl.innerHTML=p.steps.map(function(s,i){ return '<div class="plan-step"><i>'+(i+1)+'</i><span>'+esc(s)+'</span></div>'; }).join(''); }
+  if(microEl) microEl.textContent=p.micro+'  Hoy: '+won+'/'+Math.max(1,total)+' impulsos superados, '+todaySmoked+' cigarros.';
 }
 function renderSosReasons(data){
   var box=document.getElementById('sosReasons'); if(!box)return;
