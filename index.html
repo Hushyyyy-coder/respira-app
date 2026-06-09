@@ -2,8 +2,13 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#ffffff">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0c3f2f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Respira">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>Respira · Deja de fumar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,7 +67,7 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 .pad{padding:26px 22px 8px;}
 
 /* ====== ONBOARDING / TEST / RESULT (dark hero screens) ====== */
-.hero{background:linear-gradient(170deg,#0b3d2e 0%,#10past 40%);}
+.hero{background:linear-gradient(170deg,#0b3d2e 0%,#10b981 40%);}
 #onboarding,#test,#resultado,#elegir{background:linear-gradient(168deg,#0c3f2f 0%,#155f47 55%,#1f7a5c 100%);color:#fff;}
 .hero-wrap{flex:1;display:flex;flex-direction:column;padding:64px 30px 38px;}
 .ob-step{display:none;}
@@ -292,6 +297,37 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 .mus-action.tense{color:#ffd479;}
 .mus-action.relax{color:#7fe6b0;}
 
+/* ====== MEJORAS MVP: PLAN, IMPULSOS, EXPORTACIÓN Y PRIVACIDAD ====== */
+.field textarea{flex:1;background:none;border:none;outline:none;color:#fff;font-family:inherit;font-size:16px;font-weight:600;padding:14px 0;width:100%;letter-spacing:-.02em;resize:none;min-height:54px;}
+.field textarea::placeholder{color:rgba(255,255,255,.4);font-weight:400;}
+.plan-card{margin:14px 18px 0;background:linear-gradient(150deg,#0c3f2f,#155f47);color:#fff;border-radius:24px;padding:20px 21px;box-shadow:var(--shadow);}
+.plan-card .pl-lbl{font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.65;font-weight:800;margin-bottom:6px;}
+.plan-card .pl-title{font-size:18px;font-weight:800;letter-spacing:-.025em;margin-bottom:8px;}
+.plan-card .pl-txt{font-size:14px;font-weight:500;line-height:1.52;opacity:.9;}
+.plan-card .pl-txt b{color:#7fe6b0;font-weight:800;}
+.urge-card{margin:14px 18px 0;background:var(--card);border-radius:24px;padding:20px;box-shadow:var(--shadow);}
+.urge-card .uc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;}
+.urge-card .uc-title{font-weight:800;font-size:17px;letter-spacing:-.025em;}
+.urge-card .uc-sub{font-size:13px;color:var(--muted);font-weight:500;margin-top:3px;line-height:1.45;}
+.urge-card .uc-rate{background:var(--mint);color:var(--green-d);border-radius:15px;padding:9px 12px;text-align:center;min-width:76px;}
+.urge-card .uc-rate .v{font-size:22px;font-weight:800;line-height:1;letter-spacing:-.03em;}
+.urge-card .uc-rate .l{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;}
+.urge-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.urge-btn{border:none;border-radius:16px;padding:15px 12px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;transition:.16s;background:#fff3df;color:#9b5100;}
+.urge-btn.ok{background:linear-gradient(140deg,var(--green),var(--teal));color:#fff;box-shadow:0 6px 16px rgba(52,199,89,.24);}
+.urge-btn:active{transform:scale(.97);}
+.sos-reasons{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);border-radius:17px;padding:14px 16px;margin:0 0 15px;text-align:left;display:none;}
+.sos-reasons .sr-l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#7fe6b0;font-weight:800;margin-bottom:6px;}
+.sos-reasons ul{padding-left:18px;margin:0;}
+.sos-reasons li{font-size:13px;font-weight:600;line-height:1.45;margin:4px 0;}
+.toast{position:absolute;left:18px;right:18px;bottom:108px;background:#0c3f2f;color:#fff;border-radius:18px;padding:15px 17px;font-size:14px;font-weight:700;line-height:1.35;box-shadow:var(--shadow-lg);z-index:80;opacity:0;visibility:hidden;transform:translateY(12px);transition:.24s;}
+.toast.show{opacity:1;visibility:visible;transform:none;}
+.privacy-note{margin:14px 18px 0;background:#fff7e7;color:#8a5200;border-radius:18px;padding:14px 16px;font-size:12px;font-weight:600;line-height:1.5;box-shadow:var(--shadow);}
+.inline-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+.btn-soft{background:var(--card);border:1px solid var(--line);color:var(--ink-2);box-shadow:var(--shadow);border-radius:16px;padding:15px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;}
+.btn-danger-soft{background:#fff0ec;border:1px solid #ffd0c9;color:var(--red);box-shadow:none;border-radius:16px;padding:15px;font-family:inherit;font-size:14px;font-weight:800;cursor:pointer;}
+.med-note{font-size:12px;opacity:.78;line-height:1.45;margin-top:10px;font-weight:500;}
+
 .hidden{display:none !important;}
 /* ===== REFLEJO ===== */
 .refl-empty{margin:0 18px;background:var(--card);border-radius:24px;padding:40px 24px;text-align:center;box-shadow:var(--shadow);}
@@ -465,6 +501,18 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
             <label>¿Cuántos cigarros trae el paquete?</label>
             <div class="inwrap"><input type="number" id="inpPerPack" inputmode="numeric" placeholder="20" min="1" max="40" value="20" oninput="checkStep2()"><span class="unit">cig/paquete</span></div>
           </div>
+          <div class="field">
+            <label>Motivo 1 para dejarlo</label>
+            <div class="inwrap"><input type="text" id="inpReason1" placeholder="Ej. respirar mejor, mis hijos, ahorrar…" maxlength="80"></div>
+          </div>
+          <div class="field">
+            <label>Motivo 2</label>
+            <div class="inwrap"><input type="text" id="inpReason2" placeholder="Algo que te importe de verdad" maxlength="80"></div>
+          </div>
+          <div class="field">
+            <label>Motivo 3</label>
+            <div class="inwrap"><input type="text" id="inpReason3" placeholder="Tu razón personal" maxlength="80"></div>
+          </div>
         </div>
       </div>
 
@@ -508,7 +556,8 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
       <div style="margin-top:26px">
         <div class="method" data-m="brusco" onclick="selMethod(this)"><span class="ic">🎯</span><div><div class="mt">De golpe</div><div class="md">Eliges un "día D" y lo dejas</div></div></div>
         <div class="method" data-m="gradual" onclick="selMethod(this)"><span class="ic">📉</span><div><div class="mt">Reducción gradual</div><div class="md">~30% menos cada semana</div></div></div>
-        <div class="method" data-m="sustituto" onclick="selMethod(this)"><span class="ic">🩹</span><div><div class="mt">Con sustitutos</div><div class="md">Parches, chicles o vapeo</div></div></div>
+        <div class="method" data-m="farmaco" onclick="selMethod(this)"><span class="ic">🩹</span><div><div class="mt">Con ayuda farmacológica</div><div class="md">Parches, chicles o medicación con profesional</div></div></div>
+        <div class="method" data-m="reduccion_dano" onclick="selMethod(this)"><span class="ic">🌫️</span><div><div class="mt">Reducción de daño</div><div class="md">Solo si eres adulto fumador y no logras parar</div></div></div>
       </div>
       <div style="margin-top:auto;padding-top:20px">
         <button class="btn-primary" id="elegirBtn" disabled onclick="confirmManual()">Continuar</button>
@@ -559,6 +608,12 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
       <p class="hnote">A las 2-12 semanas la circulación mejora y respirar cuesta menos.</p>
     </div>
 
+    <div class="plan-card" id="personalPlan">
+      <div class="pl-lbl">Plan inteligente de hoy</div>
+      <div class="pl-title" id="planTitle">Rompe el piloto automático</div>
+      <div class="pl-txt" id="planText">Registra cigarros e impulsos. Cuando sepamos tu patrón, te avisaremos de tus momentos peligrosos.</div>
+    </div>
+
     <div class="cig-card">
       <div class="cig-top">
         <div><div class="ct">Cigarros de hoy</div><div class="cd">Registra cada uno que fumes</div></div>
@@ -569,6 +624,24 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
         <button class="cig-add" onclick="addCig()" aria-label="Registrar un cigarro">+</button>
       </div>
       <div class="cig-quota" id="cigQuota">Tu objetivo de hoy: 0 cigarros</div>
+    </div>
+
+    <div class="urge-card">
+      <div class="uc-top">
+        <div>
+          <div class="uc-title">Impulsos superados</div>
+          <div class="uc-sub">No cuentes solo los cigarros: cuenta también las ganas que derrotas.</div>
+        </div>
+        <div class="uc-rate"><div class="v" id="urgeRate">0%</div><div class="l">control</div></div>
+      </div>
+      <div class="stats" style="padding:0;grid-template-columns:1fr 1fr;margin-bottom:12px">
+        <div class="stat" style="box-shadow:none;background:var(--bg)"><div class="si">🌊 Impulsos</div><div class="sv" id="urgeToday">0</div><div class="sl">hoy</div></div>
+        <div class="stat" style="box-shadow:none;background:var(--bg)"><div class="si">✅ Aguantados</div><div class="sv" id="urgeWon">0</div><div class="sl">hoy</div></div>
+      </div>
+      <div class="urge-actions">
+        <button class="urge-btn" onclick="addCraving()">🌊 Tengo ganas</button>
+        <button class="urge-btn ok" onclick="markResisted()">✅ He aguantado</button>
+      </div>
     </div>
 
     <button class="sos" onclick="openSos()"><span class="pulse"></span> Tengo ansiedad ahora</button>
@@ -643,8 +716,10 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
       <div class="an-stats">
         <div class="stat"><div class="si"><span class="dot" style="background:var(--orange)"></span>Hora pico</div><div class="sv" id="anPeak">—</div><div class="sl">franja del día</div></div>
         <div class="stat"><div class="si"><span class="dot" style="background:var(--green)"></span>Récord</div><div class="sv" id="anMaxGap">—</div><div class="sl">sin fumar</div></div>
-        <div class="stat"><div class="si"><span class="dot" style="background:var(--blue)"></span>Total</div><div class="sv" id="anTotal">0</div><div class="sl">registrados</div></div>
+        <div class="stat"><div class="si"><span class="dot" style="background:var(--blue)"></span>Total</div><div class="sv" id="anTotal">0</div><div class="sl">cigarros</div></div>
         <div class="stat"><div class="si"><span class="dot" style="background:var(--purple)"></span>Media</div><div class="sv" id="anAvgGap">—</div><div class="sl">entre cigarros</div></div>
+        <div class="stat"><div class="si"><span class="dot" style="background:var(--teal)"></span>Impulsos</div><div class="sv" id="anCraves">0</div><div class="sl">registrados</div></div>
+        <div class="stat"><div class="si"><span class="dot" style="background:var(--green)"></span>Control</div><div class="sv" id="anControl">0%</div><div class="sl">ganas superadas</div></div>
       </div>
       <div class="an-chart">
         <h4>Cigarros por franja del día</h4>
@@ -702,7 +777,7 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 
     <div id="reflEmpty" class="refl-empty">
       <div class="re-ic">🪞</div>
-      <p>Sube una foto tuya de frente, con buena luz. Verás cómo tu piel y tu mirada van recuperándose con cada etapa sin fumar.</p>
+      <p>Sube una foto tuya de frente, con buena luz. La foto se guarda solo en este dispositivo y puedes borrarla cuando quieras.</p>
       <label class="refl-upload">Subir mi foto
         <input type="file" id="reflInput" accept="image/*" capture="user" style="display:none" onchange="loadReflPhoto(event)">
       </label>
@@ -723,16 +798,20 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
           <div class="refl-ticks"><span>Hoy</span><span>3d</span><span>2sem</span><span>3m</span><span>9m</span><span>1año</span></div>
         </div>
       </div>
-      <p class="refl-disc">Esta es una recreación motivacional: realza tu propia foto según las mejoras reales de la piel al dejar de fumar. No es una predicción médica exacta.</p>
+      <p class="refl-disc">Esta es una recreación motivacional, no una predicción médica exacta. Tu foto se procesa en el navegador y queda guardada solo en tu dispositivo.</p>
+      <div class="privacy-note">🔒 Privacidad: no se sube a ningún servidor. Si compartes este móvil o navegador, bórrala desde aquí.</div>
       <div class="pad" style="padding-top:16px">
-        <button class="btn-primary" style="background:var(--card);border:1px solid var(--line);color:var(--muted);box-shadow:var(--shadow)" onclick="changeReflPhoto()">Cambiar foto</button>
+        <div class="inline-actions">
+          <button class="btn-soft" onclick="changeReflPhoto()">Cambiar foto</button>
+          <button class="btn-danger-soft" onclick="deleteReflPhoto()">Borrar foto</button>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ============ COMUNIDAD ============ -->
   <section class="screen" id="comunidad">
-    <div class="pad"><p class="eyebrow">Comunidad</p><h2 class="big-title" style="margin-top:8px">No estás solo</h2></div>
+    <div class="pad"><p class="eyebrow">Comunidad demo</p><h2 class="big-title" style="margin-top:8px">No estás solo</h2><p class="muted" style="font-size:13px;margin-top:10px;font-weight:600;line-height:1.5">Historias de ejemplo. Si algún día la haces real, conviene moderación y anonimato.</p></div>
     <div style="height:10px"></div>
     <div class="post">
       <div class="post-h"><div class="pa" style="background:linear-gradient(140deg,#ff9f0a,#ff7a00)">M</div><div class="pn">María</div><div class="pday">día 47</div></div>
@@ -750,9 +829,12 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
       <div class="post-foot"><span>❤️ 51</span><span>💬 9</span></div>
     </div>
     <div class="pad" style="padding-top:6px">
-      <button class="btn-primary" style="background:var(--card);border:1px solid var(--line);color:var(--muted);box-shadow:var(--shadow)" onclick="resetAll()">↺ Reiniciar mis datos</button>
+      <button class="btn-primary" style="background:linear-gradient(140deg,var(--green),var(--teal));color:#fff;box-shadow:var(--shadow)" onclick="downloadCSV()">⬇️ Exportar mis datos CSV</button>
+      <button class="btn-primary" style="background:var(--card);border:1px solid var(--line);color:var(--muted);box-shadow:var(--shadow);margin-top:10px" onclick="resetAll()">↺ Reiniciar mis datos</button>
     </div>
   </section>
+
+  <div class="toast" id="toast"></div>
 
   <!-- ============ DISPARADOR (sheet) ============ -->
   <div id="trigOverlay">
@@ -775,7 +857,8 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
   <div id="sosOverlay">
     <div id="sosMenu">
       <h2 style="text-align:center">Aguanta la ola</h2>
-      <p class="sm-sub">Las ganas duran 3-5 min y se van. Elige un ejercicio guiado:</p>
+      <div class="sos-reasons" id="sosReasons"></div>
+      <p class="sm-sub">Las ganas suelen subir, tocar pico y bajar. Elige un ejercicio guiado:</p>
       <button class="tech" onclick="openTech('respira478')"><span class="te-ic">🌬️</span><span><span class="te-t">Respiración 4-7-8</span><span class="te-d">Baja el cortisol en 90 segundos</span></span></button>
       <button class="tech" onclick="openTech('box')"><span class="te-ic">⬜</span><span><span class="te-t">Respiración cuadrada</span><span class="te-d">La que usan hasta los marines</span></span></button>
       <button class="tech" onclick="openTech('grounding')"><span class="te-ic">🖐️</span><span><span class="te-t">Anclaje 5-4-3-2-1</span><span class="te-d">Corta los pensamientos en bucle</span></span></button>
@@ -807,6 +890,9 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 
 var KEY='respira_user_v1';
 var chosen=null, obStep=1;
+function toNumber(v){ return parseFloat(String(v||'').replace(',', '.')); }
+function esc(s){ return String(s||'').replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];}); }
+function toast(msg){ var t=document.getElementById('toast'); if(!t)return; t.textContent=msg; t.classList.add('show'); clearTimeout(window._toastTimer); window._toastTimer=setTimeout(function(){t.classList.remove('show');},2600); }
 
 /* ---------- TEST DE FAGERSTRÖM ---------- */
 var questions=[
@@ -858,9 +944,9 @@ function recommend(score){
   if(score<=7) return {level:'moderada',method:'gradual',ic:'📉',title:'Reducción gradual',
     desc:'Con dependencia moderada, ir bajando poco a poco (alrededor de un 30% menos por semana) suele ser más llevadero que parar de golpe.',
     note:'Una terapia sustitutiva de nicotina (parches o chicles) puede aumentar tus probabilidades. Consúltalo con tu farmacéutico o médico.'};
-  return {level:'alta',method:'sustituto',ic:'🩹',title:'Con sustitutos de nicotina',
-    desc:'Tu dependencia es alta. La evidencia recomienda apoyarte en terapia sustitutiva de nicotina, e incluso combinar productos, junto al programa.',
-    note:'Importante: con dependencia alta conviene que un médico o farmacéutico te oriente sobre la pauta y valore tratamiento.'};
+  return {level:'alta',method:'farmaco',ic:'🩹',title:'Con ayuda farmacológica',
+    desc:'Tu dependencia es alta. Conviene valorar terapia sustitutiva de nicotina o medicación con un profesional, además del programa conductual.',
+    note:'Importante: con dependencia alta, habla con médico o farmacéutico. El vapeo no va mezclado aquí: no es lo mismo que parches, chicles o medicación.'};
 }
 var recMethod=null;
 function showResult(){
@@ -898,9 +984,9 @@ function goToData(){
 }
 function checkStep2(){
   var n=document.getElementById('inpName').value.trim();
-  var c=parseFloat(document.getElementById('inpCigs').value);
-  var p=parseFloat(document.getElementById('inpPrice').value);
-  var pp=parseFloat(document.getElementById('inpPerPack').value);
+  var c=toNumber(document.getElementById('inpCigs').value);
+  var p=toNumber(document.getElementById('inpPrice').value);
+  var pp=toNumber(document.getElementById('inpPerPack').value);
   document.getElementById('obBtn').disabled=!(n.length>0&&c>0&&p>0&&pp>0);
 }
 function obNext(){
@@ -910,9 +996,10 @@ function obNext(){
     name:document.getElementById('inpName').value.trim(),
     method:chosen,
     score:qScore,
-    cigsPerDay:parseFloat(document.getElementById('inpCigs').value),
-    packPrice:parseFloat(document.getElementById('inpPrice').value),
-    perPack:parseFloat(document.getElementById('inpPerPack').value),
+    cigsPerDay:toNumber(document.getElementById('inpCigs').value),
+    packPrice:toNumber(document.getElementById('inpPrice').value),
+    perPack:toNumber(document.getElementById('inpPerPack').value),
+    reasons:[document.getElementById('inpReason1').value.trim(),document.getElementById('inpReason2').value.trim(),document.getElementById('inpReason3').value.trim()].filter(Boolean),
     start:Date.now()
   };
   localStorage.setItem(KEY,JSON.stringify(data));
@@ -941,8 +1028,55 @@ function startApp(data){
   document.getElementById('nav').classList.remove('hidden');
   if(tickInterval)clearInterval(tickInterval);
   render(data);
-  tickInterval=setInterval(()=>render(data),1000);
+  renderPersonalPlan();
+  renderCravings();
+  renderSosReasons(data);
+  tickInterval=setInterval(function(){ render(data); renderCravings(); },1000);
 }
+/* ---------- impulsos / ganas de fumar ---------- */
+var CRAVEKEY='respira_craves_v1';
+function getCraves(){ try{ return JSON.parse(localStorage.getItem(CRAVEKEY))||[]; }catch(e){ return []; } }
+function saveCraves(arr){ localStorage.setItem(CRAVEKEY,JSON.stringify(arr)); }
+function cravingTime(e){ return e&&e.t?e.t:e; }
+function addCraving(){
+  var arr=getCraves();
+  arr.push({t:Date.now(),status:'active'});
+  saveCraves(arr);
+  renderCravings();
+  toast('Impulso registrado. Ahora no decidas: respira 2 minutos y deja que baje la ola.');
+  openSos();
+}
+function markResisted(){
+  var arr=getCraves();
+  var now=Date.now();
+  var idx=-1;
+  for(var i=arr.length-1;i>=0;i--){ if(arr[i].status==='active' && now-arr[i].t<45*60000){ idx=i; break; } }
+  if(idx>=0){ arr[idx].status='resisted'; arr[idx].resolved=now; }
+  else{ arr.push({t:now,status:'resisted',resolved:now}); }
+  saveCraves(arr);
+  renderCravings();
+  renderAnalisis();
+  toast('Victoria apuntada. Esto también cuenta: acabas de debilitar el hábito.');
+}
+function renderCravings(){
+  var arr=getCraves();
+  var ts=todayStart();
+  var today=arr.filter(function(e){return cravingTime(e)>=ts;});
+  var won=today.filter(function(e){return e.status==='resisted';}).length;
+  var total=today.length;
+  var rate=total?Math.round(won/total*100):0;
+  var u=document.getElementById('urgeToday'); if(u)u.textContent=total;
+  var w=document.getElementById('urgeWon'); if(w)w.textContent=won;
+  var r=document.getElementById('urgeRate'); if(r)r.textContent=rate+'%';
+}
+function markRecentCravingAsSmoked(){
+  var arr=getCraves();
+  var now=Date.now();
+  for(var i=arr.length-1;i>=0;i--){
+    if(arr[i].status==='active' && now-arr[i].t<45*60000){ arr[i].status='smoked'; arr[i].resolved=now; saveCraves(arr); return; }
+  }
+}
+
 /* ---------- contador de cigarros ---------- */
 var LOGKEY='respira_cigs_v1';
 function getLog(){
@@ -958,6 +1092,8 @@ function addCig(){
   var log=getLog();
   log.push({t:Date.now(),trigger:null});
   saveLog(log);
+  markRecentCravingAsSmoked();
+  renderCravings();
   var btn=document.querySelector('.cig-add');
   if(btn){btn.style.transform='scale(.9)';setTimeout(()=>btn.style.transform='',120);}
   renderCigs();
@@ -974,6 +1110,7 @@ function setTrigger(name){
   }
   document.getElementById('trigOverlay').classList.remove('show');
   renderAnalisis();
+  renderPersonalPlan();
 }
 function todayStart(){
   var d=new Date();d.setHours(0,0,0,0);return d.getTime();
@@ -987,7 +1124,7 @@ function dailyQuota(){
     var q=Math.round(d.cigsPerDay*Math.pow(0.7,weeks)); /* -30% por semana */
     return Math.max(0,q);
   }
-  return 0; /* de golpe / sustitutos: objetivo 0 */
+  return 0; /* de golpe / ayuda farmacológica / reducción de daño: objetivo inicial 0 o el que pactes */
 }
 function renderCigs(){
   var times=logTimes();
@@ -1033,11 +1170,16 @@ function renderAnalisis(){
   var log=logTimes().slice().sort(function(a,b){return a-b;});
   var empty=document.getElementById('anEmpty');
   var content=document.getElementById('anContent');
+  var cr=getCraves();
   if(!empty||!content) return;
-  if(log.length===0){ empty.style.display='block'; content.style.display='none'; return; }
+  if(log.length===0 && cr.length===0){ empty.style.display='block'; content.style.display='none'; return; }
   empty.style.display='none'; content.style.display='block';
 
   document.getElementById('anTotal').textContent=log.length;
+  var crTotal=cr.length;
+  var crWon=cr.filter(function(e){return e.status==='resisted';}).length;
+  var anCr=document.getElementById('anCraves'); if(anCr)anCr.textContent=crTotal;
+  var anCo=document.getElementById('anControl'); if(anCo)anCo.textContent=(crTotal?Math.round(crWon/crTotal*100):0)+'%';
 
   /* franjas del día: 6 bloques de 4h */
   var franjas=[0,0,0,0,0,0];
@@ -1093,13 +1235,48 @@ function renderAnalisis(){
 
   /* insight en texto */
   var ins='';
-  if(log.length<5){
+  if(log.length===0 && cr.length>0){
+    ins='Aún no has registrado cigarros, pero sí <b>'+cr.length+'</b> impulso(s). Si los marcas como superados, verás tu porcentaje de control.';
+  }else if(log.length<5){
     ins='Llevas <b>'+log.length+'</b> registro(s). Sigue anotando y marcando qué los dispara para darte un análisis más útil.';
   }else{
     ins='Fumas sobre todo <b>'+peakLabels[peakIdx]+'</b> (franja '+nombres[peakIdx]+'h). ';
     if(log.length>=2){ ins+='Tu mayor tiempo sin fumar ha sido <b>'+fmtDur(maxGap)+'</b>. '; }
   }
   document.getElementById('anInsight').innerHTML=ins;
+}
+
+function getTopTrigger(){
+  var raw=getLog(), counts={};
+  raw.forEach(function(e){ var tr=entryTrigger(e); if(tr){ counts[tr]=(counts[tr]||0)+1; } });
+  var top=null,n=0; for(var k in counts){ if(counts[k]>n){top=k;n=counts[k];} }
+  return top;
+}
+function renderPersonalPlan(){
+  if(!window._userData) return;
+  var title=document.getElementById('planTitle'), txt=document.getElementById('planText');
+  if(!title||!txt)return;
+  var top=getTopTrigger();
+  var map={
+    'Estrés':['Tu punto débil: estrés','Cuando notes tensión, no negocies con el cigarro: abre SOS, respira 90 segundos y camina 3 minutos. <b>Primero baja el cuerpo, luego decides.</b>'],
+    'Café':['Tu punto débil: café','Cambia el ritual durante 7 días: otra taza, otro sitio o café más corto. <b>El placer está en el café, no en el humo.</b>'],
+    'Después de comer':['Tu punto débil: después de comer','Regla de oro: al terminar, levántate. Agua, dientes o paseo de 5 minutos. <b>No te quedes sentado negociando.</b>'],
+    'Aburrimiento':['Tu punto débil: aburrimiento','Ten sustitutos de gesto: agua, chicle, paseo corto o juego mental. <b>El impulso pasa si no lo alimentas.</b>'],
+    'Social':['Tu punto débil: social','Lleva frase preparada: “estoy dejándolo, hoy paso”. Bebida en mano y aléjate del corro fumador 5 minutos.'],
+    'Costumbre':['Tu punto débil: costumbre','Cambia el contexto exacto donde fumas: silla, ruta, mano, hora. <b>La costumbre se rompe cambiando el guion.</b>']
+  };
+  if(top && map[top]){ title.innerHTML=map[top][0]; txt.innerHTML=map[top][1]; }
+  else{
+    title.textContent='Misión de hoy: registra también las ganas';
+    txt.innerHTML='Pulsa <b>“Tengo ganas”</b> cuando aparezca el impulso y <b>“He aguantado”</b> si lo superas. La app aprenderá tus momentos peligrosos.';
+  }
+}
+function renderSosReasons(data){
+  var box=document.getElementById('sosReasons'); if(!box)return;
+  var reasons=(data&&data.reasons)||[];
+  if(!reasons.length){ box.style.display='none'; return; }
+  box.style.display='block';
+  box.innerHTML='<div class="sr-l">Recuerda por qué empezaste</div><ul>'+reasons.map(function(r){return '<li>'+esc(r)+'</li>';}).join('')+'</ul>';
 }
 
 function render(data){
@@ -1158,6 +1335,7 @@ function resetAll(){
   if(confirm('¿Seguro que quieres reiniciar todos tus datos?')){
     localStorage.removeItem(KEY);
     localStorage.removeItem(LOGKEY);
+    localStorage.removeItem(CRAVEKEY);
     localStorage.removeItem(MINDKEY);
     localStorage.removeItem(REFLKEY);
     location.reload();
@@ -1695,6 +1873,15 @@ function changeReflPhoto(){
   document.getElementById('reflEmpty').style.display='block';
   document.getElementById('reflStage').style.display='none';
 }
+function deleteReflPhoto(){
+  if(confirm('¿Borrar la foto guardada en este dispositivo?')){
+    localStorage.removeItem(REFLKEY);
+    reflImg=null;
+    document.getElementById('reflInput').value='';
+    changeReflPhoto();
+    toast('Foto borrada de este navegador.');
+  }
+}
 function updateRefl(){
   if(!reflImg)return;
   var idx=parseInt(document.getElementById('reflSlider').value,10);
@@ -1722,6 +1909,24 @@ function initRefl(){
   var saved=localStorage.getItem(REFLKEY);
   if(saved){ showReflStage(saved); }
   else{ document.getElementById('reflEmpty').style.display='block'; document.getElementById('reflStage').style.display='none'; }
+}
+
+function downloadCSV(){
+  var user=null; try{user=JSON.parse(localStorage.getItem(KEY));}catch(e){}
+  var rows=[['tipo','fecha_iso','estado_o_disparador','detalle']];
+  getLog().forEach(function(e){ rows.push(['cigarro',new Date(entryTime(e)).toISOString(),entryTrigger(e)||'', user&&user.name?user.name:'']); });
+  getCraves().forEach(function(e){ rows.push(['impulso',new Date(cravingTime(e)).toISOString(),e.status||'', e.resolved?new Date(e.resolved).toISOString():'']); });
+  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='respira-datos-'+new Date().toISOString().slice(0,10)+'.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
+}
+
+if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
+  window.addEventListener('load',function(){ navigator.serviceWorker.register('./sw.js').catch(function(){}); });
 }
 
 (function(){

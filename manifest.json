@@ -1,0 +1,25 @@
+{
+  "name": "Respira · Deja de fumar",
+  "short_name": "Respira",
+  "description": "App personal para dejar de fumar: impulsos, SOS, hábitos y logros.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbfbfd",
+  "theme_color": "#0c3f2f",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
