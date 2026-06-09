@@ -198,6 +198,41 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 .lesson .lc{width:24px;height:24px;border-radius:50%;border:2px solid var(--faint);display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;flex-shrink:0;}
 .lesson.done .lc{background:var(--green);border-color:var(--green);}
 .lesson.lock{opacity:.4;}
+/* tarjeta de acceso al programa desde el home */
+.program-card{margin:14px 18px 0;background:linear-gradient(135deg,#0c3f2f,#155f47);border-radius:24px;padding:18px 20px;display:flex;align-items:center;gap:15px;cursor:pointer;box-shadow:0 10px 28px rgba(12,63,47,.25);transition:.15s;}
+.program-card:active{transform:scale(.98);}
+.program-card .pc-ic{font-size:30px;flex-shrink:0;}
+.program-card .pc-txt{flex:1;color:#fff;}
+.program-card .pc-t{font-size:17px;font-weight:800;letter-spacing:-.02em;}
+.program-card .pc-d{font-size:13px;opacity:.82;font-weight:500;margin-top:2px;}
+.program-card .pc-go{color:#fff;font-size:26px;font-weight:300;opacity:.7;}
+/* progreso global del programa */
+.prog-overall{margin:0 18px 16px;}
+.po-bar{height:10px;background:var(--line);border-radius:20px;overflow:hidden;}
+.po-bar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--teal));border-radius:20px;transition:width .6s cubic-bezier(.22,1,.36,1);}
+.po-lbl{font-size:12px;font-weight:700;color:var(--muted);margin-top:7px;text-align:right;}
+.lesson:not(.lock){cursor:pointer;transition:.12s;}
+.lesson:not(.lock):active{transform:scale(.99);opacity:.7;}
+.lesson .lc.partial{background:var(--orange);border-color:var(--orange);}
+.phase.locked-phase{opacity:.55;}
+/* hoja de lección */
+#lessonSheet{position:fixed;inset:0;z-index:120;background:rgba(12,30,22,.5);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center;opacity:0;visibility:hidden;transition:.28s;}
+#lessonSheet.show{opacity:1;visibility:visible;}
+.ls-card{background:var(--card);width:100%;max-width:440px;max-height:86vh;overflow-y:auto;border-radius:28px 28px 0 0;padding:30px 24px calc(28px + env(safe-area-inset-bottom));position:relative;transform:translateY(40px);transition:.32s cubic-bezier(.22,1,.36,1);}
+#lessonSheet.show .ls-card{transform:none;}
+.ls-x{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:50%;border:none;background:var(--bg);font-size:15px;color:var(--muted);cursor:pointer;}
+.ls-ic{font-size:42px;text-align:center;}
+.ls-card h3{font-size:22px;font-weight:800;letter-spacing:-.03em;text-align:center;margin:8px 0 18px;line-height:1.2;}
+.ls-body{font-size:15px;line-height:1.6;color:var(--ink-2);}
+.ls-body p{margin:0 0 13px;}
+.ls-body b{color:var(--ink);font-weight:700;}
+.ls-body ul{margin:0 0 13px;padding-left:4px;list-style:none;}
+.ls-body li{position:relative;padding-left:24px;margin-bottom:9px;}
+.ls-body li::before{content:"›";position:absolute;left:6px;top:-1px;color:var(--green);font-weight:800;font-size:17px;}
+.ls-body .ls-action{display:block;width:100%;background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:13px 16px;font-family:inherit;font-size:14px;font-weight:700;color:var(--green);cursor:pointer;text-align:left;margin:4px 0 14px;}
+.ls-body .ls-tip{background:#eafaf0;border-radius:14px;padding:13px 15px;font-size:13.5px;color:#0c3f2f;font-weight:500;margin-bottom:13px;}
+.ls-done{width:100%;background:linear-gradient(140deg,var(--green),var(--teal));color:#fff;border:none;border-radius:16px;padding:16px;font-family:inherit;font-size:16px;font-weight:800;cursor:pointer;margin-top:8px;}
+.ls-done.undo{background:var(--bg);color:var(--muted);border:1.5px solid var(--line);}
 
 /* ====== LOGROS ====== */
 .ach-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:13px;padding:6px 18px;}
@@ -671,6 +706,15 @@ body{background:radial-gradient(circle at 20% 0%,#dff8ea 0,#e3e4e8 38%,#d8dbe0 1
       <p class="hnote">A las 2-12 semanas la circulación mejora y respirar cuesta menos.</p>
     </div>
 
+    <div class="program-card" onclick="goPrograma()">
+      <div class="pc-ic">🧭</div>
+      <div class="pc-txt">
+        <div class="pc-t">Tu terapia guiada</div>
+        <div class="pc-d" id="programCardSub">El método paso a paso, en 3 fases</div>
+      </div>
+      <div class="pc-go">›</div>
+    </div>
+
     <div class="plan-card smart-plan" id="personalPlan">
       <div class="plan-head">
         <div class="plan-kicker"><span class="plan-dot"></span>Plan inteligente de hoy</div>
@@ -745,35 +789,22 @@ body{background:radial-gradient(circle at 20% 0%,#dff8ea 0,#e3e4e8 38%,#d8dbe0 1
 
   <!-- ============ PROGRAMA ============ -->
   <section class="screen" id="programa">
-    <div class="pad"><p class="eyebrow">Programa guiado</p><h2 class="big-title" style="margin-top:8px">Tu terapia</h2><p class="muted" style="font-size:14px;margin-top:10px;font-weight:500;line-height:1.5">El método con más respaldo científico, en 3 fases. Una sesión corta al día.</p></div>
-    <div style="height:8px"></div>
-    <div class="phase p1">
-      <div class="phase-h"><div class="phase-n">1</div><div><div class="pt">Preparación</div><div class="pp">Completada · 4/4</div></div></div>
-      <div class="lessons">
-        <div class="lesson done"><div class="lc">✓</div>Conoce tus desencadenantes</div>
-        <div class="lesson done"><div class="lc">✓</div>Tus motivos para dejarlo</div>
-        <div class="lesson done"><div class="lc">✓</div>Elige tu día D</div>
-        <div class="lesson done"><div class="lc">✓</div>Prepara tu entorno</div>
-      </div>
-    </div>
-    <div class="phase p2">
-      <div class="phase-h"><div class="phase-n">2</div><div><div class="pt">Abandono</div><div class="pp">En curso · 3/5</div></div></div>
-      <div class="lessons">
-        <div class="lesson done"><div class="lc">✓</div>Sobrevivir las primeras 72h</div>
-        <div class="lesson done"><div class="lc">✓</div>Reestructurar pensamientos</div>
-        <div class="lesson done"><div class="lc">✓</div>Romper rutinas asociadas</div>
-        <div class="lesson" onclick="this.classList.toggle('done')"><div class="lc"></div>Manejar el estrés sin tabaco</div>
-        <div class="lesson lock"><div class="lc">🔒</div>Resistir las recaídas sociales</div>
-      </div>
-    </div>
-    <div class="phase p3">
-      <div class="phase-h"><div class="phase-n">3</div><div><div class="pt">Prevención de recaída</div><div class="pp">Bloqueada · 0/4</div></div></div>
-      <div class="lessons">
-        <div class="lesson lock"><div class="lc">🔒</div>Identificar señales de riesgo</div>
-        <div class="lesson lock"><div class="lc">🔒</div>Plan de emergencia personal</div>
-      </div>
-    </div>
+    <div class="pad"><p class="eyebrow">Programa guiado</p><h2 class="big-title" style="margin-top:8px">Tu terapia</h2><p class="muted" style="font-size:14px;margin-top:10px;font-weight:500;line-height:1.5">El método con más respaldo científico, en 3 fases. Marca cada paso cuando lo trabajes; tu avance se guarda solo.</p></div>
+    <div class="prog-overall"><div class="po-bar"><i id="progBar"></i></div><div class="po-lbl" id="progLbl">0% completado</div></div>
+    <div id="phaseList"></div>
+    <div style="height:20px"></div>
   </section>
+
+  <!-- hoja de contenido de cada lección -->
+  <div id="lessonSheet">
+    <div class="ls-card">
+      <button class="ls-x" onclick="closeLessonSheet()">✕</button>
+      <div class="ls-ic" id="lsIc">📘</div>
+      <h3 id="lsTitle">—</h3>
+      <div class="ls-body" id="lsBody"></div>
+      <button class="ls-done" id="lsDoneBtn" onclick="toggleLessonDone()">Marcar como hecho ✓</button>
+    </div>
+  </div>
 
   <!-- ============ LOGROS ============ -->
   <section class="screen" id="logros">
@@ -1115,6 +1146,14 @@ function nav(id,btn){
   if(id==='analisis') renderAnalisis();
   if(id==='mindHome') renderMindHome();
   if(id==='reflejo') initRefl();
+  if(id==='programa') renderPrograma();
+}
+/* abrir el programa desde una tarjeta (sin botón de nav) */
+function goPrograma(){
+  show('programa');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('on'));
+  renderPrograma();
+  var sc=document.getElementById('programa'); if(sc) sc.scrollTop=0;
 }
 
 /* ---------- app con datos reales ---------- */
@@ -1127,6 +1166,7 @@ function startApp(data){
   renderPersonalPlan();
   renderCravings();
   renderSosReasons(data);
+  if(typeof updateProgramCard==='function') updateProgramCard();
   tickInterval=setInterval(function(){ render(data); renderCravings(); },1000);
 }
 /* ---------- impulsos / ganas de fumar ---------- */
@@ -1555,6 +1595,7 @@ function resetAll(){
     localStorage.removeItem(CRAVEKEY);
     localStorage.removeItem(MINDKEY);
     localStorage.removeItem(REFLKEY);
+    localStorage.removeItem(PROGKEY);
     location.reload();
   }
 }
@@ -2141,6 +2182,154 @@ function downloadCSV(){
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(function(){URL.revokeObjectURL(a.href);},1000);
 }
+
+
+/* ====================================================
+   PROGRAMA GUIADO "Tu terapia" — funcional
+   3 fases, progreso real en localStorage, contenido
+   que reusa el SOS y los disparadores ya existentes.
+   ==================================================== */
+var PROGKEY='respira_prog_v1';
+var progPhases=[
+  {n:1,cls:'p1',name:'Preparación',lessons:[
+    {id:'p1a',ic:'🔍',t:'Conoce tus desencadenantes',body:
+      '<p>Antes de dejarlo, hay que saber <b>cuándo y por qué</b> fumas. Casi nadie fuma "porque sí": hay disparadores (el café, el estrés, después de comer, el aburrimiento...).</p>'+
+      '<p>Durante un par de días, cada vez que fumes registra el cigarro y marca qué lo disparó. La propia app te lo pregunta.</p>'+
+      '<button class="ls-action" onclick="closeLessonSheet();nav(\'analisis\',document.querySelector(&quot;.nav button[data-go=\\\'analisis\\\']&quot;))">📊 Ver mi análisis de disparadores</button>'+
+      '<div class="ls-tip">Cuando tengas 3+ cigarros registrados con su motivo, el Análisis te dirá tu disparador principal y cómo romperlo.</div>'},
+    {id:'p1b',ic:'❤️',t:'Tus motivos para dejarlo',body:
+      '<p>Los motivos con fuerza son los <b>personales y concretos</b>, no los genéricos. "Por salud" motiva poco; "para no ahogarme subiendo a jugar con mi sobrino" motiva mucho.</p>'+
+      '<p>Piensa y, si puedes, escribe tus 3 razones de verdad:</p>'+
+      '<ul><li>¿Qué te estás perdiendo por fumar?</li><li>¿Quién se alegraría de que lo dejes?</li><li>¿En qué gastarías el dinero ahorrado?</li></ul>'+
+      '<div class="ls-tip">Vuelve a estas razones cuando tengas un antojo fuerte. Son tu ancla.</div>'},
+    {id:'p1c',ic:'📅',t:'Elige tu día D',body:
+      '<p>El "día D" es el día en que dejas de fumar del todo. Tener una fecha concreta funciona mejor que un "algún día".</p>'+
+      '<ul><li>Elígelo en las <b>próximas 2 semanas</b> (ni hoy con prisas, ni dentro de meses).</li><li>Evita días de mucho estrés previsto.</li><li>Un día normal, entre semana, suele ir mejor que un finde de fiesta.</li></ul>'+
+      '<div class="ls-tip">Si tu dependencia es alta, puedes usar los días previos para reducir poco a poco o empezar terapia sustitutiva con tu médico.</div>'},
+    {id:'p1d',ic:'🧹',t:'Prepara tu entorno',body:
+      '<p>El día antes del día D, ponlo fácil:</p>'+
+      '<ul><li>Tira <b>todo</b>: tabaco, mecheros, ceniceros.</li><li>Lava la ropa o el coche que huela a humo.</li><li>Avisa a quien convives para que te apoye.</li><li>Ten a mano sustitutos para la boca y las manos: agua, chicles, fruta cortada.</li></ul>'+
+      '<div class="ls-tip">Quitar de en medio lo que te recuerda a fumar reduce los antojos automáticos.</div>'}
+  ]},
+  {n:2,cls:'p2',name:'Abandono',lessons:[
+    {id:'p2a',ic:'🔥',t:'Sobrevivir las primeras 72h',body:
+      '<p>Los <b>primeros 3 días</b> son los más duros: es cuando la nicotina abandona el cuerpo. A partir de ahí el mono físico baja en picado.</p>'+
+      '<ul><li>Bebe mucha agua y date duchas: ayuda a eliminar la nicotina.</li><li>Los antojos vienen en <b>olas de 3-5 minutos</b>. No duran más. Aguanta la ola.</li><li>Si la ansiedad aprieta, usa una técnica guiada ahora mismo.</li></ul>'+
+      '<button class="ls-action" onclick="closeLessonSheet();openSos()">🫁 Abrir técnicas de ansiedad (SOS)</button>'},
+    {id:'p2b',ic:'🧠',t:'Reestructurar pensamientos',body:
+      '<p>El tabaco no da placer: solo <b>alivia el mono que él mismo crea</b>. Cambiar cómo piensas sobre fumar es media batalla.</p>'+
+      '<p>Cuando aparezca una excusa ("necesito uno para relajarme"), reconócela como lo que es: la voz de la adicción.</p>'+
+      '<button class="ls-action" onclick="closeLessonSheet();nav(\'mindHome\',document.querySelector(&quot;.nav button[data-go=\\\'mindHome\\\']&quot;))">🧠 Entrenar con el juego del monstruo</button>'+
+      '<div class="ls-tip">En el juego desmontas las 12 excusas típicas del tabaco. Es justo este ejercicio, en versión divertida.</div>'},
+    {id:'p2c',ic:'🔁',t:'Romper rutinas asociadas',body:
+      '<p>Fumar está pegado a rutinas: el café, el cigarro de después de comer, la pausa del trabajo. Si cambias la rutina, el antojo pierde su gancho.</p>'+
+      '<ul><li>Toma el café de pie o en otro sitio.</li><li>Levántate de la mesa nada más comer; lávate los dientes.</li><li>Cambia el camino o la mano con la que hacías cosas.</li></ul>'+
+      '<div class="ls-tip">Mira tu disparador principal en Análisis: ahí tienes la estrategia concreta para tu rutina más peligrosa.</div>'},
+    {id:'p2d',ic:'😤',t:'Manejar el estrés sin tabaco',body:
+      '<p>Mucha gente fuma para "relajarse", pero la nicotina es un <b>estimulante</b>: acelera el corazón y, a la larga, da más ansiedad. La calma del cigarro es solo el fin del mono.</p>'+
+      '<p>Tienes formas reales de bajar el estrés, sin humo y gratis:</p>'+
+      '<button class="ls-action" onclick="closeLessonSheet();openSos()">🌬️ Respiración guiada y relajación (SOS)</button>'},
+    {id:'p2e',ic:'🍻',t:'Resistir las recaídas sociales',body:
+      '<p>El alcohol y los amigos que fuman son la trampa nº1 de las primeras semanas. No conectas con la gente por el humo, sino por quién eres.</p>'+
+      '<ul><li>Sostén algo en la mano: una bebida, el móvil.</li><li>Avisa a tus amigos de que lo estás dejando; los buenos te ayudarán.</li><li>Si bebes, ten más cuidado: baja tus defensas.</li><li>Ten preparada tu respuesta a "¿uno no pasa nada?": <b>sí pasa</b>.</li></ul>'},
+  ]},
+  {n:3,cls:'p3',name:'Prevención de recaída',lessons:[
+    {id:'p3a',ic:'⚠️',t:'Identificar señales de riesgo',body:
+      '<p>Una recaída casi nunca es de repente: hay <b>señales antes</b>. Aprende a verlas venir.</p>'+
+      '<ul><li>"Por uno no pasa nada" — la mentira clásica.</li><li>Guardar un cigarro "por si acaso".</li><li>Ponerte a propósito en situaciones de fumadores.</li><li>Estrés alto sin plan para gestionarlo.</li></ul>'+
+      '<div class="ls-tip">Reconocer estas señales es lo que te permite frenar a tiempo.</div>'},
+    {id:'p3b',ic:'🆘',t:'Plan de emergencia personal',body:
+      '<p>Ten un plan claro para cuando llegue un antojo muy fuerte, decidido <b>antes</b> de que pase:</p>'+
+      '<ul><li>1. Abrir el SOS y hacer una técnica de respiración.</li><li>2. Releer mis 3 motivos para dejarlo.</li><li>3. Beber agua y salir a caminar 5 min.</li><li>4. Escribir o llamar a alguien que me apoye.</li></ul>'+
+      '<button class="ls-action" onclick="closeLessonSheet();openSos()">🆘 Probar mi plan ahora (SOS)</button>'},
+    {id:'p3c',ic:'💪',t:'Si recaes, no es el final',body:
+      '<p>Una calada o un cigarro <b>no borran tu progreso</b>. La mayoría de quienes lo dejan para siempre recayeron alguna vez antes. Lo que importa es volver al plan.</p>'+
+      '<ul><li>No te castigues ni pienses "ya lo he estropeado todo".</li><li>Analiza qué lo provocó y refuerza esa grieta.</li><li>Vuelve al día D al día siguiente, sin drama.</li></ul>'+
+      '<div class="ls-tip">La culpa lleva a fumar más. La autocompasión y volver al plan, no.</div>'},
+    {id:'p3d',ic:'🎉',t:'Celebra y reinvierte',body:
+      '<p>Cada semana sin fumar es una victoria real. Date cuenta de lo que ganas, no solo de lo que dejas.</p>'+
+      '<ul><li>Mira en Logros el dinero ahorrado y los cigarros evitados.</li><li>Usa el Reflejo para ver tu mejora.</li><li>Date un capricho con parte de lo ahorrado.</li></ul>'+
+      '<button class="ls-action" onclick="closeLessonSheet();nav(\'logros\',document.querySelector(&quot;.nav button[data-go=\\\'logros\\\']&quot;))">🏆 Ver mis logros</button>'}
+  ]}
+];
+
+function getProg(){ try{ return JSON.parse(localStorage.getItem(PROGKEY))||{}; }catch(e){ return {}; } }
+function saveProg(p){ localStorage.setItem(PROGKEY,JSON.stringify(p)); }
+function updateProgramCard(pct,d,t){
+  var el=document.getElementById('programCardSub'); if(!el)return;
+  if(pct===undefined){
+    var done=getProg(),tl=0,td=0;
+    progPhases.forEach(function(ph){ tl+=ph.lessons.length; td+=phaseDone(ph,done); });
+    pct=tl?Math.round(td/tl*100):0; d=td; t=tl;
+  }
+  el.textContent = pct===0 ? 'El método paso a paso, en 3 fases' : pct>=100 ? '¡Completado! Repasa cuando quieras 🎉' : 'Vas por el '+pct+'% · '+d+'/'+t+' pasos';
+}
+
+function phaseDone(phase,done){ return phase.lessons.filter(function(l){return done[l.id];}).length; }
+/* una fase se desbloquea cuando la anterior está completa */
+function phaseUnlocked(idx,done){
+  if(idx===0) return true;
+  var prev=progPhases[idx-1];
+  return phaseDone(prev,done)>=prev.lessons.length;
+}
+
+function renderPrograma(){
+  var done=getProg();
+  var totalL=0, totalDone=0;
+  progPhases.forEach(function(ph){ totalL+=ph.lessons.length; totalDone+=phaseDone(ph,done); });
+  var pct=totalL?Math.round(totalDone/totalL*100):0;
+  document.getElementById('progBar').style.width=pct+'%';
+  document.getElementById('progLbl').textContent=pct+'% completado · '+totalDone+'/'+totalL+' pasos';
+  updateProgramCard(pct,totalDone,totalL);
+
+  var wrap=document.getElementById('phaseList');
+  wrap.innerHTML='';
+  progPhases.forEach(function(ph,idx){
+    var unlocked=phaseUnlocked(idx,done);
+    var nd=phaseDone(ph,done);
+    var complete=nd>=ph.lessons.length;
+    var status=!unlocked?'Bloqueada':complete?'Completada':nd>0?'En curso':'Por empezar';
+    var div=document.createElement('div');
+    div.className='phase '+ph.cls+(unlocked?'':' locked-phase');
+    var lis=ph.lessons.map(function(l){
+      var isDone=!!done[l.id];
+      var lock=!unlocked;
+      var mark=lock?'🔒':isDone?'✓':'';
+      var click=lock?'':' onclick="openLesson(\''+l.id+'\')"';
+      return '<div class="lesson'+(isDone?' done':'')+(lock?' lock':'')+'"'+click+'><div class="lc'+(isDone?'':'')+'">'+mark+'</div>'+l.t+'</div>';
+    }).join('');
+    div.innerHTML='<div class="phase-h"><div class="phase-n">'+ph.n+'</div><div><div class="pt">'+ph.name+'</div><div class="pp">'+status+' · '+nd+'/'+ph.lessons.length+'</div></div></div><div class="lessons">'+lis+'</div>';
+    wrap.appendChild(div);
+  });
+}
+
+var curLessonId=null;
+function findLesson(id){
+  for(var i=0;i<progPhases.length;i++){ for(var j=0;j<progPhases[i].lessons.length;j++){ if(progPhases[i].lessons[j].id===id) return progPhases[i].lessons[j]; } }
+  return null;
+}
+function openLesson(id){
+  var l=findLesson(id); if(!l)return;
+  curLessonId=id;
+  document.getElementById('lsIc').textContent=l.ic;
+  document.getElementById('lsTitle').textContent=l.t;
+  document.getElementById('lsBody').innerHTML=l.body;
+  var done=getProg();
+  var btn=document.getElementById('lsDoneBtn');
+  if(done[id]){ btn.textContent='Hecho ✓ · tocar para desmarcar'; btn.classList.add('undo'); }
+  else{ btn.textContent='Marcar como hecho ✓'; btn.classList.remove('undo'); }
+  document.getElementById('lessonSheet').classList.add('show');
+}
+function closeLessonSheet(){ document.getElementById('lessonSheet').classList.remove('show'); }
+function toggleLessonDone(){
+  if(!curLessonId)return;
+  var done=getProg();
+  if(done[curLessonId]) delete done[curLessonId]; else done[curLessonId]=Date.now();
+  saveProg(done);
+  closeLessonSheet();
+  renderPrograma();
+}
+
 
 if('serviceWorker' in navigator && (location.protocol==='https:' || location.hostname==='localhost')){
   window.addEventListener('load',function(){ navigator.serviceWorker.register('./sw.js').catch(function(){}); });
