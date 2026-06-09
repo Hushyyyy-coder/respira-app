@@ -457,6 +457,7 @@ h1,h2,h3,h4{font-weight:700;letter-spacing:-.025em;line-height:1.08;}
 .chat-win .cw-emoji{font-size:60px;}
 .chat-win h3{font-size:22px;font-weight:800;margin:8px 0 6px;letter-spacing:-.03em;}
 .chat-win p{font-size:14px;color:var(--ink-2);font-weight:500;line-height:1.5;}
+.chat-tip{align-self:center;max-width:88%;background:#fff7e6;border:1px solid #ffe2a8;color:#7a4a00;font-size:12.5px;font-weight:600;line-height:1.45;padding:10px 14px;border-radius:14px;margin:2px 0;animation:bubIn .3s;}
 
 /* lección modal */
 #lessonOverlay{position:absolute;inset:0;background:linear-gradient(168deg,#0c3f2f,#1f7a5c);z-index:55;
@@ -990,6 +991,9 @@ body{background:radial-gradient(circle at 20% 0%,#dff8ea 0,#e3e4e8 38%,#d8dbe0 1
       <button class="tech" onclick="openTech('box')"><span class="te-ic">⬜</span><span><span class="te-t">Respiración cuadrada</span><span class="te-d">La que usan hasta los marines</span></span></button>
       <button class="tech" onclick="openTech('grounding')"><span class="te-ic">🖐️</span><span><span class="te-t">Anclaje 5-4-3-2-1</span><span class="te-d">Corta los pensamientos en bucle</span></span></button>
       <button class="tech" onclick="openTech('musculos')"><span class="te-ic">💪</span><span><span class="te-t">Soltar la tensión</span><span class="te-d">Tensa y relaja el cuerpo</span></span></button>
+      <button class="tech" onclick="openTech('wimhof')"><span class="te-ic">🫧</span><span><span class="te-t">Respiración de choque</span><span class="te-d">Apaga el antojo en modo supervivencia</span></span></button>
+      <button class="tech" onclick="openTech('mu')"><span class="te-ic">🚽</span><span><span class="te-t">Suelta el "Mu"</span><span class="te-d">Tira de la cadena a la ansiedad</span></span></button>
+      <button class="tech" onclick="openTech('centro')"><span class="te-ic">🌀</span><span><span class="te-t">Baja el centro</span><span class="te-d">Saca la ansiedad de la cabeza</span></span></button>
       <button class="tech" onclick="openTech('surf')"><span class="te-ic">🌊</span><span><span class="te-t">Surfea el impulso</span><span class="te-d">Obsérvalo sin obedecerlo</span></span></button>
       <button class="tech" onclick="openTech('mover')"><span class="te-ic">🏃</span><span><span class="te-t">Mueve el cuerpo</span><span class="te-d">Rompe el automatismo físico</span></span></button>
       <button class="sos-close" style="margin-top:18px" onclick="closeSos()">Ya estoy mejor ✓</button>
@@ -1686,8 +1690,110 @@ var techContent={
         '<li>🚶 Sal a caminar 5 minutos.</li>'+
         '<li>🙆 Sacude brazos y manos, suelta la tensión.</li></ul>';
     }
+  },
+  /* respiración de choque (estilo Wim Hof) */
+  wimhof:{
+    title:'Respiración de choque',
+    build:function(box){
+      box.innerHTML=
+        '<div class="ex-title">Respiración de choque</div>'+
+        '<div class="ex-sub">30 respiraciones rápidas y luego aguantas. Pone al cuerpo en modo supervivencia y el antojo se calla.</div>'+
+        '<div class="breath-circle"><div class="breath-orb" id="bOrb" style="transform:scale(.6)"><div class="bo-phase" id="bPhase">¿List@?</div><div class="bo-count" id="bCount">·</div></div></div>'+
+        '<div class="ex-cyclelbl" id="bCycle">Respira fuerte por la nariz, suelta por la boca</div>'+
+        '<div class="ls-tip" style="margin:16px 4px 4px">Hazlo sentad@ y nunca de pie o conduciendo: puede marear un poco, es normal. Si te agobia, para y respira normal.</div>';
+      startWimHof();
+    }
+  },
+  /* mantra Mu / la cisterna */
+  mu:{
+    title:'Suelta el "Mu"',
+    build:function(box){
+      box.innerHTML=
+        '<div class="ex-title">Suelta el "Mu"</div>'+
+        '<div class="ex-sub">Al inhalar, cargas aire. Al exhalar, di "Muuu" por dentro e imagina que tiras de la cadena: la ansiedad se va por el desagüe. 🚽</div>'+
+        '<div class="breath-circle"><div class="breath-orb" id="bOrb" style="transform:scale(.6)"><div class="bo-phase" id="bPhase">Prepárate</div><div class="bo-count" id="bCount">·</div></div></div>'+
+        '<div class="ex-cyclelbl" id="bCycle">Ciclo 0 de 6</div>';
+      startBreath([['Carga aire',4,1],['MUUU 🚽',6,.55]],6);
+    }
+  },
+  /* bajar el centro de control */
+  centro:{
+    title:'Baja el centro',
+    build:function(box){ startCentro(box); }
   }
 };
+
+/* ---- motor respiración de choque (Wim Hof simplificado) ---- */
+function startWimHof(){
+  clearExTimers();
+  var orb=document.getElementById('bOrb');
+  var phaseEl=document.getElementById('bPhase');
+  var countEl=document.getElementById('bCount');
+  var cycleEl=document.getElementById('bCycle');
+  var breaths=30, n=0, up=true;
+  setTimeout(function(){
+    /* fase 1: 30 respiraciones rápidas (~1.6s cada una) */
+    window._bt=setInterval(function(){
+      up=!up;
+      if(up){ n++; }
+      orb.style.transition='transform .7s ease-in-out';
+      orb.style.transform='scale('+(up?1:.55)+')';
+      phaseEl.textContent=up?'Inhala':'Exhala';
+      countEl.textContent=Math.min(n,breaths);
+      cycleEl.textContent='Respiración '+Math.min(n,breaths)+' de '+breaths;
+      if(n>breaths){
+        clearExTimers();
+        /* fase 2: soltar todo el aire y aguantar */
+        phaseEl.textContent='Suelta y aguanta';
+        countEl.textContent='0';
+        orb.style.transition='transform 1.5s ease';
+        orb.style.transform='scale(.45)';
+        var hold=0;
+        cycleEl.textContent='Aguanta sin aire lo que puedas. Toca cuando respires.';
+        orb.parentElement.style.cursor='pointer';
+        orb.parentElement.onclick=function(){
+          clearExTimers();
+          orb.parentElement.onclick=null;
+          phaseEl.textContent='Bien';
+          countEl.textContent='✓';
+          orb.style.transform='scale(.85)';
+          cycleEl.textContent='Aguantaste '+hold+'s. ¿Notas la mente más callada?';
+        };
+        window._bt=setInterval(function(){ hold++; countEl.textContent=hold; },1000);
+      }
+    },800);
+  },800);
+}
+
+/* ---- bajar el centro de control: contar exhalaciones 1..10 ---- */
+function startCentro(box){
+  box.innerHTML=
+    '<div class="ex-title">Baja el centro</div>'+
+    '<div class="ex-sub">Pon una mano en la barriga, bajo el ombligo. Lleva ahí la atención y cuenta tus exhalaciones del 1 al 10.</div>'+
+    '<div class="breath-circle"><div class="breath-orb" id="cOrb" style="transform:scale(.7)"><div class="bo-count" id="cCount" style="font-size:46px">1</div></div></div>'+
+    '<div class="ex-cyclelbl" id="cMsg">Toca la bola cada vez que sueltes el aire</div>'+
+    '<div class="ls-tip" style="margin:14px 4px 4px">Si la mente se va al cigarro y pierdes la cuenta, no pasa nada: alégrate de haberte dado cuenta y vuelve al 1 con calma.</div>';
+  var count=1;
+  var orb=document.getElementById('cOrb');
+  var cnt=document.getElementById('cCount');
+  var msg=document.getElementById('cMsg');
+  orb.style.cursor='pointer';
+  orb.onclick=function(){
+    orb.style.transition='transform .5s ease';
+    orb.style.transform='scale(1)';
+    setTimeout(function(){ orb.style.transform='scale(.7)'; },350);
+    count++;
+    if(count>10){
+      cnt.textContent='✓';
+      msg.textContent='Diez respiraciones completas. Has traído la mente al cuerpo. 🌿';
+      orb.onclick=null;
+    }else{
+      cnt.textContent=count;
+      if(count===5) msg.textContent='Vas por la mitad. Sigue, sin prisa.';
+      else if(count>=8) msg.textContent='Casi. Nota cómo pesa menos la cabeza.';
+    }
+  };
+}
 
 /* ---- motor de respiración ---- */
 function startBreath(phases, totalCycles){
@@ -1926,6 +2032,24 @@ var rounds=[
    ],correct:0,
    reactGood:'Argh, productivo y todo 😤',reactBad:'¡Pausa para fumar! 😈'},
 
+  {monMsg:'¡No aguantas más! ¡Eres débil! ¡NECESITAS un cigarro YA! 😤',monSt:'🗯️',
+   opts:[
+     {e:'👏',t:'¡Buenísimo! Qué gran táctica para llamar mi atención. Aplausos.'},
+     {e:'😨',t:'Tienes razón, soy débil, mejor me rindo a tus gritos.'},
+     {e:'🥊',t:'Voy a discutir contigo media hora, que eso siempre funciona.'}
+   ],correct:0,
+   reactGood:'¿Aplausos? Oye, eso no... me desarma 😳',reactBad:'¡ESO! ¡Húndete! 😈',
+   tip:'Truco zen: no discutas con la voz del antojo. Apláudele irónicamente y pierde su fuerza.'},
+
+  {monMsg:'La ansiedad te aplasta, es densa, oscura, dramática... 🎭',monSt:'🎭',
+   opts:[
+     {e:'💃',t:'Me la imagino cantada con la Macarena. Imposible tomártela en serio.'},
+     {e:'😰',t:'Sí, vamos a ponerle música épica de tragedia para que asuste más.'},
+     {e:'🎬',t:'Qué drama tan serio e importante, voy a entrar en pánico ya.'}
+   ],correct:0,
+   reactGood:'¡Eh, no le pongas el Aserejé a mi drama! 😭',reactBad:'Sí, qué dramático todo 😈',
+   tip:'Si le pones ritmo de Macarena a la urgencia, el cerebro deja de creerse el drama.'},
+
   {monMsg:'Volverás. Siempre vuelven. Te espero aquí, bonito 😈',monSt:'😈',
    opts:[
      {e:'👋',t:'Puede que tiemble algún día. Pero hoy te cierro la puerta.'},
@@ -2057,6 +2181,8 @@ function answerChat(idx,btn,r){
       if(chatRound>m.beaten){ m.beaten=chatRound; if(m.stickers<stickerDex.length)m.stickers=Math.min(stickerDex.length,Math.floor(chatRound)); }
       saveMind(m);
       setMonHp();
+      /* truco/consejo de la ronda, si lo tiene */
+      if(r.tip){ var tb=document.createElement('div'); tb.className='chat-tip'; tb.innerHTML='💡 '+r.tip; document.getElementById('chatBody').appendChild(tb); document.getElementById('chatBody').scrollTop=document.getElementById('chatBody').scrollHeight; }
     }else{
       chatCombo=0;
     }
